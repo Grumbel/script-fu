@@ -1,14 +1,32 @@
 <html>
   <head>
     <title>Script-Fu Tutorial</title>
-    <LINK REL="stylesheet" HREF="default.css" TYPE="text/css">
+<!--    <LINK REL="stylesheet" HREF="default.css" TYPE="text/css">-->
   </head>
 
-  <body>
+  <body BGCOLOR="white" TEXT="black">
     
     <h1>Script-fu Tutorial</h1>
-    
-    <h2>Preface</h2>
+
+    <h2>News</h2>
+    $Log$
+
+    <h2>Table of Content</h2>
+    <p>
+      <a href="#preface">Preface</a><br>
+      <a href="#intro">Introduction</a><br>
+      <a href="#first">First step on the road to a Script-Fu</a><br>
+      <a href="#repro">Reproducing the steps in the Script-Fu Console</a><br>
+      <a href="#write">Writing down the Script-Fu</a><br>
+      <a href="#pitfalls">Common Pitfalls</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#return">Return Values</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#r5sr">R5SR Compliance</a><br>
+      <a href="#debug">Debugging</a><br>
+      <a href="#cannotdo">Things you can't do in Script-Fu</a><br>
+      <a href="#references">References</a><br>
+    </p>
+
+    <h2><a name="preface">Preface</a></h2>
 
     <p>The following tutorial is written for <strong>The Gimp
 	1.1.24</strong>. Some things described here will not work or work
@@ -21,10 +39,10 @@
       basic things works. We will create a complete script-fu
       step-by-step. The goal is to have a Script-Fu, which produces a
       metal style text. I assume, that the reader has a basic knowlege
-      of Scheme, which is the programming language, which is used in
+      of Scheme, which is the programming language that is used in
       Script-Fu</p>
 
-    <h2>First step on the road to a Script-Fu</h2>
+    <h2><a name="#first">First step on the road to a Script-Fu</a></h2>
 
     <p>Ok, now we take the first step, we try to do what we want to do
       in Script-Fu first in The Gimp as normal. That is important,
@@ -55,7 +73,7 @@
 
     <img src="images/step4.jpg">
     
-    <h2>Reproducing the steps in the Script-Fu Console</h2>
+    <h2><a name="repro">Reproducing the steps in the Script-Fu Console</a></h2>
     
     <p>Ok the image looks now as we expected it, so lets summarize,
       what we have done:</p>
@@ -254,7 +272,7 @@ and than:
 
     <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
     
-    <h2>Writing down the Script-Fu</h2>
+    <h2><a name="write">Writing down the Script-Fu</a></h2>
 
     <p>Huh, now we have everything for our script-fu ready, we just
       need to attach the pieces. In the following steps we will also
@@ -346,7 +364,7 @@ and than:
 
 	<tr>
 	  <td><tt class="code">SF-ADJUSTMENT</tt></td>
-	  <td>List (start-value min-value max-value small-step large-step ??? roll-box)</td>
+	  <td>List (start-value min-value max-value small-step large-step [int=0 or float=1] roll-box)</td>
 	  <td>Creates a slider bar or a input box with range values</td>
 	</tr>
 
@@ -496,11 +514,11 @@ and than:
 		    SF-VALUE      "Font Size" "50" )</pre>
 
 
-    <h2>Common Pitfalls</h2>
+    <h2><a name="pitfalls">Common Pitfalls</a></h2>
     <p>The following is a list of common pitfalls in Script-Fu.</p>
 
-    <h3>Return Values</h3> 
-
+    <h3><a name="return">Return Values</a></h3> 
+    
     <p>When a function returns a value, it will always be encapsulet
       in a list, it doesn't matter if its only one value or multiple
       values. Even if the return value is itself a list, like for
@@ -513,7 +531,31 @@ and than:
       is the second list element, etc. So you need to always apply a
       <tt class="code">car</tt> call to get the correct value.</p>
     
-    <h3>Debugging</h3>
+    <h3><a name="r5sr">R5SR Compliance</a></h3>
+    
+    <p><a
+	  href="http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a>
+      is the document, which describes the scheme language, but
+      sadly the language used in the Gimp is not R5SR compliance,
+      not even close. Thats because Gimp uses SIOD as its scheme
+      interpreter. SIOD is a small scheme implementation, the
+      price is that it only provides a small subset of R5SR
+      functions, some have even another name. For example you
+      don't have <tt class="code">display</tt>, only a function
+      called <tt class="code">print</tt>. For a summary of scheme
+      functions supported by the Gimp, you can have a look at the
+      webpage of <a
+		    href="http://people.delphi.com/gjc/siod.html">SIOD</a>. To
+      make it even worse The Gimp doesn't even provide all the
+      functions listed on the SIOD page, but its a good starting point.
+      You can also use the function <tt class="code">apropos</tt> in
+	  the console to search for a specific function:</p>
+
+      <pre class="console-output">=> (apropos "write")
+
+(fwrite writes swrite write-mask stroke-overwrite)</pre>
+
+    <h2><a name="debug">Debugging</a></h2>
     
     <p>When you start to play with Script-Fu and even if you are
       common with it, you will very often ran into a situation, where
@@ -552,6 +594,68 @@ ERROR: too few arguments (see errobj)</pre>
 
 ((image))
 ()</pre>
+
+    <h2><a name="cannotdo">Thing you can't do in Script-Fu</a></h2>
+
+    <p>For now I have described what you can do with Script-Fu, but
+      there are also a lot of things, which you can't do in
+      Script-Fu.</p>
+
+    <p>The first thing, that you might want to do is to provide some
+      better default values for the argument that you function will
+      recieve. The bad news is that you can't do that, you can only
+      pass constant values to the Script-Fu register call. So if your
+      default value should for example be half the width of the image,
+      you simply can't do that, you have to life with an constant
+      value.</p>
+
+    <p>Another thing you might want to have is some sort of GUI, which
+      goes behind the stuff that is provided by the SF-* values and
+      again, you can't do this. The SF-* values are all of a gui, that
+      you can expect from Script-Fu, if you want more complicated
+      stuff, like a preview window, you have to write a real Gimp
+      Plug-in.</p>
+
+    <p>At some point you might want to write your own filter or
+      effect, which needs image manipulation at pixel level. Thats a
+      thing that you actually can do in Script-Fu, but it will be
+      extremly slow, due to the interpreted nature of Script-Fu. So
+      again, its better to write that as a real Gimp Plug-in.</p>
+
+    <p>You might also want to open a directory and open all the images
+      in it. Not even that is possible. The SIOD webpage describes the
+      <tt class="code">opendir</tt> function, but when you try it in
+      Script-Fu it will not work as many other SIOD function.</p>
+
+    <pre class="console-output">=&gt; (opendir "/")
+
+ERROR: unbound variable (errobj opendir)</pre>
+
+    <p>To solve this you have to work-around this by dumping the
+      directory contents to a file and read that file instead or you
+      can write a Perl-Fu, Python-Fu or a Gimp Plug-in.</p>
+
+
+
+    <h2><a name="references">References</a></h2>
+    <ul>
+      <li><a href="http://people.delphi.com/gjc/siod.html">SIOD</a></li>
+      <li><a href="http://www.scheme.com/tspl2d/index.html">The Scheme
+      Language, Second Edition</a></li>
+      <li><a
+      href="http://www.cs.rice.edu/CS/PLT/Teaching/Lectures/Released/Book/">How
+      to Design Programs</a></li>
+      <li><a href="http://www.gimp.org">The Gimp</a>
+    </ul>
+
+    <ul>
+      <li><a href="http://lithwww.epfl.ch/teaching/rdf/support99/SchemeTut.html">Script-Fu &amp; Scheme</a></li>
+      <li><a href="http://gum.gnome.gr.jp/write-scriptfu.html">Script-Fu (japanese)</a></li>
+      <li><a href="http://www.xcf.berkeley.edu/~gimp/script-fu/script-fu.html">Script-Fu (GIMP)</a></li>
+      <li><a href="http://www.script-fu.org">Script-Fu.org</a></li>
+      <li><a href="http://www.ee.byu.edu/support/gimp/write_scriptfu.html">GUM - Writing Script-Fu</a></li>
+      <li><a href="http://w3.man.torun.pl/~makler/help/script-fu-tutorial/">Mike Terry's Black Belt School of ScriptFu</a></li>
+    </ul>
 
     <hr>
 
