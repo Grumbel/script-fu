@@ -369,6 +369,12 @@ and than:
 	</tr>
 
 	<tr>
+	  <td><tt class="code">SF-FILENAME</tt></td>
+	  <td>String (pathname)</td>
+	  <td>Lets you browse for the file</td>
+	</tr>
+
+	<tr>
 	  <td><tt class="code">SF-STRING</tt></td>
 	  <td>String</td>
 	  <td>Creates a input box</td>
@@ -412,18 +418,19 @@ and than:
 		    "Joe User"
 		    "August 2000"
 		    ""
-		    SF-VALUE      "SF-VALUE" "0"
-		    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 0 1)
-		    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 0 0)
-		    SF-IMAGE      "SF-IMAGE" 0
+		    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 1 0)
+		    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 1 1)
+		    SF-COLOR      "SF-COLOR" '(255 0 255)
 		    SF-DRAWABLE   "SF-DRAWABLE" 0
-		    SF-TOGGLE     "SF-TOGGLE" TRUE
+		    SF-FONT       "SF-FONT" ""
+		    SF-GRADIENT   "SF-GRADIENT"  "Golden"
+		    SF-IMAGE      "SF-IMAGE" 0
+		    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
 		    SF-PATTERN    "SF-PATTERN" "Wood"
 		    SF-STRING     "SF-STRING" "Test String"
-		    SF-FONT       "SF-FONT" ""
-		    SF-COLOR      "SF-COLOR" '(255 0 255)
-		    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
-		    SF-GRADIENT   "SF-GRADIENT"  "Golden")</pre>
+		    SF-TOGGLE     "SF-TOGGLE" TRUE
+		    SF-VALUE      "SF-VALUE" "0"
+                    SF-FILENAME   "SF-FILENAME" "/")</pre>
 
     <p>The resulting box will look like this:</p>
 
@@ -667,12 +674,17 @@ ERROR: unbound variable (errobj opendir)</pre>
       <li><a href="http://w3.man.torun.pl/~makler/help/script-fu-tutorial/">Mike Terry's Black Belt School of ScriptFu</a></li>
     </ul>
 
-    <hr>
-
     <h2><a name="changelog">ChangeLog</a></h2>
-    <pre>$Log: script-fu-tut.html,v $
+    <pre>
+    $Log: script-fu-tut.html,v $
+    Revision 1.5  2000/08/15 16:06:41  ingo
+    * Some sentences about debugging with (print ...)
+    * Moved the changelog to the bottom of the page
+    
     Revision 1.4  2000/08/15 10:24:39  ingo
     Added some infos about things you can't do in Script-Fu</pre>
+
+    <hr>
 
     <P class="copyright">Copyright (c) 2000 Ingo Ruhnke &lt;<a
       href="mailto:grumbel@gmx.de">grumbel@gmx.de</a>&gt;</p>
