@@ -209,8 +209,9 @@ And now we can finally display our image:
       might look as black-magic to you, but we will see later and easy
       way to create it.</p>
 
-<p>Now we need to duplicate that layer, you might notice that there is
-now duplicate layer in the DB, so we need to do it manually:</p>
+    <p>Now we need to duplicate that layer, you might notice that there is
+      no duplicate layer function in the DB, so we need to do it
+      manually and write another scheme function:</p>
 
 <pre class="code">(define (my-duplicate-layer image layer)
 	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
@@ -222,14 +223,13 @@ and than:
 
 41</pre>
     
-    <p>Than we need to add some space for the enlarged text border,
-      gimp-layer-resize is our friend:</p>
-<pre class="console-output">
-    (gimp-layer-resize 41 200 100 5 5)
-    </pre>
+    <p>The next step is to add some space for the enlarged text
+      border, gimp-layer-resize is our friend:</p>
 
+    <pre class="console-output">(gimp-layer-resize 41 200 100 5 5)</pre>
+    
     <p>This works, but the width and height are hard coded, so we try
-    again in a more flexible manner:</p>
+      again in a more flexible manner:</p>
 
     <pre class="code">(define (my-layer-add-border layer border)
 	(let* ((width  (car (gimp-drawable-width  layer)))
@@ -237,10 +237,10 @@ and than:
 	       (gimp-layer-resize layer
 				  (+ width border) (+ height border)
 				  (/ border 2) (/ border 2))))</pre>
-
+  
     <p>Now we need to transfer the layers alpha cannel to the
       selection and grow it some pixels:</p>
-
+    
     <pre class="code">(gimp-selection-layer-alpha 41)
 (gimp-selection-grow 3 5)</pre>
 
@@ -250,50 +250,320 @@ and than:
 
     <pre class="code">(gimp-layer-set-preserve-trans 41 0)</pre>
 
-<p>Now we will fill the selection with a gradient:</p>
+    <p>Now we will fill the selection with a gradient:</p>
 
-<pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
-
-
-    <h2>Writing Script-Fu's</h2>
+    <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
+    
+    <h2>Writing down the Script-Fu</h2>
 
     <p>Huh, now we have everything for our script-fu ready, we just
       need to attach the pieces. In the following steps we will also
       remove some unnecessary action and probably add some stuff.</p>
 
-    <p>Ok, so how to write a script-fu? Simply have a look at <tt
-      class="file">~/.gimp-1.1/scripts/</tt>, thats the place where
-      all script-fu's will end. So open your favorite text editor and
-      create a file my-metal-logo.scm and save it into the directory
-      <tt class="file">~/.gimp-1.1/scripts/</tt> When you then press
-      <tt class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> your script
-      will be loaded into "The Gimp", but before you will see
-      anything, we first need to register our function.</p>
+    <p>Ok, so how to write a Script-Fu? Well, you need basically three
+      things. A file where your script is written down, that file
+      should be placed in <tt
+      class="file">~/.gimp-1.1/scripts/</tt>. A function, which does
+      all the image manipulation and at last you need to have a call
+      to <tt class="code">script-fu-register</tt> to make your script
+      visible from inside the Gimp.</p> 
 
-    <p>The function script-fu-register is the function, which is
-      capable of doing that. The first argument is the function name
-      of your newly written function, the second is the place, where
-      your function will be appear inside the Gimp. The other
-      arguments are for the Copyright, author, etc. The eight and the
-      following arguments become interessting again, this are the
-      arguments, which your function will recive. An example
-      script-fu-register call would look like this:</p>
+    <p>So lets write an empty function and register it. You should
+    copy&amp;paste the following code into a file <tt
+    class="file">dummy.scm</tt> and save it to <tt
+    class="file">~/.gimp-1.1/scripts/</tt> as described above.</p>
 
-    <pre class="code">(script-fu-register "script-fu-gradient-example"
-		    _"&lt;Toolbox&gt;/Xtns/Script-Fu/Utils/Custom Gradient..."
+    <pre class="code">(define (my-dummy-function a b)
+  (print "Do nothing"))
+
+(script-fu-register "my-dummy-function"
+		    _"&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Dummy..."
+		    "Do nothing"
+		    "Joey User"
+		    "Joey User"
+		    "August 2000"
+		    ""
+		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
+   
+
+    <p>When you then press <tt
+      class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> your script will
+      be loaded into the Gimp and should be accessable from the
+      menu.</p>
+    
+    <p>Notice, that there are two kinds of Script-Fu's. The first kind
+      will create a new image, thats used for logo's and accessible
+      through the menu <tt
+      class="menu">Xtns-&gt;Scritp-fu-&gt...</tt>, and the second kind
+      will manipulate an existing image, this kind is accessible
+      through the right-click pop-up menu on an image <tt
+      class="menu">Scritp-fu-&gt...</tt>. To register the second kind
+      of Script-Fu, you need to adjust the path to <tt
+      class="code">&lt;Image&gt;/Script-Fu/...</tt> and it needs to
+      take the first two arguments of type SF-IMAGE and
+      SF-DRAWABLE.</p>
+
+    <p>This brings us to the next topic, the arguments that your
+      function can get, they can have the following types:</p>
+    
+    <table border="1">
+      	<tr>
+	  <th>Argument Type</th>
+	  <th>Data Type</th>
+	  <th>Description</th>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-IMAGE</tt></td>
+	  <td>Integer (image id)</td>
+	  <td>Used to get an image id</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-DRAWABLE</tt></td>
+	  <td>Integer (drawable id)</td>
+	  <td>Get a drawable id</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-VALUE</tt></td>
+	  <td>String</td>
+	  <td>Input a numeric value</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-TOGGLE</tt></td>
+	  <td>Boolean (TRUE or FALSE)</td>
+	  <td>Input a booleon value</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-PATTERN</tt></td>
+	  <td>String (Pattern name)</td>
+	  <td>Lets you select a pattern</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-ADJUSTMENT</tt></td>
+	  <td>List (start-value min-value max-value small-step large-step ??? roll-box)</td>
+	  <td>Creates a slider bar or a input box with range values</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-STRING</tt></td>
+	  <td>String</td>
+	  <td>Creates a input box</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-FONT</tt></td>
+	  <td>String (fontname)</td>
+	  <td>Lets you select a font</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-COLOR</tt></td>
+	  <td>List (red green blue) [0-255]</td>
+	  <td>Lets you select a color</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-OPTION</tt></td>
+	  <td>List of strings</td>
+	  <td>Lets you select an item out of a list</td>
+	</tr>  
+
+	<tr>
+	  <td><tt class="code">SF-GRADIENT</tt></td>
+	  <td>String (gradient name)</td>
+	  <td>Lets you select a gradient</td>
+	</tr>
+    </table>
+    
+    <p>The following code creates a box with all possible input
+    types:</p>
+
+<pre class="code">(define (my-demo-box value adj1 adj2 image drawable toggle pattern string font color option gradient)
+  (print "Do nothing"))
+
+(script-fu-register "my-demo-box"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Demo Box..."
+		    "Do nothing"
+		    "Joe User"
+		    "Joe User"
+		    "August 2000"
+		    ""
+		    SF-VALUE      "SF-VALUE" "0"
+		    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 0 0)
+		    SF-IMAGE      "SF-IMAGE" 0
+		    SF-DRAWABLE   "SF-DRAWABLE" 0
+		    SF-TOGGLE     "SF-TOGGLE" TRUE
+		    SF-PATTERN    "SF-PATTERN" "Wood"
+		    SF-STRING     "SF-STRING" "Test String"
+		    SF-FONT       "SF-FONT" ""
+		    SF-COLOR      "SF-COLOR" '(255 0 255)
+		    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
+		    SF-GRADIENT   "SF-GRADIENT"  "Golden")</pre>
+
+    <p>The resulting box will look like this:</p>
+
+    <img src="images/demo-box.png">
+
+    <p>So back to business, lets finish our Script-Fu example. We
+      should start wish the frame work, so we need to decide which
+      argument types we need. As we want to create a font, we first
+      need the text, so we use SF-STRING, than we should use SF-FONT
+      for the font selection and in addition SF-VALUE to enter the
+      font size.</p>
+
+    <p>The creation of the <tt class="code">script-fu-register</tt> is
+      left as an exercise for the user. I you don't want to try it
+      yourself you can look some lines below for the finished
+      script. The resulting box might then lock like this:</p>
+
+    <!-- Insert image -->
+
+    <p>Now that we have our register call set up, we can fill the
+      function with some code. First of we insert our two helper
+      functions <tt class="code">my-duplicate-layer</tt> and <tt
+      class="code">my-layer-add-border</tt> at the top of the
+      file. Next, we more or less copy&amp;paste our Script-Fu Console
+      experiments together. We move the <tt
+      class="code">gimp-display-new</tt> call to the end of our
+      function, so we don't have to see how the image rendering
+      works. We also add another helper function, which will cut the
+      final image to the right size. The resulting script might look
+      then something like this:</p>
+
+    <pre class="code">(define (my-image-to-layer-size image layer)
+  (gimp-layer-set-offsets layer 0 0)
+  (gimp-image-resize image 
+		     (car (gimp-drawable-width layer))
+		     (car (gimp-drawable-height layer))
+		     0 0))
+
+(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))
+
+(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))
+
+(define (my-make-metal-font text font font-size)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+	(bottom-font-layer (car (gimp-text-fontname image -1 0 0 text 0 TRUE font-size PIXELS
+					     font))))
+
+   (let* ((top-font-layer (my-duplicate-layer image bottom-font-layer)))
+     
+     (my-layer-add-border bottom-font-layer 20)
+
+     (gimp-layer-set-preserve-trans bottom-font-layer 0)
+     (gimp-gradients-set-active "Four_bars")
+
+     (gimp-selection-layer-alpha bottom-font-layer)
+     (gimp-selection-grow image 3)
+     (gimp-blend bottom-font-layer CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 200 50)
+
+
+     (gimp-selection-layer-alpha top-font-layer)
+     (gimp-blend top-font-layer    CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 50 200 0)
+     (gimp-selection-clear image)
+     
+     (let* ((new-layer (car (gimp-image-merge-visible-layers 
+			     image EXPAND-AS-NECESSARY))))
+       (my-image-to-layer-size image new-layer))
+
+     (gimp-display-new image))
+   ))
+
+(script-fu-register "my-make-metal-font"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/Logos/Metal Font..."
 		    "Create an example image of a custom gradient"
 		    "Federico Mena Quintero"
 		    "Federico Mena Quintero"
 		    "June 1997"
 		    ""
-		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
-		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
+		    SF-STRING     "Text" "The GIMP"
+		    SF-FONT       "Font" "-*-blippo-*-r-*-*-24-*-*-*-p-*-*-*"
+		    SF-VALUE      "Font Size" "50" )</pre>
+
+
+    <h2>Common Pitfalls</h2>
+    <p>The following is a list of common pitfalls in Script-Fu.</p>
+
+    <h3>Return Values</h3> 
+
+    <p>When a function returns a value, it will always be encapsulet
+      in a list, it doesn't matter if its only one value or multiple
+      values. Even if the return value is itself a list, like for
+      example the color returned by <tt
+      class="code">gimp-color-picker</tt>, the return value will
+      always be encapsult in an extra list.</p>
+
+    <p>If multiple values are returned they are also in a list, the
+      first return value is the first element in the list, the second
+      is the second list element, etc. So you need to always apply a
+      <tt class="code">car</tt> call to get the correct value.</p>
     
+    <h3>Debugging</h3>
+    
+    <p>When you start to play with Script-Fu and even if you are
+      common with it, you will very often ran into a situation, where
+      your script doesn't work. To make it even worse you will not
+      even get a error message. Most of the time the cause will be
+      simple, but the search hard. The following steps might make the
+      search easier.</p>
+    
+    <p>First of check that your script is syntactical correct, that
+      means you have closed all opened parentheses and quotes. An
+      editor with syntax highlighting, automatic indention and
+      parentheses highlighting will help to accomplish that.</p>
 
-    <h2>Copyright</h2>
-    <pre class="copyright">
-      This document is covered under the GNU Free Documentation License
-    </pre>
+    <p>Second, you might have forgotten to add a <tt
+    class="code">car</tt> to some return value. To check for that
+    errors, copy&amp;paste your code into the Script-Fu Console and
+    call it manually.</p>
 
+    <pre class="console-output">ERROR: Invalid types specified for arguments</pre>
+
+    <p>The above is most likely the error message you will get, if you
+      get another error message, your bug might be elsewhere. To find 
+      the bug, just cut down your script, until you find the line,
+      that causes the throuble.</p>
+    
+    <p>When you call a function with too few or to much arguments, you
+      will get the following error message:</p>
+      
+    <pre class="console-output">=&gt; (gimp-image-get-layers)
+ERROR: too few arguments (see errobj)</pre>
+
+    Than simply have a look at the errobj, it will tell you which
+    arguments where expected and which you supplied.
+
+    <pre class="console-output">=&gt; (print errobj)
+
+((image))
+()</pre>
+
+    <hr>
+
+    <P class="copyright">Copyright (c) 2000 Ingo Ruhnke &lt;<a
+      href="mailto:grumbel@gmx.de">grumbel@gmx.de</a>&gt;</p>
+
+    <p class="copyright">Permission is granted to copy, distribute and/or modify this
+      document under the terms of the <a
+      href="http://www.gnu.org/copyleft/fdl.html">GNU Free
+      Documentation License</a>, Version 1.1 or any later version
+      published by the Free Software Foundation.</p>
+
+    <small>Last updated: Mon Aug 14 20:57:00 2000</small>
   </body>
 </html>
