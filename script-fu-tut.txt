@@ -159,12 +159,60 @@ Now we need to duplicate that layer, you might notice that there is
 now duplicate layer in the DB, so we need to do it manually:
 
 (define (my-duplicate-layer image layer)
-	(let* ((dup-layer (car (gimp-layer-copy 32 1))))
-              (gimp-image-add-layer image layer 0)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
 	      dup-layer))
 
+and than:
 
-gimp-layer-resize
+=> (my-duplicate-layer 3 34)
+
+41
+
+Than we need to add some space for the enlarged text border,
+gimp-layer-resize is our friend:
+
+(gimp-layer-resize 41 200 100 5 5)
+
+This works, but the width and height are hard coded, so we try again
+in a more flexible manner:
+
+(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))
+
+Now we need to transfer the layers alpha cannel to the selection and
+grow it some pixels:
+
+(gimp-selection-layer-alpha 41)
+(gimp-selection-grow 3 5)
+
+Before we fill the layer, we have to remove the "Keep trans" flag,
+which causes that all transparent areas stay transparent:
+
+(gimp-layer-set-preserve-trans 41 0) 
+
+Now we will fill the selection with a gradient:
+
+(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)
+
+
+Script-fu
+~~~~~~~~~~
+
+Huh, now we have everything for our script-fu ready, we just need to
+attach the pieces. In the following steps we will also remove some
+unnecessary action and probably add some stuff.
+
+Ok, so how to write a script-fu? Simply have a look at
+~/.gimp-1.1/scripts/, thats the place where all script-fu's will
+end. So open your favorite text editor and create a file
+my-metal-logo.scm and save it into the directory ~/.gimp-1.1/scripts/
+When you then press "Xtns->Scritp-fu->Reload" your script will be
+loaded into "The Gimp
 
 
 EOF
