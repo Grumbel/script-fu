@@ -1,0 +1,287 @@
+<html>
+  <head>
+    <title>Script-Fu Tutorial</title>
+    <LINK REL="stylesheet" HREF="default.css" TYPE="text/css">
+  </head>
+
+  <body>
+    
+    <h1>Script-fu Tutorial</h1>
+    
+    <h2>Preface</h2>
+    <p>
+      The following tutorial is written for The Gimp 1.1.24. Some
+      things described here will not work with The Gimp 1.0.x, some
+      other probably will. I assume that the reader as a basic
+      knowlege of Scheme.
+    </p>
+
+    <h2>Introduction</h2>
+    <p>
+      This is a short tutorial to script-fu programming. I'll try to give a
+      short intro into the word of script-fu and explain how basic things
+      works.
+    </p>
+
+    <p>We will start by creating a script-fu step-by-step, the final
+      script should produce a nice metal-looking text.</p>
+
+    <p>Ok, now we take the first step, we try to do what we want to do
+      script-fu first in The Gimp as normal. That is important, cause
+      we need to know which steps we should take first and which
+      second.</p>
+
+    <p>First of we create a new rgb image "File->New Image" and insert
+      some text into it, say the word "Test". Then we duplicate the
+      text some times and apply a metal gradient to the top
+      layer. Then we take the second text layer and enlarge it a bit,
+      to do so, we use the alpha-to-selection function and grow the
+      selection by a few pixels. Then we fill the selection with the
+      same gradient, but in a another orientation. At last, we merge
+      the layers and apply a standard drop shadow.</p>
+    
+    <p>Now be summarize, what we have done:</p>
+
+    <ol>
+	<li>Create a new image</li>
+	<li>Enter some text</li>
+	<li>Duplicate the text layer</li>
+	<li>Enlarge the bottom layer</li>
+	<li>Fill both text layers with a gradient</li>
+	<li>Merge the text layers</li>
+	<li>Apply a drop shadow</li>
+	<li>Merge all layers</li>
+	<li>Auto-crop the image</li>
+    </ol>
+
+    <p>The task is now to reproduce this nine steps in script-fu, to
+      do so, we open the Script-fu console
+      (Xtns->Script-fu->Console). The script-fu console is the place
+      where you can enter script-fu commands and test them. Its the
+      place where you should test all new functions you aren't handy
+      with and its the place where you can more or less debug your
+      written scripts.</p>
+
+    <p>If the console is open, we click on the "Browse" button in the
+      down left corner, this brings us to the DB Browser. Thats the
+      place where you can search for functions you can access from
+      script-fu. Along with the name of the function you also get a
+      description of the arguments, its expect.</p>
+
+    <p>So now its time to reproduce our first step in the image
+      creation, so we need a function to create an new image. After a
+      little search for "new" we find the function (gimp-image-new),
+      which sounds like what we are searching for. We enter the
+      following into the console:</p>
+
+ (gimp-image-new 256 256 RGB)
+
+and we will get an output as follows:
+
+    <div class="console-output">
+=> (gimp-image-new 256 256 RGB)
+
+(3)
+    </div>
+
+    <p>The last line is the return value, as you can read in the DB
+      Browser, this is the id of the newly created image and this is
+      also the first pitfall on our guide to script-fu. The return
+      value comes as a list and not as a single value! So to use the
+      value, we have to get the first element of the list with car,
+      car will then return the value 3.</p>
+
+    <P>You might now wonder, where the image is that we have created,
+      cause you cannot see it. The answer is, that we don't have a
+      display for it, so the image is only inside the memory, but is
+      not displayed, so we need create an display for it.  So we try
+      <tt class="code">(gimp-display-new 3)</tt>, but we get an error:
+    </p>
+
+    <div class="console-output">
+ERROR: Procedural database execution failed:
+    (gimp_display_new 3)
+    </div>
+
+    <p>So, thats another pitfall. Our newly created image, doesn't contain
+      any layers and to display an image, we actually need at least one
+      layer. So we create an layer:</p>
+
+(gimp-layer-new 3 256 256 RGB-IMAGE "foobar" 100 NORMAL-MODE)
+<div class="console-output">
+=> (gimp-layer-new 3 256 256 RGB_IMAGE "foobar" 100 NORMAL-MODE)
+
+(21)
+    </div>
+
+    <p>You might notice, that the constant NORMAL-MODE is listed as
+      NORMAL_MODE in the DB Browser (notice the underscore), so you have to
+replace all the underscrores with minus's in the script-fu world.</p>
+
+    <p>The next step is to add the layer to the image, as described in the DB
+browser:</p>
+
+(gimp-image-add-layer 3 21 0)
+<div class="console-output">
+=> (gimp-display-new 3)
+
+(4)
+    </div>
+And now we can finally display our image:
+
+<div class="console-output">
+=> (gimp-display-new 3)
+
+(4)
+    </div>
+
+The displayed image looks a bit wired, cause it filled with random
+colors, to erase them, we will fill the layer with the current
+background color.
+
+    <div class="console-output">
+=> (gimp-drawable-fill 21 BG-IMAGE-FILL)
+
+()
+    </div>
+    
+A drawable is (more or less) the same as a layer.
+
+    <p>Now we have our image set up. To confusing? Then lets summarize
+      and write our first scheme function. First we encapsule all into
+      a let* clause and than add the let* clause into a function body:</p>
+
+<div class="code">
+(define (my-make-new-image)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+        (layer (car (gimp-layer-new image 256 256 
+                     RGB-IMAGE "foobar" 100 NORMAL-MODE))))
+       (gimp-drawable-fill layer BG-IMAGE-FILL)
+       (gimp-image-add-layer image layer 0)
+       (gimp-display-new image)
+       image))
+    </div>
+
+    <p>The last value is the return value, so image is the return
+      value in this function.</p>
+
+    <p>So back to our metal-text thing, we need now to add a text
+      string and play with it. A little browsing in the DB brings up
+      gimp-text-fontname.  To call it we type:</p>
+
+(gimp-text-fontname 3 21 0 0 "Foobar" 0 TRUE 25 PIXELS
+		    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
+
+<div class="console-output">
+=> (gimp-text-fontname 3 21 0 0 "Foobar" 0 TRUE 25 PIXELS
+		    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
+
+(33)
+    </div>
+
+    <p>And voila, we have our text as a floating layer. The "fontname"
+      might look as black-magic to you, but we will see later and easy
+      way to create it.</p>
+
+    <p>So lets convert the floating selection into a new layer with
+      <tt class="code">gimp-floating-sel-to-layer</tt> and start to make it metal like.</p>
+
+<div class="console-output">
+=> (gimp-floating-sel-to-layer 33)
+
+()
+    </div>
+
+<p>Now we need to duplicate that layer, you might notice that there is
+now duplicate layer in the DB, so we need to do it manually:</p>
+
+<div class="code">
+(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))
+    </div>
+and than:
+<div class="console-output">
+=> (my-duplicate-layer 3 34)
+
+41
+    </div>
+    
+    <p>Than we need to add some space for the enlarged text border,
+      gimp-layer-resize is our friend:</p>
+<div class="console-output">
+    (gimp-layer-resize 41 200 100 5 5)
+    </div>
+
+This works, but the width and height are hard coded, so we try again
+in a more flexible manner:
+
+    <div class="code">
+(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))
+    </div>
+
+Now we need to transfer the layers alpha cannel to the selection and
+grow it some pixels:
+
+(gimp-selection-layer-alpha 41)
+(gimp-selection-grow 3 5)
+
+Before we fill the layer, we have to remove the "Keep trans" flag,
+which causes that all transparent areas stay transparent:
+
+(gimp-layer-set-preserve-trans 41 0) 
+
+Now we will fill the selection with a gradient:
+
+(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)
+
+
+Script-fu
+~~~~~~~~~~
+
+Huh, now we have everything for our script-fu ready, we just need to
+attach the pieces. In the following steps we will also remove some
+unnecessary action and probably add some stuff.
+
+Ok, so how to write a script-fu? Simply have a look at
+~/.gimp-1.1/scripts/, thats the place where all script-fu's will
+end. So open your favorite text editor and create a file
+my-metal-logo.scm and save it into the directory ~/.gimp-1.1/scripts/
+When you then press "Xtns->Scritp-fu->Reload" your script will be
+loaded into "The Gimp", but before you will see anything, we first
+need to register our function.
+
+The function script-fu-register is the function, which is capable of
+doing that. The first argument is the function name of your newly
+written function, the second is the place, where your function will be
+appear inside the Gimp. The other arguments are for the Copyright,
+author, etc. The eight and the following arguments become interessting
+again, this are the arguments, which your function will recive. An
+example script-fu-register call would look like this:
+
+    <div class="code">
+(script-fu-register "script-fu-gradient-example"
+		    _"&lt;Toolbox&gt;/Xtns/Script-Fu/Utils/Custom Gradient..."
+		    "Create an example image of a custom gradient"
+		    "Federico Mena Quintero"
+		    "Federico Mena Quintero"
+		    "June 1997"
+		    ""
+		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))
+    </div>
+    
+
+    <h2>Copyright</h2>
+    <div class="copyright">
+      This document is covered under the GNU Free Documentation License
+    </div>
+
+  </body>
+</html>
