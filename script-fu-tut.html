@@ -32,12 +32,12 @@
     <h2><a name="preface">Preface</a></h2>
 
     <p>The following tutorial is written for <strong>The Gimp
-	1.1.24</strong>. Some things described here will not work or work
-      different with The Gimp 1.0.x.</p>
-    
+	1.1.24</strong>. Some things described here will not work or will work
+      differently with The Gimp 1.0.x.</p>
+
     <h2>Introduction</h2>
 
-    <p>This is a short tutorial to Script-Fu programming. I'll try to
+    <p>This is a short tutorial in Script-Fu programming. I'll try to
       give a short intro into the world of Script-Fu and explain how
       basic things works. We will create a complete script-fu
       step-by-step. The goal is to have a Script-Fu, which produces a
@@ -47,12 +47,12 @@
 
     <h2><a name="#first">First step on the road to a Script-Fu</a></h2>
 
-    <p>Ok, now we take the first step, we try to do what we want to do
-      in Script-Fu first in The Gimp as normal. That is important,
-      'cause we need to know exacly which operation we need and
-      in which order we need to call them.</p>
+    <p>Ok, now we take the first step:what we want to do
+      in Script-Fu,  we try to do first in The Gimp as normal.
+      That is important, 'cause we need to know exactly which
+      operation we need, and in which order we need to call them.</p>
 
-    <p>So lets create our test image, first of we create a new rgb
+    <p>So let's create our test image, first of we create a new rgb
       image (<tt class="menu">File-&gt;New Image</tt>) and insert some
       text into it, say the word "Test".</p>
 
@@ -62,7 +62,7 @@
       top layer.</p>
 
       <img src="images/step2.jpg">
-    
+
     <p>Then we take the second text layer and enlarge it a bit, to do
       so, we use the alpha-to-selection function and grow the
       selection by a few pixels. Then we fill the selection with the
@@ -71,15 +71,15 @@
       <img src="images/step3.jpg">
 
     <p>At last, we merge the layers and apply a standard drop
-      shadow. If that is done, we auto-crop the image, to remove all
+      shadow. When that is done, we auto-crop the image, to remove all
       unnecessary parts of the image.</p>
 
     <img src="images/step4.jpg">
-    
+
     <h2><a name="repro">Reproducing the steps in the Script-Fu Console</a></h2>
-    
-    <p>Ok the image looks now as we expected it, so lets summarize,
-      what we have done:</p>
+
+    <p>Ok: the image looks now as we expected it to, so lets summarize
+       what we have done:</p>
 
     <ol>
 	<li>Create an new image</li>
@@ -93,32 +93,32 @@
 	<li>Auto-crop the image</li>
     </ol>
 
-    <p>The task is now to reproduce this steps in the <strong>Script-Fu
-      Console</strong>.It is the place where you can enter Script-Fu Commands
-      and test them. Its the place where you should test all new
-      functions you aren't handy with and its the place where you can
-      more or less debug your written scripts. Its the easiest if you
-      test every line of Script-Fu first in the console and then
-      paralell write the Script-Fu, if the commands acts as you
-      expected it.</p>
+    <p>The task is now to reproduce these steps in the <strong>Script-Fu
+      Console</strong>: where you can enter Script-Fu Commands
+      and test them. Use the Console to test all new
+      functions you aren't handy with; in the Console you can
+      more or less debug your written scripts. It's easiest if you
+      test every line of Script-Fu first in the Console and then
+      parallel-write the Script-Fu, once the commands act as you
+      expect them to.</p>
 
     <img src="images/script-fu-console.png">
 
     <p>To do so, we open the Script-Fu Console (<tt
-      class="menu">Xtns-&gt;Script-fu-&gt;Consol</tt>).  If the
+      class="menu">Xtns-&gt;Script-fu-&gt;Consol</tt>). When the
       console is open, we click on the <tt class="menu">Browse...</tt> button in the bottom
-      left corner, this brings us to the <strong>DB
-      Browser</strong>. Thats the place where you can search for
-      functions, which you can access from within Script-Fu. Along
+      left corner; this brings us to the <strong>DB
+      Browser</strong>, where you can search for
+      functions which you can access from within Script-Fu. Along
       with the name of the function, you also get a description of the
-      arguments its expect and a general description what the function
+      arguments it expects and a general description what the function
       does.</p>
 
     <img src="images/db-browser.png">
 
-    <p>So now its time to reproduce our first step in the image
+    <p>Now it's time to reproduce our first step in the image
       creation, so we need a function to create an new image. Most of
-      the functions you find in the DB Browser have similar names as
+      the functions you find in the DB Browser have names similar to those
       in the menus of the Gimp. After a little search for "new" we
       find the function <tt class="code">gimp-image-new</tt>, which
       sounds like what we are searching for. We enter the following
@@ -132,18 +132,18 @@
 
 (3)</pre>
 
-    <p>The first line is simply the command that gots executed, the
+    <p>The first line is simply the command that was executed, the
       second line is the return value of the function. As you can read
-      in the DB Browser, this is the id of the newly created
-      image. You can simply use the id as argument to functions in the
+      in the DB Browser, this is the ID of the newly created
+      image. You can simply use the ID as an argument to functions in the
       console. The return value is also the first pitfall on our
       journey to Script-Fu. It comes as a one element long list and
       <em>not</em> as a integer value! So to use the value, we have to
       get the first element of the list with <tt
-      class="code">car</tt>, it will then return the image id 3.</p>
+      class="code">car</tt>, it will then return the image with ID 3.</p>
 
     <P>You might now wonder, where the image is that we have created,
-      cause you cannot see it. The answer is, that we don't have a
+      'cause you cannot see it. The answer is: we don't have a
       display for it, so the image is only inside the memory, but is
       not displayed, so we need create an display for it.  So we try
       <tt class="code">(gimp-display-new 3)</tt>, but we get an error:
@@ -152,11 +152,11 @@
     <pre class="console-output">ERROR: Procedural database execution failed:
     (gimp_display_new 3)</pre>
 
-    <p>So, thats just another pitfall. Not all functions in Script-Fu,
-      acts the same as there counterparts in the menu's. Sometimes
-      there are much more low-level, so you have to do some more work,
+    <p>So, that's just another pitfall. Not all functions in Script-Fu,
+      act the same as their counterparts in the menus. Sometimes
+      they are much more low-level, so you have to do some more work,
       to get the results you expect. The problem here is that our
-      newly created image, doesn't contain any layers. To display an
+      newly created image doesn't contain any layers. To display an
       image, we actually need at least one layer. So the next step is
       to create an layer:</p>
 
@@ -164,14 +164,14 @@
 
 (21)</pre>
 
-    <p>You might notice, that the constants RGB-IMAGE and NORMAL-MODE
+    <p>You might notice that the constants RGB-IMAGE and NORMAL-MODE
       is listed as RGB_IMAGE and NORMAL_MODE in the DB Browser (notice
       the underscore '_'). You have to replace all the underscrores
       with minus's '-' in the Script-Fu world. If your are unsure if
       your replacements are right, just enter the constant into the
       console.</p>
 
-    <p>The next step is to add the layer newly created layer to the
+    <p>The next step is to add the newly created layer to the
       image, as described in the DB browser:</p>
 
 <pre class="console-output">=&gt; (gimp-image-add-layer 3 21 -1)
@@ -183,7 +183,7 @@ And now we can finally display our image:
 
 (4)</pre>
 
-    <p>The displayed image looks a bit wired, cause it is filled with
+    <p>The displayed image looks a bit wierd, cause it is filled with
       random colors, to erase them, we will fill the layer with the
       current background color.</p>
 
@@ -193,19 +193,19 @@ And now we can finally display our image:
 
     <p>The function to fill a layer is called <tt
       class="code">gimp-drawable-fill</tt> and not <tt
-      class="code">gimp-layer-fill</tt> as you might expect, thats
+      class="code">gimp-layer-fill</tt> as you might expect, that's
       because a layer is a drawable. So if you are searching for
       functions to manipulate layers, you should also look out for
       stuff that manipulates drawables.</p>
-    
+
     <p>Now we have our image set up. To quick for you? Then lets
       summarize and write our first scheme function. First we
-      encapsule all into a let* clause and than add the let* clause
+      encapsule all of it into a let* clause, and than add the let* clause
       into a function body:</p>
 
 <pre class="code">(define (my-make-new-image)
  (let* ((image (car (gimp-image-new 256 256 RGB)))
-        (layer (car (gimp-layer-new image 256 256 
+        (layer (car (gimp-layer-new image 256 256
                      RGB-IMAGE "foobar" 100 NORMAL-MODE))))
        (gimp-drawable-fill layer BG-IMAGE-FILL)
        (gimp-image-add-layer image layer 0)
@@ -227,7 +227,7 @@ And now we can finally display our image:
 
     <p>And voila, we have our text on a newly created layer. The
       string <tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt>
-      might look as black-magic to you, but we will see later and easy
+      might look like black-magic to you, but we will see later an easy
       way to create it.</p>
 
     <p>Now we need to duplicate that layer, you might notice that there is
@@ -238,17 +238,17 @@ And now we can finally display our image:
 	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
               (gimp-image-add-layer image dup-layer 0)
 	      dup-layer))</pre>
-and than:
+and then:
 
 <pre class="console-output">=&gt; (my-duplicate-layer 3 34)
 
 41</pre>
-    
+
     <p>The next step is to add some space for the enlarged text
       border, gimp-layer-resize is our friend:</p>
 
     <pre class="console-output">(gimp-layer-resize 41 200 100 5 5)</pre>
-    
+
     <p>This works, but the width and height are hard coded, so we try
       again in a more flexible manner:</p>
 
@@ -258,10 +258,10 @@ and than:
 	       (gimp-layer-resize layer
 				  (+ width border) (+ height border)
 				  (/ border 2) (/ border 2))))</pre>
-  
+
     <p>Now we need to transfer the layers alpha cannel to the
       selection and grow it some pixels:</p>
-    
+
     <pre class="code">(gimp-selection-layer-alpha 41)
 (gimp-selection-grow 3 5)</pre>
 
@@ -274,7 +274,7 @@ and than:
     <p>Now we will fill the selection with a gradient:</p>
 
     <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
-    
+
     <h2><a name="write">Writing down the Script-Fu</a></h2>
 
     <p>Huh, now we have everything for our script-fu ready, we just
@@ -282,12 +282,12 @@ and than:
       remove some unnecessary action and probably add some stuff.</p>
 
     <p>Ok, so how to write a Script-Fu? Well, you need basically three
-      things. A file where your script is written down, that file
+      things. First, a file where your script is written down, that file
       should be placed in <tt
-      class="file">~/.gimp-1.1/scripts/</tt>. A function, which does
-      all the image manipulation and at last you need to have a call
+      class="file">~/.gimp-1.1/scripts/</tt>. Second, a function, which does
+      all the image manipulation, and finally you need to have a call
       to <tt class="code">script-fu-register</tt> to make your script
-      visible from inside the Gimp.</p> 
+      visible from inside the Gimp.</p>
 
     <p>So lets write an empty function and register it. You should
     copy&amp;paste the following code into a file <tt
@@ -306,13 +306,13 @@ and than:
 		    ""
 		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
 		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
-   
+
 
     <p>When you then press <tt
       class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> your script will
       be loaded into the Gimp and should be accessable from the
       menu.</p>
-    
+
     <p>Notice, that there are two kinds of Script-Fu's. The first kind
       will create a new image, thats used for logo's and accessible
       through the menu <tt
@@ -327,7 +327,7 @@ and than:
 
     <p>This brings us to the next topic, the arguments that your
       function can get, they can have the following types:</p>
-    
+
     <table border="1">
       	<tr>
 	  <th>Argument Type</th>
@@ -401,7 +401,7 @@ and than:
 	  <td><tt class="code">SF-OPTION</tt></td>
 	  <td>List of strings</td>
 	  <td>Lets you select an item out of a list</td>
-	</tr>  
+	</tr>
 
 	<tr>
 	  <td><tt class="code">SF-GRADIENT</tt></td>
@@ -409,7 +409,7 @@ and than:
 	  <td>Lets you select a gradient</td>
 	</tr>
     </table>
-    
+
     <p>The following code creates a box with all possible input
     types:</p>
 
@@ -442,7 +442,7 @@ and than:
     <img src="images/demo-box.png">
 
     <p>So back to business, lets finish our Script-Fu example. We
-      should start wish the frame work, so we need to decide which
+      should start with the frame work, so we need to decide which
       argument types we need. As we want to create a font, we first
       need the text, so we use SF-STRING, than we should use SF-FONT
       for the font selection and in addition SF-VALUE to enter the
@@ -457,8 +457,8 @@ and than:
 
     <p>Now that we have our register call set up, we can fill the
       function with some code. First of we insert our two helper
-      functions <tt class="code">my-duplicate-layer</tt> and <tt
-      class="code">my-layer-add-border</tt> at the top of the
+      functions: <tt class="code">my-duplicate-layer</tt> and <tt
+      class="code">my-layer-add-border</tt>, at the top of the
       file. Next, we more or less copy&amp;paste our Script-Fu Console
       experiments together. We move the <tt
       class="code">gimp-display-new</tt> call to the end of our
@@ -469,7 +469,7 @@ and than:
 
     <pre class="code">(define (my-image-to-layer-size image layer)
   (gimp-layer-set-offsets layer 0 0)
-  (gimp-image-resize image 
+  (gimp-image-resize image
 		     (car (gimp-drawable-width layer))
 		     (car (gimp-drawable-height layer))
 		     0 0))
@@ -492,7 +492,7 @@ and than:
 					     font))))
 
    (let* ((top-font-layer (my-duplicate-layer image bottom-font-layer)))
-     
+
      (my-layer-add-border bottom-font-layer 20)
 
      (gimp-layer-set-preserve-trans bottom-font-layer 0)
@@ -506,8 +506,8 @@ and than:
      (gimp-selection-layer-alpha top-font-layer)
      (gimp-blend top-font-layer    CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 50 200 0)
      (gimp-selection-clear image)
-     
-     (let* ((new-layer (car (gimp-image-merge-visible-layers 
+
+     (let* ((new-layer (car (gimp-image-merge-visible-layers
 			     image EXPAND-AS-NECESSARY))))
        (my-image-to-layer-size image new-layer))
 
@@ -529,30 +529,30 @@ and than:
     <h2><a name="pitfalls">Common Pitfalls</a></h2>
     <p>The following is a list of common pitfalls in Script-Fu.</p>
 
-    <h3><a name="return">Return Values</a></h3> 
-    
-    <p>When a function returns a value, it will always be encapsulet
-      in a list, it doesn't matter if its only one value or multiple
+    <h3><a name="return">Return Values</a></h3>
+
+    <p>When a function returns a value, it will always be encapsulated
+      in a list; it doesn't matter whether only one value or multiple
       values. Even if the return value is itself a list, like for
       example the color returned by <tt
       class="code">gimp-color-picker</tt>, the return value will
-      always be encapsult in an extra list.</p>
+      always be encapsulated in an extra list.</p>
 
     <p>If multiple values are returned they are also in a list, the
       first return value is the first element in the list, the second
       is the second list element, etc. So you need to always apply a
       <tt class="code">car</tt> call to get the correct value.</p>
-    
+
     <h3><a name="r5sr">R5SR Compliance</a></h3>
-    
+
     <p><a
 	  href="http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a>
-      is the document, which describes the scheme language, but
-      sadly the language used in the Gimp is not R5SR compliance,
+      is the document which describes the scheme language, but
+      sadly the language used in the Gimp is not R5SR compliance;
       not even close. Thats because Gimp uses SIOD as its scheme
       interpreter. SIOD is a small scheme implementation, the
       price is that it only provides a small subset of R5SR
-      functions, some have even another name. For example you
+      functions; even some of the functions' names have been changed. For example you
       don't have <tt class="code">display</tt>, only a function
       called <tt class="code">print</tt>. For a summary of scheme
       functions supported by the Gimp, you can have a look at the
@@ -568,21 +568,21 @@ and than:
 (fwrite writes swrite write-mask stroke-overwrite)</pre>
 
     <h2><a name="debug">Debugging</a></h2>
-    
-    <p>When you start to play with Script-Fu and even if you are
-      common with it, you will very often ran into a situation, where
-      your script doesn't work. To make it even worse sometimes you will not
-      even get a error message. Most of the time the cause will be
+
+    <p>When you start to play with Script-Fu, and even when you are
+      familiar with it, you will very often run into a situation where
+      your script doesn't work. To make it even worse, sometimes you will not
+      even get a error message. Most of the time, the cause will be
       simple, but the search hard. The following steps might make the
       search easier.</p>
-    
-    <p>First of check that your script is syntactical correct, that
+
+    <p>First of check that your script is syntactically correct; that
       means you have closed all opened parentheses and quotes. An
       editor with syntax highlighting, automatic indention and
       parentheses highlighting will help to accomplish that.</p>
 
     <p>Second, you might have forgotten to add a <tt
-      class="code">car</tt> to some return value. To check for that
+      class="code">car</tt> to some return value. To check for these
       errors, copy&amp;paste your code into the Script-Fu Console and
       call it manually.</p>
 
@@ -590,15 +590,15 @@ and than:
 
     <p>The above is most likely the error message you will get, if you
       get another error message, your bug might be elsewhere.</p>
-    
+
     <p>When you call a function with too few or to much arguments, you
       will get the following error message:</p>
-      
+
     <pre class="console-output">=&gt; (gimp-image-get-layers)
 ERROR: too few arguments (see errobj)</pre>
 
-    Than simply have a look at the errobj, it will tell you which
-    arguments where expected and which you supplied.
+    Than simply have a look at the errobj: it will tell you which
+    arguments were expected and which you supplied.
 
     <pre class="console-output">=&gt; (print errobj)
 
@@ -613,29 +613,29 @@ ERROR: too few arguments (see errobj)</pre>
     <h2><a name="cannotdo">Thing you can't do in Script-Fu</a></h2>
 
     <p>For now I have described what you can do with Script-Fu, but
-      there are also a lot of things, which you can't do in
+      there are also a lot of things which you can't do in
       Script-Fu.</p>
 
     <p>The first thing, that you might want to do is to provide some
-      better default values for the argument that you function will
+      better default values for the argument that your function will
       recieve. The bad news is that you can't do that, you can only
       pass constant values to the Script-Fu register call. So if your
-      default value should for example be half the width of the image,
-      you simply can't do that, you have to life with an constant
+      default value should, for example, be half the width of the image,
+      you simply can't do that, you have to live with an constant
       value.</p>
 
-    <p>Another thing you might want to have is some sort of GUI, which
-      goes behind the stuff that is provided by the SF-* values and
-      again, you can't do this. The SF-* values are all of a gui, that
-      you can expect from Script-Fu, if you want more complicated
+    <p>Another thing you might want to have is some sort of GUI which
+      goes behind the stuff that is provided by the SF-* values; and
+      again: you can't do this. The SF-* values are all the gui that
+      you can expect from Script-Fu. If you want more complicated
       stuff, like a preview window, you have to write a real Gimp
       Plug-in.</p>
 
     <p>At some point you might want to write your own filter or
-      effect, which needs image manipulation at pixel level. Thats a
-      thing that you actually can do in Script-Fu, but it will be
+      effect, which needs image manipulation at pixel level. That's a
+      thing that you actually can do in Script-Fu. But it will be
       extremly slow, due to the interpreted nature of Script-Fu. So
-      again, its better to write that as a real Gimp Plug-in.</p>
+      again, it's better to write that as a real Gimp Plug-in.</p>
 
     <p>You might also want to open a directory and open all the images
       in it. Not even that is possible. The SIOD webpage describes the
@@ -647,15 +647,15 @@ ERROR: too few arguments (see errobj)</pre>
 ERROR: unbound variable (errobj opendir)</pre>
 
     <p>To solve this you have to work-around this by dumping the
-      directory contents to a file and read that file instead or you
+      directory contents to a file and read that file instead, or you
       can write a Perl-Fu, Python-Fu or a Gimp Plug-in.</p>
 
-    <p>There exist a project called <a
+    <p>There exists a project called <a
       href="http://anoncvs.jp.gnome.org/index.cgi/gimp-plugins-unstable/gimple/">gimple</a>
-      in the Gnome CVS repositiory which might fix some of this
+      in the Gnome CVS repositiory which might fix some of these
       issues. Gimple is a Guile interface for Gimp. It will have much
       better R5SR compliance than SIOD and will probably be able to
-      call guile-gtk, to enable the creation ouf much more flexible
+      call guile-gtk, to enable the creation of much more flexible
       gui-interfaces, but I don't know the status of this project and
       have never seen it in action.</p>
 
@@ -668,7 +668,7 @@ ERROR: unbound variable (errobj opendir)</pre>
     some links to other Script-Fu sites at the <a
     href="http://www.gimp.org">Gimp</a> webpage. I have also uploaded
     my Script-Fu's, you can find them <a href="scripts/">here</a>, but
-    be warned, most of them are not documented and some might not work
+    be warned, most of them are not documented, and some might not work
     at all.</p>
 
     <h2><a name="references">References</a></h2>
@@ -694,6 +694,9 @@ ERROR: unbound variable (errobj opendir)</pre>
     <h2><a name="changelog">ChangeLog</a></h2>
     <pre>
     $Log: script-fu-tut.html,v $
+    Revision 1.11  2002/01/23 18:18:39  ingo
+    applied OSHIRO Naoki's typo patch
+
     Revision 1.10  2001/11/19 21:33:20  ingo
     *** empty log message ***
 
@@ -712,7 +715,7 @@ ERROR: unbound variable (errobj opendir)</pre>
     Revision 1.5  2000/08/15 16:06:41  ingo
     * Some sentences about debugging with (print ...)
     * Moved the changelog to the bottom of the page
-    
+
     Revision 1.4  2000/08/15 10:24:39  ingo
     Added some infos about things you can't do in Script-Fu</pre>
 
@@ -727,6 +730,6 @@ ERROR: unbound variable (errobj opendir)</pre>
       Documentation License</a>, Version 1.1 or any later version
       published by the Free Software Foundation.</p>
 
-    <small>Last updated: $Date: 2001/11/19 21:33:20 $</small>
+    <small>Last updated: $Date: 2002/01/23 18:18:39 $</small>
   </body>
 </html>
