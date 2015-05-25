@@ -212,7 +212,29 @@ Ok, so how to write a script-fu? Simply have a look at
 end. So open your favorite text editor and create a file
 my-metal-logo.scm and save it into the directory ~/.gimp-1.1/scripts/
 When you then press "Xtns->Scritp-fu->Reload" your script will be
-loaded into "The Gimp
+loaded into "The Gimp", but before you will see anything, we first
+need to register our function.
+
+The function script-fu-register is the function, which is capable of
+doing that. The first argument is the function name of your newly
+written function, the second is the place, where your function will be
+appear inside the Gimp. The other arguments are for the Copyright,
+author, etc. The eight and the following arguments become interessting
+again, this are the arguments, which your function will recive. An
+example script-fu-register call would look like this:
+
+(script-fu-register "script-fu-gradient-example"
+		    _"<Toolbox>/Xtns/Script-Fu/Utils/Custom Gradient..."
+		    "Create an example image of a custom gradient"
+		    "Federico Mena Quintero"
+		    "Federico Mena Quintero"
+		    "June 1997"
+		    ""
+		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))
+
+...
+
 
 
 EOF
