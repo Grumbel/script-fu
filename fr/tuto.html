@@ -1,0 +1,1099 @@
+<html>
+<head>
+
+
+<script type="text/javascript" src="/static/js/analytics.js"></script>
+<script type="text/javascript">archive_analytics.values.server_name="wwwb-app15.us.archive.org";archive_analytics.values.server_ms=157;</script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+  <title>tutoriel pour faire des Scripts-fu</title>
+</head>
+<body bgcolor='#FFFFFF'>
+
+
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">//<![CDATA[
+var __wm = (function(){
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http://amin.unice.fr/~titix/gimp/traduction/tuto.html";
+
+var firstYear = 1996;
+var imgWidth = 500,imgHeight = 27;
+var yearImgWidth = 25,monthImgWidth = 2;
+var displayDay = "6";
+var displayMonth = "Feb";
+var displayYear = "2004";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var $D=document,$=function(n){return document.getElementById(n)};
+var trackerVal,curYear = -1,curMonth = -1;
+var yearTracker,monthTracker;
+function showTrackers(val) {
+  if (val===trackerVal) return;
+  var $ipp=$("wm-ipp");
+  var $y=$("displayYearEl"),$m=$("displayMonthEl"),$d=$("displayDayEl");
+  if (val) {
+    $ipp.className="hi";
+  } else {
+    $ipp.className="";
+    $y.innerHTML=displayYear;$m.innerHTML=displayMonth;$d.innerHTML=displayDay;
+  }
+  yearTracker.style.display=val?"inline":"none";
+  monthTracker.style.display=val?"inline":"none";
+  trackerVal = val;
+}
+function getElementX2(obj) {
+  var $e=jQuery(obj);
+  return (typeof $e=="undefined"||typeof $e.offset=="undefined")?
+    getElementX(obj):Math.round($e.offset().left);
+}
+function trackMouseMove(event,element) {
+  var eventX = getEventX(event);
+  var elementX = getElementX2(element);
+  var xOff = Math.min(Math.max(0, eventX - elementX),imgWidth);
+  var monthOff = xOff % yearImgWidth;
+
+  var year = Math.floor(xOff / yearImgWidth);
+  var monthOfYear = Math.min(11,Math.floor(monthOff / monthImgWidth));
+  // 1 extra border pixel at the left edge of the year:
+  var month = (year * 12) + monthOfYear;
+  var day = monthOff % 2==1?15:1;
+  var dateString = zeroPad(year + firstYear) + zeroPad(monthOfYear+1,2) +
+    zeroPad(day,2) + "000000";
+
+  $("displayYearEl").innerHTML=year+firstYear;
+  $("displayMonthEl").innerHTML=prettyMonths[monthOfYear];
+  // looks too jarring when it changes..
+  //$("displayDayEl").innerHTML=zeroPad(day,2);
+  var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+  $("wm-graph-anchor").href=url;
+
+  if(curYear != year) {
+    var yrOff = year * yearImgWidth;
+    yearTracker.style.left = yrOff + "px";
+    curYear = year;
+  }
+  if(curMonth != month) {
+    var mtOff = year + (month * monthImgWidth) + 1;
+    monthTracker.style.left = mtOff + "px";
+    curMonth = month;
+  }
+}
+function hideToolbar() {
+  $("wm-ipp").style.display="none";
+}
+function bootstrap() {
+  var $spk=$("wm-ipp-sparkline");
+  yearTracker=$D.createElement('div');
+  yearTracker.className='yt';
+  with(yearTracker.style){
+    display='none';width=yearImgWidth+"px";height=imgHeight+"px";
+  }
+  monthTracker=$D.createElement('div');
+  monthTracker.className='mt';
+  with(monthTracker.style){
+    display='none';width=monthImgWidth+"px";height=imgHeight+"px";
+  }
+  $spk.appendChild(yearTracker);
+  $spk.appendChild(monthTracker);
+
+  var $ipp=$("wm-ipp");
+  $ipp&&disclaimElement($ipp);
+}
+return{st:showTrackers,mv:trackMouseMove,h:hideToolbar,bt:bootstrap};
+})();//]]>
+</script>
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+</style>
+<div id="wm-ipp" lang="en" style="display:none;">
+
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+   <table style="width:100%;"><tbody><tr>
+   <td id="wm-logo">
+       <a href="/web/" title="Wayback Machine home page"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0" /></a>
+   </td>
+   <td class="c">
+       <table style="margin:0 auto;"><tbody><tr>
+       <td class="u" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://amin.unice.fr/~titix/gimp/traduction/tuto.html" style="width:400px;" onfocus="this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20040206220101" /><input type="submit" value="Go" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td class="n" rowspan="2">
+           <table><tbody>
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr class="m">
+           	<td class="b" nowrap="nowrap">
+		
+		    <a href="/web/20031210130536/http://amin.unice.fr/~titix/gimp/traduction/tuto.html" title="10 Dec 2003">DEC</a>
+		
+		</td>
+		<td class="c" id="displayMonthEl" title="You are here: 22:01:01 Feb 6, 2004">FEB</td>
+		<td class="f" nowrap="nowrap">
+		
+		    Mar
+		
+                </td>
+	    </tr>
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr class="d">
+               <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20031210130536/http://amin.unice.fr/~titix/gimp/traduction/tuto.html" title="13:05:36 Dec 10, 2003"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+               
+               </td>
+               <td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 22:01:01 Feb 6, 2004">6</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   <img src="/static/images/toolbar/wm_tb_nxt_off.png" alt="Next capture" width="14" height="16" border="0"/>
+               
+	       </td>
+           </tr>
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr class="y">
+	       <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20020620124851/http://amin.unice.fr/~titix/gimp/traduction/tuto.html" title="20 Jun 2002"><strong>2002</strong></a>
+               
+               </td>
+               <td class="c" id="displayYearEl" title="You are here: 22:01:01 Feb 6, 2004">2004</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   2005
+               
+	       </td>
+           </tr>
+           </tbody></table>
+       </td>
+       </tr>
+       <tr>
+       <td class="s">
+           <a class="t" href="/web/20040206220101*/http://amin.unice.fr/~titix/gimp/traduction/tuto.html" title="See a list of every capture for this URL">9 captures</a>
+           <div class="r" title="Timespan for captures of this URL">15 Dec 01 - 6 Feb 04</div>
+       </td>
+       <td class="k">
+       <a href="" id="wm-graph-anchor">
+       <div id="wm-ipp-sparkline" title="Explore captures for this URL">
+	 <img id="sparklineImgId" alt="sparklines"
+		 onmouseover="__wm.st(1)" onmouseout="__wm.st(0)"
+		 onmousemove="__wm.mv(event,this)"
+		 width="500"
+		 height="27"
+		 border="0"
+		 src="/web/jsp/graph.jsp?graphdata=500_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:000000000001_2002:-1:000101000000_2003:-1:010101000101_2004:1:010000000000_2005:-1:000000000000_2006:-1:000000000000_2007:-1:000000000000_2008:-1:000000000000_2009:-1:000000000000_2010:-1:000000000000_2011:-1:000000000000_2012:-1:000000000000_2013:-1:000000000000_2014:-1:000000000000_2015:-1:000000000000" />
+       </div>
+       </a>
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td class="r">
+       <a href="#close" onclick="__wm.h();return false;" style="background-image:url(/static/images/toolbar/wm_tb_close.png);top:5px;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="background-image:url(/static/images/toolbar/wm_tb_help.png);bottom:5px;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+</div>
+</div>
+</div>
+<script type="text/javascript">__wm.bt();</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+<h1>tutoriel pour faire des Scripts-fu</h1>
+
+Ce tutoriel est la traduction du <a href='/web/20040206220101/http://pingus.seul.org/~grumbel/gimp/script-fu/script-fu-tut.html'>Script-Fu Tutorial</a> de <a
+ href="mailto:grumbel@gmx.de">grumbel@gmx.de</a>.
+<br>
+La mise en forme de ce tutoriel respecte exactement celle du tutoriel d'origine.
+
+<ul>
+<li><a href='#preface'>Préface</a>
+<li><a href='#intro'>Intro</a>
+<li><a href='#pas'>Premiers pas sur la route des Scripts-fu</a>
+<li><a href='#etape'>Reproduction des étapes dans la console Script-fu</a>
+<li><a href='#ecriture'>L'écriture du Script-fu à proprement parler</a>
+<li><a href='#piege'>Les pièges les plus courants</a>
+<ul>
+  <li>Les valeurs de retour
+  <li>La "compliance" R5RS 
+</ul>
+<li><a href='#bug'>Déverminage</a>
+<li><a href='#impossible'>Les choses qu'on ne peut pas faire dans un Script-fu</a>
+<li><a href='#exemple'>Exemples</a>
+<li><a href='#references'>Références</a>
+</ul>
+
+<u><h2><a name='preface'>Préface</a></h2></u>
+<!------->
+
+<p>
+le document suivant est écrit pour Gimp 1.1.24
+Les actions décrites diffèrent légèrement de la version 1.0 ou de la
+version 1.2
+</p>
+
+<u><h2><a name='intro'>Introduction</a></h2></u>
+<!------------>
+
+<p>
+Ceci est un court tutoriel sur la programmation d'un Script-fu 
+L'auteur va tenter de donner une courte introduction au monde des
+Scripts-fu et d'en montrer les principes de base. Nous allons créer un
+Script-fu complet pas à pas, le résultat final doit être un Script-fu
+qui produit un texte avec effet de métal. Je vais assumer que le lecteur
+possède les connaissances de base en Scheme, qui est le language de
+programmation utilisé pour les Scripts-fu.
+</p>
+
+
+<u><a name='pas'><h2>Premiers pas sur la route des Scripts-fu</h2></a></u>
+<!--------------------------------------->
+
+<p>
+Premièrement nous allons essayer de faire avec le Gimp ce que nous
+souhaitons faire en Script-fu. C'est important parce que nous devons
+savoir exactement de quelles opérations nous aurons besoin et dans
+quel ordre elles devront se dérouler.
+</p>
+<p>
+Pour commencer notre test, nous créons une image rgb et nous inscrivons
+en noir le mot "test" dans un calque transparent.
+</p>
+
+<img src='/web/20040206220101im_/http://pingus.seul.org/~grumbel/gimp/script-fu/images/step1.jpg'>
+
+<p>
+Maintenant on duplique le calque courant et on applique un gradient
+métal sur celui qui est le plus en avant.
+</p>
+
+<img src='/web/20040206220101im_/http://pingus.seul.org/~grumbel/gimp/script-fu/images/step2.jpg'>
+
+<p>
+Ensuite on sélectionne le 2ème calque et on l'élargit. Pour cela on
+utilise 'alpha vers sélection' et on agrandit de quelques pixels la
+sélection. maintenant on remplit la sélection avec le même gradient mais
+dans une autre direction.
+</p>
+
+<img src='/web/20040206220101im_/http://pingus.seul.org/~grumbel/gimp/script-fu/images/step3.jpg'>
+
+<p>
+Pour finir on rassemble les calques et on applique une ombre portée
+standard, et on applique un redimensionnement automatique pour éliminer
+les parties inutiles de l'image.
+</p>
+
+<img src='/web/20040206220101im_/http://pingus.seul.org/~grumbel/gimp/script-fu/images/step4.jpg'>
+
+<u><a name='etape'><h2>Reproduction des étapes dans la console Script-fu</h2></a></u>
+<!------------------------------------------------->
+<p>
+D'accord, maintenant l'image ressemble à ce que nous souhaitions
+obtenir, voila ce que nous avons fait :
+</p>
+
+<ol>
+<li> Créé une nouvelle image
+<li> Créé un calque texte
+<li> Dupliqué le calque texte
+<li> Elargi le calque texte du dessous
+<li> Rempli les deux calques textes avec un gradient
+<li> Rassemblé les deux calques
+<li> Appliqué une ombre portée
+<li> Rassemblé les deux calques courants
+<li> Éliminé les zones en surplus (autocrop)
+</ol>
+
+<p>
+Notre tache est maintenant de rassembler ces instructions dans la
+console Script-fu. C'est là que nous allons entrer les commandes pour
+les tester. C'est aussi là que vous allez plus ou moins pouvoir debugger
+vos scripts et que vous pourrez tester les commandes Scripts-fu auxquelles
+vous n'êtes pas familier. La façon la plus simple d'écrire un Script-fu
+est de tester chaque ligne dans la console avant de l'inscrire dans le
+Script-fu si tout c'est passé comme désiré.
+</p>
+
+<img src='2001_09_12_010048_shot.png'>
+
+<p>
+Pour cela, ouvrez la console par 'Exts->Script-fu->console...'. Si la
+console est ouverte, nous cliquons sur le bouton 'Parcourir...' en bas a
+gauche et nous accédons a la base de données des procédures. C'est là
+que nous pourrons chercher les fonctions qui sont accessibles depuis les
+Scripts-fu. A partir du nom de la fonction vous pouvez obtenir une
+description de son déroulement et les arguments attendus.
+</p>
+
+<img src='2001_09_12_010030_shot.png'>
+
+<p>
+Maintenant il est temps de reproduire la première étape qui est la
+création de l'image, pour cela nous avons besoin de la fonction qui crée
+une image. Beaucoup de fonctions que vous trouverez dans la base de
+données ont le même nom dans les menus de Gimp. Après une petite
+recherche de 'new' dans la base, nous trouvons la fonction
+'<i>gimp-image-new</i>' qui sonne comme ce que nous cherchons. Nous
+entrons la ligne suivante dans la console :
+</p>
+
+<i>
+<pre>
+(gimp-image-new 256 256 RGB)
+</pre>
+</i>
+
+<p>
+et nous obtenons en retour :
+</p>
+
+<i>
+<pre>
+=> (gimp-image-new 256 256 RGB)
+
+(3)
+</pre>
+</i>
+
+<p>
+par exemple. La première ligne est simplement la commande exécutée, la
+deuxième est la valeur de retour de la fonction. Comme vous pouvez le
+lire dans la base de données des procédures, c'est l'id de l'image
+nouvellement créée.
+<br><i>(NDT: notez bien toutes les valeurs retournées par la console de
+script-fu et dans la suite de tutoriel remplacez systématiquement les
+valeurs d'id données pour l'exemple par celles que vous avez réellement
+obtenu; si vous avez obtenu (0) remplacez 3 par 0, etc...)
+</i><br>
+Vous pouvez utiliser l'id comme un simple argument à
+une fonction de la console. La valeur de retour est le premier piège de
+notre voyage au pays des Scripts-fu. Elle revient comme le premier
+élément d'une longue liste et non comme une valeur entière ! Maintenant
+pour l'utiliser nous avons à prendre le premier élément de la liste avec
+<i>car</i>, ce qui nous retournera l'image d'id 3.
+</p>
+<p>
+Vous devez maintenant vous demander, où est l'image que nous avons créé,
+parce qu'on ne peut pas encore la voir. La réponse est que nous n'avons
+pas encore d'affichage pour elle, mais qu'elle réside déjà en mémoire.
+Nous allons donc créer un affichage pour elle. Nous essayons
+<i>(gimp-display-new 3)</i> mais nous récoltons une erreur :
+</p>
+
+<i>
+<pre>
+ERROR: Procedural database execution failed:
+    (gimp_display_new 3)
+</pre>
+</i>
+
+<p>
+C'est juste un nouveau piège. Toutes les fonctions des Scripts-fu
+n'agissent pas comme dans les menus de Gimp. Souvent, elles sont plus
+'bas-niveau' et vous avez plus de travail à faire pour obtenir les
+résultats escomptés. Le problème ici, aprés avoir créé une image, est
+qu'elle ne contient pas encore de calques. Pour afficher une image, elle
+doit avoir au moins un calque. Voici comment créer un calque :
+</p>
+
+<i>
+<pre>
+=> (gimp-layer-new 3 256 256 RGB-IMAGE "foobar" 100 NORMAL-MODE)
+
+(21)
+</pre>
+</i>
+
+<p>
+Vous avez peut être constaté que les constantes <i>RGB-IMAGE</i> et
+<i>NORMAL-MODE</i> sont spécifiées dans la base de données comme étant
+<i>RGB_IMAGE</i> et <i>NORMAL_MODE</i>. Vous devez remplacer tous les
+_(underscore) par des -(signe 'moins') dans le monde des constantes
+Script-fu. Si vous n'êtes pas sûr de vos remplacements, testez-les dans
+la console Script-fu.
+</p>
+<p>
+L'étape suivante est d'ajouter le nouveau calque à la nouvelle image,
+comme décrit dans la base de données :
+</p>
+
+<i>
+<pre>
+(gimp-image-add-layer 3 21 0)
+</pre>
+</i>
+
+<p>
+et de finalement afficher notre image :
+</p>
+
+<i>
+<pre>
+=> (gimp-display-new 3)
+
+(4)
+</pre>
+</i>
+
+<p>
+L'image nouvellement affichée à l'air un peu troublée, parce qu'elle est
+remplie de couleurs aléatoires, pour les effacer nous allons remplir
+cette image avec la couleur de fond courante :
+</p>
+
+<i>
+<pre>
+=> (gimp-drawable-fill 21 BG-IMAGE-FILL)
+()
+</pre>
+</i>
+
+<p>
+La fonction pour remplir un calque aurait peut-être pu s'appeller
+<i>gimp-layer-fill</i>, mais un calque est une zone de dessin, et elle
+s'appelle <i>gimp-drawable-fill</i>. Donc pour trouver des fonctions qui se
+rapportent à des calques, vous devez chercher des fonctions qui se
+rapportent à des zones de dessin.
+</p>
+
+<p>
+Maintenant notre image est initialisée. Trop rapidement pour vous ?
+Laissez moi résumer et écrire notre première fonction scheme. D'abord
+encapsulons le tout dans une clause let* et plaçons notre let* dans une
+fonction.
+</p>
+
+<i>
+<pre>
+(define (my-make-new-image)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+        (layer (car (gimp-layer-new image 256 256
+                     RGB-IMAGE "foobar" 100 NORMAL-MODE))))
+       (gimp-drawable-fill layer BG-IMAGE-FILL)
+       (gimp-image-add-layer image layer 0)
+       (gimp-display-new image)
+       image))
+</pre>
+</i>
+
+<p>
+Dans un script scheme la dernière ligne est la valeur de retour de la
+fonction, <i>image</i> est donc la valeur de retour de notre fonction.
+</p>
+
+<p>
+Retournons à notre affaire de texte métallisé. Nous avons besoin
+d'ajouter un texte et de jouer avec lui. En cherchant rapidement dans
+la base nous trouvons <i>gimp-text-fontname</i>. Pour l'appeller nous
+utiliserons :
+</p>
+
+<i>
+<pre>
+=> (gimp-text-fontname 3 21 -1 0 "Foobar" 0 TRUE 25 PIXELS
+                    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
+
+(33)
+</pre>
+</i>
+
+<p>
+Voila, notre texte est installé dans un nouveau calque transparent. La
+chaîne <i>"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</i>
+doit vous sembler être de la magie noire, mais nous allons plus tard
+découvrir un moyen simple de la générer.
+<br><i>
+(NDT : Pour obtenir satisfaction il faut impérativement que la police blippo
+soit installée sur votre serveur graphique X. C'est peu probable mais il y a
+une solution pour entrer une police valide. Utilisez Gimp et créez votre texte
+de façon classique. Puis, dans l'outil Texte, cliquez sur l'onglet Information
+sur la police, et récupérez l'information fournie dans le champ : Nom de la
+police demandée, pour la réintroduire dans la console de script-fu).
+</i><br>
+</p>
+
+<p>
+Maintenant nous avons besoin de copier ce calque, vous remarquerez qu'il
+n'y a pas de fonction de duplication dans la base, nous aurons donc
+besoin de la créer manuellement.
+</p>
+
+<i>
+<pre>
+(define (my-duplicate-layer image layer)
+        (let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+              dup-layer))
+</pre>
+</i>
+
+<p>
+Et de l'invoquer :
+</p>
+
+<i>
+<pre>
+=> (my-duplicate-layer 3 21)
+
+41
+</pre>
+</i>
+
+<p>
+L'étape suivante est d'ajouter de l'espace autour du texte.
+<i>gimp-layer-resize</i> va nous y aider.
+</p>
+
+<i>
+<pre>
+(gimp-layer-resize 41 200 100 5 5)
+</pre>
+</i>
+<p>
+Cela fonctionne, mais les tailles sont données en dur. Voici une
+technique plus flexible :
+</p>
+
+<i>
+<pre>
+(define (my-layer-add-border layer border)
+        (let* ((width  (car (gimp-drawable-width  layer)))
+               (height (car (gimp-drawable-height layer))))
+               (gimp-layer-resize layer
+                                  (+ width border) (+ height border)
+                                  (/ border 2) (/ border 2))))
+</pre>
+</i>
+
+<p>
+Maintenant nous devons passer la transparence du calque en sélection, et
+agrandir cette dernière.
+</p>
+
+<i>
+<pre>
+(gimp-selection-layer-alpha 41)
+(gimp-selection-grow 3 5)
+</pre>
+</i>
+
+<p>
+Avant de remplir le calque, nous avons besoin de décocher la case
+'préserver la transparence' qui fait que tous les espaces transparents,
+le restent.
+</p>
+
+<i>
+<pre>
+(gimp-layer-set-preserve-trans 41 0)
+</pre>
+</i>
+
+<p>
+Maintenant pour remplir la sélection avec un gradient :
+</p>
+
+<i>
+<pre>
+(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)
+</pre>
+</i>
+
+<u><a name='ecriture'><h2>L'écriture du Script-fu à proprement parler</h2></a></u>
+<!------------------------------------------------------->
+
+<p>
+Maintenant nous avons tout pour faire tourner notre script, reste juste
+à attacher les pièces entre elles. Dans les étapes suivantes nous allons
+supprimer les actions inutiles et probablement ajouter des éléments.
+</p>
+
+<p>
+D'accord comment enregistrer un Script-fu ? Vous aurez besoin de 3
+choses : un fichier dans lequel le script est écrit, ce fichier devra
+étre placé dans le répertoire <i>~/.gimp-version/scripts/</i>. Une
+fonction, qui effectue toutes les manipulations, et pour finir un appel
+à <i>script-fu-register</i> pour rendre le script visible depuis le
+GIMP.
+</p>
+
+<i>
+<pre>
+define (my-dummy-function a b)
+  (print "Do nothing"))
+
+(script-fu-register "my-dummy-function"
+                    _"<Toolbox>/Xtns/Script-Fu/My Stuff/Dummy..."
+                    "Do nothing"
+                    "Joey User"
+                    "Joey User"
+                    "August 2000"
+                    ""
+                    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+                    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))
+</pre>
+</i>
+
+<p>
+En suivant le menu <i>Exts->Script-fu->Rafraichir</i> le fichier sera lu
+par le GIMP et sa fonction sera rendue accessible depuis le menu de GIMP.
+</p>
+
+<p>
+Attention, Il y a 2 sortes de Script-fu : La première sorte crée une
+nouvelle image, et est accessible par <i>Exts->Script-fu->...</i> et la
+2ème va manipuler une image existante, et sera accessible par un clic
+droit sur l'image à manipuler. Pour enregistrer la 2ème sorte de
+Script-fu vous aurez besoin d'ajuster le chemin
+<i>&lt;Image&gt;/Script-fu/...</i> et de prendre (au moins) 2 arguments
+<i>SF-IMAGE</i> et <i>SF-DRAWABLE</i>.
+</p>
+
+<p>
+Ce qui nous amène au sujet suivant, les arguments que peut prendre votre
+fonction, et leurs types
+</p>
+
+<table border="1">
+        <tr>
+          <th>Type de l'argument</th>
+          <th>Type de donnée</th>
+          <th>Description</th>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-IMAGE</tt></td>
+          <td>Entier (id d'une image)</td>
+          <td>Utilisé pour récupérer l'id d'une image</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-DRAWABLE</tt></td>
+          <td>Entier (id d'une zone de dessin)</td>
+          <td>Récupère l'id d'une zone de dessin</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-VALUE</tt></td>
+          <td>Chaîne de caractères</td>
+          <td>Entrée d'une valeur numérique</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-TOGGLE</tt></td>
+          <td>Case à cocher (TRUE or FALSE)</td>
+          <td>Reçoit une valeur vraie ou fausse</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-PATTERN</tt></td>
+          <td>Chaîne de caractères (nom d'un motif)</td>
+          <td>Vous laisse sélectionner un motif</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-ADJUSTMENT</tt></td> <td>
+	  Liste
+          (valeur-de-départ valeur-min valeur-max petit-pas grand-pas
+          [entier=0 or flottant=1] [slider=0 or roll-box=1])</td>
+          <td>Crée un "slider" ou une "input box" avec les valeurs données</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-FILENAME</tt></td>
+          <td>Chaîne de caractères (chemin)</td>
+          <td>Vous laisse parcourir à la recherche du fichier</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-STRING</tt></td>
+          <td>Chaîne de caractère</td>
+          <td>Vous demande une Chaîne dans une boite de dialogue</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-FONT</tt></td>
+          <td>Chaîne de caractères (nom d'une police de caractères)</td>
+          <td>Vous laisse choisir une police</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-COLOR</tt></td>
+          <td>Liste (Rouge Vert Bleu) [0-255]</td>
+          <td>Vous laisse choisir une couleur</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-OPTION</tt></td>
+          <td>Liste de chaînes de caractères</td>
+          <td>Vous laisse choisir un élément dans une liste</td>
+        </tr>
+
+        <tr>
+          <td><tt class="code">SF-GRADIENT</tt></td>
+          <td>Chaîne de caractère (nom du gradient)</td>
+          <td>Vous laisse choisir un dégradé</td>
+        </tr>
+    </table>
+
+<p>
+Le code suivant crée une boite avec tous les types d'entrées possibles.
+</p>
+
+<i>
+<pre>
+(define (my-demo-box value adj1 adj2 image drawable toggle pattern string font color option gradient)
+  (print "Do nothing"))
+
+(script-fu-register "my-demo-box"
+                    "<Toolbox>/Xtns/Script-Fu/My Stuff/Demo Box..."
+                    "Do nothing"
+                    "Joe User"
+                    "Joe User"
+                    "August 2000"
+                    ""
+                    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 1 0)
+                    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 1 1)
+                    SF-COLOR      "SF-COLOR" '(255 0 255)
+                    SF-DRAWABLE   "SF-DRAWABLE" 0
+                    SF-FONT       "SF-FONT" ""
+                    SF-GRADIENT   "SF-GRADIENT"  "Golden"
+                    SF-IMAGE      "SF-IMAGE" 0
+                    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
+                    SF-PATTERN    "SF-PATTERN" "Wood"
+                    SF-STRING     "SF-STRING" "Test String"
+                    SF-TOGGLE     "SF-TOGGLE" TRUE
+                    SF-VALUE      "SF-VALUE" "0"
+                    SF-FILENAME   "SF-FILENAME" "/")
+</pre>
+</i>
+
+<p>
+La boite résultante ressemblera à ça :
+</p>
+
+<img src='2001_09_12_011259_shot.png'>
+
+<p>
+Retournons à nos affaires, et finissons notre exemple de Script-fu.
+Décidons des arguments dont nous avons besoin en fonction de ce que nous
+utilisons : un text (<i>SF-STRING</i>) une police (<i>SF-FONT</i>) et une
+taille pour la police (<i>SF-VALUE</i>).
+</p>
+
+<p>
+L'enregistrement par le <i>script-fu-register</i> vous est laissé comme
+exercice. Si vous ne souhaitez pas le faire seul, inspirez vous de la commande
+<i>script-fu-register</i> quelques lignes plus haut.
+</p>
+
+<p>
+Maintenant que notre enregistrement est préparé, nous pouvons remplir la
+fonction avec du code. D'abord nous insérons nos raccourcis
+<i>my-duplicate-layer</i> et <i>my-layer-add-border</i> en haut du
+fichier. Ensuite nous allons plus ou moins copier coller nos
+expérimentations Script-fu en Console. Nous déplaçons l'appel à
+<i>gimp-display-new</i> en fin de fonction, ainsi nous ne verrons pas
+l'image avant la fin du travail. Nous ajoutons d'autres fonctions
+d'aide, qui vont finalement découper notre image à la bonne dimension.
+Le résultat doit ressembler à ça :
+</p>
+
+<i>
+<pre>
+(define (my-image-to-layer-size image layer)
+  (gimp-layer-set-offsets layer 0 0)
+  (gimp-image-resize image
+                     (car (gimp-drawable-width layer))
+                     (car (gimp-drawable-height layer))
+                     0 0))
+
+(define (my-layer-add-border layer border)
+        (let* ((width  (car (gimp-drawable-width  layer)))
+               (height (car (gimp-drawable-height layer))))
+               (gimp-layer-resize layer
+                                  (+ width border) (+ height border)
+                                  (/ border 2) (/ border 2))))
+
+(define (my-duplicate-layer image layer)
+        (let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+              dup-layer))
+
+(define (my-make-metal-font text font font-size)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+        (bottom-font-layer (car (gimp-text-fontname image -1 0 0 text 0 TRUE font-size PIXELS
+                                             font))))
+
+   (let* ((top-font-layer (my-duplicate-layer image bottom-font-layer)))
+
+     (my-layer-add-border bottom-font-layer 20)
+
+     (gimp-layer-set-preserve-trans bottom-font-layer 0)
+     (gimp-gradients-set-active "Four_bars")
+
+     (gimp-sélection-layer-alpha bottom-font-layer)
+     (gimp-sélection-grow image 3)
+     (gimp-blend bottom-font-layer CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 200 50)
+
+
+     (gimp-sélection-layer-alpha top-font-layer)
+     (gimp-blend top-font-layer    CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 50 200 0)
+     (gimp-sélection-clear image)
+
+     (let* ((new-layer (car (gimp-image-merge-visible-layers
+                             image EXPAND-AS-NECESSARY))))
+       (my-image-to-layer-size image new-layer))
+
+     (gimp-display-new image))
+   ))
+
+(script-fu-register "my-make-metal-font"
+                    "<Toolbox>/Xtns/Script-Fu/Logos/Metal Font..."
+                    "Create an example image of a custom gradient"
+                    "Federico Mena Quintero"
+                    "Federico Mena Quintero"
+                    "June 1997"
+                    ""
+                    SF-STRING     "Text" "The GIMP"
+                    SF-FONT       "Font" "-*-blippo-*-r-*-*-24-*-*-*-p-*-*-*"
+                    SF-VALUE      "Font Size" "50" )
+
+</pre>
+</i>
+
+<u><a name='piege'><h2>Les piéges les plus courants</h2></a></u>
+
+Voici la liste des piéges dans lesquels j'espére ne pas vous voir tomber
+:
+
+<h3>Les valeurs de retour</h3>
+
+<p>
+Quand une fonction retourne une valeur, elle est toujours encapsulée
+dans une liste, qu'elle soit constituée d'une valeur ou plusieurs. Même
+si la valeur elle même est une liste (comme pour une couleur, liste des
+3 valeurs RGB retournée par <i>gimp-color-picker</i>) elle sera
+encapsulée dans une autre liste.
+</p>
+
+<p>
+Si plusieurs valeurs sont retournées, elles sont alors dans une liste,
+la première valeur de retour étant le premier élément, la 2ème valeur le
+2ème élément, etc... Donc vous devez toujours appliquer la fonction
+scheme <i>car</i> au résultat pour récupérer la valeur correcte.
+</p>
+
+<h3>La "Compliance" R5RS</h3>
+
+<p>
+<a href='/web/20040206220101/http://www.schemers.org/Documents/Standards/R5RS/'>R5RS</a>
+décrit le language scheme, tristement le scheme de Gimp n'est pas
+conforme à cette norme. C'est parce que Gimp utilise SIOD comme
+interprète scheme. SIOD est un petit interprète scheme, et ne produit
+qu'une petite partie des spécifications R5RS, et certaines portent un
+autre nom que dans la version R5RS. Par exemple on n'a pas <i>display</i>
+mais on a <i>print</i>. Pour avoir un aperçu des fonctions scheme
+disponibles dans Gimp vous pouvez consulter la page de <a
+href='/web/20040206220101/http://people.delphi.com/gjc/siod.html'>SIOD</a>. Pire, Gimp ne
+donne pas accès a toutes les fonctions décrites sur cette page, qui
+reste néanmoins un bon point de départ. Vous pouvez utiliser la fonction
+<i>apropos</i> en console pour plus d'infos sur une fonction spécifique.
+</p>
+
+<i>
+<pre>
+=> (apropos "write")
+
+(fwrite writes swrite write-mask stroke-overwrite)
+</pre>
+</i>
+
+
+<u><a name='bug'><h2>Déverminage</h2></a></u>
+
+<p>
+Quand vous commencez à travailler au corps les Scripts-fu et même si vous
+y êtes familier, il arrive souvent que le script ne se passe pas comme
+prévu. Pire parfois le message d'erreur renvoyé est inexistant ou
+incompréhensible. La plupart du temps la cause est simple et la
+recherche difficile. Les étapes suivantes vont vous la rendre plus
+facile.
+</p>
+
+<p>
+D'abord regardez si votre script est syntaxiquement correct, c'est à
+dire que vous avez fermé toutes vos parenthèses et guillemets. Un
+éditeur avec support syntaxique des indentations et des parenthèses,
+comme emacs, vous sera utile.
+</p>
+
+<p>
+Vous pouvez aussi avoir omis d'utiliser un <i>car</i> sur une valeur de
+retour. Pour vérifier cela copiez collez votre code dans la console et
+appellez le manuellement.
+</p>
+
+<i>
+<pre>
+ERROR: Invalid types specified for arguments
+</pre>
+</i>
+
+<p>
+L'erreur ci dessus en est révélatrice.
+</p>
+
+<p>
+Vous pouvez aussi appeller une fonction avec un mauvais nombre
+d'arguments, ce qui vous amènera le message d'erreur suivant :
+</p>
+
+<i>
+<pre>
+&gt; (gimp-image-get-layers)
+ERROR: too insomniark niarkfew arguments (see errobj)
+</pre>
+</i>
+
+<p><i>
+(NDT : vous pouvez aussi avoir 2 fonctions du méme nom, mais
+avec des paramètres différents. Cela ne sera pas détecté par gimp comme
+une erreur mais déclenchera néamoins une erreur à l'éxécution).
+</i></p>
+
+<p>
+En consultant l'erreur, vous pourrez voir quels arguments étaient requis
+et combien vous en avez donné :
+</p>
+
+<i>
+<pre>
+=> (print errobj)
+
+((image))
+()
+</pre>
+</i>
+
+<p>
+A la fin si votre fonction ne marche toujours pas, ajoutez quelques
+appels a <i>print</i> aux bons endroits, pour vérifier jusqu'où le
+déroulement se passe correctement. pour voir cette sortie, exécutez
+votre travail en console.
+</p>
+
+<u><a name='impossible'><h2>Les choses qu'on ne peut pas faire dans un Script-fu</h2></a></u>
+
+<p>
+Jusqu'ici j'ai décris ce qu'on peut faire avec un Script-fu, mais il y a
+pleins de choses impossibles.
+</p>
+
+<p>
+La première chose est que vous pouvez vouloir donner de meilleures
+valeurs par défaut aux arguments que votre fonction va recevoir. On peut
+uniquement passer des constantes en arguments à un Script-fu. Vous pouvez vouloir
+passer par exemple la moitié de la taille d'une image, eh bien ce n'est
+pas possible.
+</p>
+
+<p>
+Une autre contrainte, est l'interface qui est apportée par l'ensemble
+des SF-* que vous utiliserez. Vous ne pourrez pas en avoir d'autre sauf
+si vous décider de faire des plug-ins (greffons) et d'abandonner les Scripts-fu.
+</p>
+
+<p>
+Les Scripts-fu sont plus lent que les plug-ins en général, surtout pour
+le traitement d'image pixel par pixel.
+</p>
+
+<p>
+Vous souhaiterez peut être ouvrir toutes les images contenues dans un
+répertoire. La fonction <i>opendir</i> de SIOD ne fonctionne pas.
+</p>
+
+<i>
+<pre>
+=> (opendir "/")
+
+ERROR: unbound variable (errobj opendir)
+</pre>
+</i>
+
+<p>
+Une solution consiste à placer le résultat d'un ls de ce répertoire dans
+un fichier, et de lire ce fichier, ou bien vous pouvez écrire Perl-Fu,
+Python-Fu ou un Plug-in.
+</p>
+
+<u><h2><a name='exemple'>Exemples</a></h2></u>
+
+<p>
+C'est souvent une bonne idée de regarder les Scripts-fu des autres pour
+se faire une idée. les Scripts-fu peuvent par exemple être trouvés dans
+le répertoire <i>usr/share/gimp/version-of-gimp/scripts/</i>. Il y a des
+liens sur des sites de Script-fu sur la <a
+href='/web/20040206220101/http://www.gimp.org/'>page officielle de gimp</a> mes propres
+scripts sont disponibles <a
+href='/web/20040206220101/http://pingus.seul.org/~grumbel/gimp/script-fu/scripts/'>ici</a>
+mais attention, ils ne sont ni sûrs ni documentés.
+</p>
+
+
+<u><h2><a name="references">References</a></h2></u>
+
+    <ul>
+      <li><a href="/web/20040206220101/http://people.delphi.com/gjc/siod.html">SIOD</a></li>
+      <li><a href="/web/20040206220101/http://www.scheme.com/tspl2d/index.html">The Scheme
+      Language, Second Edition</a></li>
+      <li><a
+      href="/web/20040206220101/http://www.cs.rice.edu/CS/PLT/Teaching/Lectures/Released/Book/">How
+      to Design Programs</a></li>
+      <li><a href="/web/20040206220101/http://www.gimp.org/">The Gimp</a>
+    </ul>
+
+    <ul>
+      <li><a href="/web/20040206220101/http://lithwww.epfl.ch/teaching/rdf/support99/SchemeTut.html">Script-Fu &amp; Scheme</a></li>
+      <li><a href="/web/20040206220101/http://gum.gnome.gr.jp/write-scriptfu.html">Script-Fu (japanese)</a></li>
+      <li><a href="/web/20040206220101/http://www.xcf.berkeley.edu/~gimp/script-fu/script-fu.html">Script-Fu (GIMP)</a></li>
+      <li><a href="/web/20040206220101/http://www.script-fu.org/">Script-Fu.org</a></li>
+      <li><a href="/web/20040206220101/http://www.ee.byu.edu/support/gimp/write_scriptfu.html">GUM - Writing Script-Fu</a></li>
+      <li><a href="/web/20040206220101/http://w3.man.torun.pl/~makler/help/script-fu-tutorial/">Mike Terry's Black Belt School of ScriptFu</a></li>
+    </ul>
+
+
+<P class="copyright">Copyright (c) 2000 Ingo Ruhnke &lt;<a
+      href="mailto:grumbel@gmx.de">grumbel@gmx.de</a>&gt;</p>
+
+<p>Traduction Septembre 2001 <a
+href='mailto:titix@amin.unice.fr'>Laetitia MARIN</a></P>
+
+<p class="copyright">Permission est donnée de copier, distribuer et modifier ce
+      document, sous les termes de la <a
+      href="/web/20040206220101/http://www.gnu.org/copyleft/fdl.html">GNU Free
+      Documentation License</a>, Version 1.1 ou version supérieure
+      publiée par la Free Software Foundation.</p>
+
+
+
+
+
+
+
+<!--
+     FILE ARCHIVED ON 22:01:01 Feb 6, 2004 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 10:44:54 May 26, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

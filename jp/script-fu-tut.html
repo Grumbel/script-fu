@@ -1,0 +1,1198 @@
+<html>
+  <head>
+
+
+<script type="text/javascript" src="/static/js/analytics.js"></script>
+<script type="text/javascript">archive_analytics.values.server_name="wwwb-app1.us.archive.org";archive_analytics.values.server_ms=147;</script>
+<link type="text/css" rel="stylesheet" href="/static/css/banner-styles.css"/>
+
+
+    <title>Script-Fu チュートリアル -日本語版-</title>
+    <!-- <LINK REL="stylesheet" HREF="default.css" TYPE="text/css"> -->
+  </head>
+
+  <body BGCOLOR="white" TEXT="black">
+
+
+<!-- BEGIN WAYBACK TOOLBAR INSERT -->
+<script type="text/javascript" src="/static/js/disclaim-element.js" ></script>
+<script type="text/javascript" src="/static/js/graph-calc.js" ></script>
+<script type="text/javascript" src="/static/jflot/jquery.min.js" ></script>
+<script type="text/javascript">//<![CDATA[
+var __wm = (function(){
+var wbPrefix = "/web/";
+var wbCurrentUrl = "http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html";
+
+var firstYear = 1996;
+var imgWidth = 500,imgHeight = 27;
+var yearImgWidth = 25,monthImgWidth = 2;
+var displayDay = "3";
+var displayMonth = "Feb";
+var displayYear = "2003";
+var prettyMonths = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var $D=document,$=function(n){return document.getElementById(n)};
+var trackerVal,curYear = -1,curMonth = -1;
+var yearTracker,monthTracker;
+function showTrackers(val) {
+  if (val===trackerVal) return;
+  var $ipp=$("wm-ipp");
+  var $y=$("displayYearEl"),$m=$("displayMonthEl"),$d=$("displayDayEl");
+  if (val) {
+    $ipp.className="hi";
+  } else {
+    $ipp.className="";
+    $y.innerHTML=displayYear;$m.innerHTML=displayMonth;$d.innerHTML=displayDay;
+  }
+  yearTracker.style.display=val?"inline":"none";
+  monthTracker.style.display=val?"inline":"none";
+  trackerVal = val;
+}
+function getElementX2(obj) {
+  var $e=jQuery(obj);
+  return (typeof $e=="undefined"||typeof $e.offset=="undefined")?
+    getElementX(obj):Math.round($e.offset().left);
+}
+function trackMouseMove(event,element) {
+  var eventX = getEventX(event);
+  var elementX = getElementX2(element);
+  var xOff = Math.min(Math.max(0, eventX - elementX),imgWidth);
+  var monthOff = xOff % yearImgWidth;
+
+  var year = Math.floor(xOff / yearImgWidth);
+  var monthOfYear = Math.min(11,Math.floor(monthOff / monthImgWidth));
+  // 1 extra border pixel at the left edge of the year:
+  var month = (year * 12) + monthOfYear;
+  var day = monthOff % 2==1?15:1;
+  var dateString = zeroPad(year + firstYear) + zeroPad(monthOfYear+1,2) +
+    zeroPad(day,2) + "000000";
+
+  $("displayYearEl").innerHTML=year+firstYear;
+  $("displayMonthEl").innerHTML=prettyMonths[monthOfYear];
+  // looks too jarring when it changes..
+  //$("displayDayEl").innerHTML=zeroPad(day,2);
+  var url = wbPrefix + dateString + '/' +  wbCurrentUrl;
+  $("wm-graph-anchor").href=url;
+
+  if(curYear != year) {
+    var yrOff = year * yearImgWidth;
+    yearTracker.style.left = yrOff + "px";
+    curYear = year;
+  }
+  if(curMonth != month) {
+    var mtOff = year + (month * monthImgWidth) + 1;
+    monthTracker.style.left = mtOff + "px";
+    curMonth = month;
+  }
+}
+function hideToolbar() {
+  $("wm-ipp").style.display="none";
+}
+function bootstrap() {
+  var $spk=$("wm-ipp-sparkline");
+  yearTracker=$D.createElement('div');
+  yearTracker.className='yt';
+  with(yearTracker.style){
+    display='none';width=yearImgWidth+"px";height=imgHeight+"px";
+  }
+  monthTracker=$D.createElement('div');
+  monthTracker.className='mt';
+  with(monthTracker.style){
+    display='none';width=monthImgWidth+"px";height=imgHeight+"px";
+  }
+  $spk.appendChild(yearTracker);
+  $spk.appendChild(monthTracker);
+
+  var $ipp=$("wm-ipp");
+  $ipp&&disclaimElement($ipp);
+}
+return{st:showTrackers,mv:trackMouseMove,h:hideToolbar,bt:bootstrap};
+})();//]]>
+</script>
+<style type="text/css">
+body {
+  margin-top:0 !important;
+  padding-top:0 !important;
+  min-width:800px !important;
+}
+</style>
+<div id="wm-ipp" lang="en" style="display:none;">
+
+<div style="position:fixed;left:0;top:0;width:100%!important">
+<div id="wm-ipp-inside">
+   <table style="width:100%;"><tbody><tr>
+   <td id="wm-logo">
+       <a href="/web/" title="Wayback Machine home page"><img src="/static/images/toolbar/wayback-toolbar-logo.png" alt="Wayback Machine" width="110" height="39" border="0" /></a>
+   </td>
+   <td class="c">
+       <table style="margin:0 auto;"><tbody><tr>
+       <td class="u" colspan="2">
+       <form target="_top" method="get" action="/web/form-submit.jsp" name="wmtb" id="wmtb"><input type="text" name="url" id="wmtbURL" value="http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html" style="width:400px;" onfocus="this.focus();this.select();" /><input type="hidden" name="type" value="replay" /><input type="hidden" name="date" value="20030203041219" /><input type="submit" value="Go" /><span id="wm_tb_options" style="display:block;"></span></form>
+       </td>
+       <td class="n" rowspan="2">
+           <table><tbody>
+           <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+           <tr class="m">
+           	<td class="b" nowrap="nowrap">
+		
+		    <a href="/web/20021202205414/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html" title="2 Dec 2002">DEC</a>
+		
+		</td>
+		<td class="c" id="displayMonthEl" title="You are here: 4:12:19 Feb 3, 2003">FEB</td>
+		<td class="f" nowrap="nowrap">
+		
+		    Mar
+		
+                </td>
+	    </tr>
+           <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+           <tr class="d">
+               <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20021202205414/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html" title="20:54:14 Dec 2, 2002"><img src="/static/images/toolbar/wm_tb_prv_on.png" alt="Previous capture" width="14" height="16" border="0" /></a>
+               
+               </td>
+               <td class="c" id="displayDayEl" style="width:34px;font-size:24px;" title="You are here: 4:12:19 Feb 3, 2003">3</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   <img src="/static/images/toolbar/wm_tb_nxt_off.png" alt="Next capture" width="14" height="16" border="0"/>
+               
+	       </td>
+           </tr>
+           <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+           <tr class="y">
+	       <td class="b" nowrap="nowrap">
+               
+                   <a href="/web/20011230131242/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html" title="30 Dec 2001"><strong>2001</strong></a>
+               
+               </td>
+               <td class="c" id="displayYearEl" title="You are here: 4:12:19 Feb 3, 2003">2003</td>
+	       <td class="f" nowrap="nowrap">
+               
+                   2004
+               
+	       </td>
+           </tr>
+           </tbody></table>
+       </td>
+       </tr>
+       <tr>
+       <td class="s">
+           <a class="t" href="/web/20030203041219*/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html" title="See a list of every capture for this URL">11 captures</a>
+           <div class="r" title="Timespan for captures of this URL">6 Mar 01 - 3 Feb 03</div>
+       </td>
+       <td class="k">
+       <a href="" id="wm-graph-anchor">
+       <div id="wm-ipp-sparkline" title="Explore captures for this URL">
+	 <img id="sparklineImgId" alt="sparklines"
+		 onmouseover="__wm.st(1)" onmouseout="__wm.st(0)"
+		 onmousemove="__wm.mv(event,this)"
+		 width="500"
+		 height="27"
+		 border="0"
+		 src="/web/jsp/graph.jsp?graphdata=500_27_1996:-1:000000000000_1997:-1:000000000000_1998:-1:000000000000_1999:-1:000000000000_2000:-1:000000000000_2001:-1:001101000101_2002:-1:010100010101_2003:1:010000000000_2004:-1:000000000000_2005:-1:000000000000_2006:-1:000000000000_2007:-1:000000000000_2008:-1:000000000000_2009:-1:000000000000_2010:-1:000000000000_2011:-1:000000000000_2012:-1:000000000000_2013:-1:000000000000_2014:-1:000000000000_2015:-1:000000000000" />
+       </div>
+       </a>
+       </td>
+       </tr></tbody></table>
+   </td>
+   <td class="r">
+       <a href="#close" onclick="__wm.h();return false;" style="background-image:url(/static/images/toolbar/wm_tb_close.png);top:5px;" title="Close the toolbar">Close</a>
+       <a href="http://faq.web.archive.org/" style="background-image:url(/static/images/toolbar/wm_tb_help.png);bottom:5px;" title="Get some help using the Wayback Machine">Help</a>
+   </td>
+   </tr></tbody></table>
+</div>
+</div>
+</div>
+<script type="text/javascript">__wm.bt();</script>
+<!-- END WAYBACK TOOLBAR INSERT -->
+
+
+Original: <A href="/web/20030203041219/http://pingus.seul.org/~grumbel/gimp/script-fu/script-fu-tut.html">http://pingus.seul.org/~grumbel/gimp/script-fu/script-fu-tut.html</A><BR>
+Japanese Translator: <A href="/web/20030203041219/http://www09.u-page.so-net.ne.jp/yd5/yositaka/">Iccii</A> &lt;iccii@hotmail.com&gt; , 2001/01/23
+<HR>
+
+    <h1>Script-fu チュートリアル -日本語版-</h1>
+
+<!-- 
+    [<a href="/web/20030203041219/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html">Japanese Version</a>]
+ -->
+    [<a href="/web/20030203041219/http://www09.u-page.so-net.ne.jp/yd5/yositaka/project/trans/script-fu/script-fu-tut.html">日本語版</a>]
+
+<!-- 
+    <h2>Table of Content</h2>
+    <p>
+      <a href="#preface">Preface</a><br>
+      <a href="#intro">Introduction</a><br>
+      <a href="#first">First step on the road to a Script-Fu</a><br>
+      <a href="#repro">Reproducing the steps in the Script-Fu Console</a><br>
+      <a href="#write">Writing down the Script-Fu</a><br>
+      <a href="#pitfalls">Common Pitfalls</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#return">Return Values</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#r5sr">R5SR Compliance</a><br>
+      <a href="#debug">Debugging</a><br>
+      <a href="#cannotdo">Things you can't do in Script-Fu</a><br>
+      <a href="#examples">Examples</a><br>
+      <a href="#references">References</a><br>
+      <a href="#changelog">ChangeLog</a><br>
+    </p>
+ -->
+    <h2>コンテンツ一覧表</h2>
+    <p>
+      <a href="#preface">序文</a><br>
+      <a href="#intro">紹介</a><br>
+      <a href="#first">Script-Fu への道の最初のステップ</a><br>
+      <a href="#repro">Script-Fu コンソールでステップを再生</a><br>
+      <a href="#write">Script-Fu に書き下ろす</a><br>
+      <a href="#pitfalls">よくある落とし穴</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#return">返り値</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#r5sr">R5SR 遵守</a><br>
+      <a href="#debug">デバッギング</a><br>
+      <a href="#cannotdo">Script-Fu でできないこと</a><br>
+      <a href="#examples">お手本</a><br>
+      <a href="#references">参考文献</a><br>
+      <a href="#changelog">変更履歴</a><br>
+    </p>
+
+    <h2><a name="preface">序文</a></h2>
+
+<!-- 
+    <p>The following tutorial is written for <strong>The Gimp
+	1.1.24</strong>. Some things described here will not work or work
+      different with The Gimp 1.0.x.</p>
+ -->
+    <p>この下のチュートリアルは <strong>The Gimp 1.1.24</strong> のために書きました。ここで説明したいくつかの事柄は The Gimp 1.0.x では動作しないか違った動作になるでしょう。</p>
+    
+    <h2><A name="intro">紹介</A></h2>
+
+<!-- 
+    <p>This is a short tutorial to Script-Fu programming. I'll try to
+      give a short intro into the world of Script-Fu and explain how
+      basic things works. We will create a complete script-fu
+      step-by-step. The goal is to have a Script-Fu, which produces a
+      metal style text. I assume, that the reader has a basic knowlege
+      of Scheme, which is the programming language that is used in
+      Script-Fu</p>
+ -->
+<P>これは Script-Fu プログラミングのちょっとしたチュートリアルです。Script-Fu の世界への手短な紹介と、基本的な動作はどのようなものなのかについて説明するつもりです。一歩ずつ進んで行って完全なスクリプトを作成します。目標は金属質の文字を作り出す、Script-Fu を手に入れることです。私が考えているのは、読者が Script-Fu で使用されるプログラミング言語、Sheme の基本的な知識を持つことです。</P>
+
+    <h2><a name="#first">Script-Fu への道の最初の一歩</a></h2>
+
+<!-- 
+    <p>Ok, now we take the first step, we try to do what we want to do
+      in Script-Fu first in The Gimp as normal. That is important,
+      'cause we need to know exacly which operation we need and
+      in which order we need to call them.</p>
+ -->
+<P>オーケー、それではまずはじめの一歩は、最初に Script-Fu で行いたいことを Gimp で普通に行います。これは重要なことで、なぜかといえば必要な操作とそれらを呼び出すべき順番を正確に知る必要があるからです。</P>
+
+<!-- 
+    <p>So lets create our test image, first of we create a new rgb
+      image (<tt class="menu">File-&gt;New Image</tt>) and insert some
+      text into it, say the word "Test".</p>
+ -->
+<P>それではテストの画像を作りましょう、最初に作成するのは新規画像 (<tt class="menu">ファイル-&gt;新規画像</tt>) で、これに何か文字を入れます、ここでは "Test" という文字にします。</P>
+
+      <img src="images/step1.jpg">
+
+<!-- 
+    <p>Then we duplicate the text and apply a metal gradient to the
+      top layer.</p>
+ -->
+<P>そして文字を複製して上のレイヤーに metal グラデーションを適用します。</P>
+
+      <img src="images/step2.jpg">
+    
+<!-- 
+    <p>Then we take the second text layer and enlarge it a bit, to do
+      so, we use the alpha-to-selection function and grow the
+      selection by a few pixels. Then we fill the selection with the
+      same gradient, but in a another orientation.</p>
+ -->
+<P>それから二番目の文字レイヤーを使って少しだけ拡大します、そうするためには、｢透明を選択領域に｣ 機能を使用してから、数ピクセルだけ選択領域を拡大します。そして選択領域を同じグラデーションで塗りつぶすのですが、ちょっと違う方向にしておきます。</P>
+
+      <img src="images/step3.jpg">
+
+<!-- 
+    <p>At last, we merge the layers and apply a standard drop
+      shadow. If that is done, we auto-crop the image, to remove all
+      unnecessary parts of the image.</p>
+ -->
+<P>最後に、レイヤーを結合して一般的なドロップシャドウを適用します。全部が終わったら、画像の要らない部分を取り除くために、画像を自動切り取りします。</P>
+
+    <img src="images/step4.jpg">
+    
+    <h2><a name="repro">Script-Fu コンソールでステップを再生</a></h2>
+    
+<!-- 
+    <p>Ok the image looks now as we expected it, so lets summarize,
+      what we have done:</p>
+ -->
+<P>よし、画像が思ったようになったので、要約しておこう、やった事はこれ:</P>
+
+<!-- 
+    <ol>
+	<li>Create an new image</li>
+	<li>Create a text layer</li>
+	<li>Duplicate the text layer</li>
+	<li>Enlarge the bottom text layer</li>
+	<li>Fill both text layers with a gradient</li>
+	<li>Merge the text layers</li>
+	<li>Apply a drop shadow</li>
+	<li>Merge all layers</li>
+	<li>Auto-crop the image</li>
+    </ol>
+ -->
+    <ol>
+	<li>新規画像を作成</li>
+	<li>文字レイヤーを作成</li>
+	<li>文字レイヤーを複製</li>
+	<li>下の文字レイヤーを拡大</li>
+	<li>両方の文字レイヤーをグラデーションで塗る</li>
+	<li>文字レイヤーを結合</li>
+	<li>ドロップシャドウの適用</li>
+	<li>全てのレイヤーを統合</li>
+	<li>画像を自動切り取り</li>
+    </ol>
+
+<!-- 
+    <p>The task is now to reproduce this steps in the <strong>Script-Fu
+      Console</strong>.It is the place where you can enter Script-Fu Commands
+      and test them. Its the place where you should test all new
+      functions you aren't handy with and its the place where you can
+      more or less debug your written scripts. Its the easiest if you
+      test every line of Script-Fu first in the console and then
+      paralell write the Script-Fu, if the commands acts as you
+      expected it.</p>
+ -->
+<P>この作業を <strong>Script-Fu コンソール</strong>で順番に再現します。これは Script-Fu コマンドの入力とそのテストができるという場所です。そしてこれは扱い難い全ての新規関数をテストしなきゃならない場所であり、あなたが書いたスクリプトを多少デバッグできる場所なのです。最初にコンソールで Script-Fu の全てのラインをテストするならこれは簡単で、もし期待通りにコマンドが動いたら、Script-Fu と平行して書き込みます。</P>
+
+    <img src="images/script-fu-console.png">
+
+<!-- 
+    <p>To do so, we open the Script-Fu Console (<tt
+      class="menu">Xtns-&gt;Script-fu-&gt;Consol</tt>).  If the
+      console is open, we click on the <tt class="menu">Browse...</tt> button in the bottom
+      left corner, this brings us to the <strong>DB
+      Browser</strong>. Thats the place where you can search for
+      functions, which you can access from within Script-Fu. Along
+      with the name of the function, you also get a description of the
+      arguments its expect and a general description what the function
+      does.</p>
+ -->
+<P>そうするために、Script-Fu コンソール (<tt class="menu">拡張-&gt;Script-fu-&gt;コンソール</tt>) を開きます。コンソールが開いたら、右下の角の <tt class="menu">Browse...</tt> ボタンをクリックします、これは <strong>DB ブラウザ</strong>を呼び出します。それは Script-Fu の中からアクセスできる、関数を検索できる場所です。関数の名前とともに、スクリプトが期待する引数の説明と関数が何を行うかの一般的な説明を手に入れることができます。</P>
+
+    <img src="images/db-browser.png">
+
+<!-- 
+    <p>So now its time to reproduce our first step in the image
+      creation, so we need a function to create an new image. Most of
+      the functions you find in the DB Browser have similar names as
+      in the menus of the Gimp. After a little search for "new" we
+      find the function <tt class="code">gimp-image-new</tt>, which
+      sounds like what we are searching for. We enter the following
+      into the console:</p>
+ -->
+<P>画像作成の最初のステップを再現する時がきたので、一つの新規画像を作成するための関数が必要です。DB ブラウザで見付かる関数のほとんどは Gimp のメニューにある名前と非常に似ています。"new" をちょっと検索してみると <tt class="code">gimp-image-new</tt> の関数が見付かり、これが探しているものであるようです。コンソールの中へ次のように入力します:</P>
+
+
+    <pre class="code">(gimp-image-new 256 256 RGB)</pre>
+
+<!-- 
+    <p>and we will get an output as follows:</p>
+ -->
+    <p>すると下のような出力を得ます:</p>
+
+    <pre class="console-output">=&gt; (gimp-image-new 256 256 RGB)
+
+(3)</pre>
+
+<!-- 
+    <p>The first line is simply the command that gots executed, the
+      second line is the return value of the function. As you can read
+      in the DB Browser, this is the id of the newly created
+      image. You can simply use the id as argument to functions in the
+      console. The return value is also the first pitfall on our
+      journey to Script-Fu. It comes as a one element long list and
+      <em>not</em> as a integer value! So to use the value, we have to
+      get the first element of the list with <tt
+      class="code">car</tt>, it will then return the image id 3.</p>
+ -->
+<P>最初の行は単なる実行コマンドコマンドで、次の行は関数の返り値です。DB ブラウザで読み取ることができるように、これは新しく作成した画像の id です。コンソールでは関数の引数として単に id を使うだけなのです。返り値は Script-Fu の旅での最初の落とし穴でもあります。これはとある要素が長いリストになっているのであり、一つの整数の値にはなって<em>いません</em>! そのためこの値を使うには、<tt class="code">car</tt> でリストの最初の要素を取り出さなければならず、これは画像 id 3 を返すでしょう。</P>
+
+<!-- 
+    <P>You might now wonder, where the image is that we have created,
+      cause you cannot see it. The answer is, that we don't have a
+      display for it, so the image is only inside the memory, but is
+      not displayed, so we need create an display for it.  So we try
+      <tt class="code">(gimp-display-new 3)</tt>, but we get an error:
+    </p>
+ -->
+<P>あなたは今不思議に思うかもしれません、そこで画像を作成してしまったのに、見ることができないようになっているよ。答えはこうです、画像を表示していない、だから画像はメモリの中にあるだけで、表示されていない、そのためこれの表示を作成する必要があります。そして <tt class="code">(gimp-display-new 3)</tt> をやろうとしますが、エラーになってしまいます:</P>
+
+    <pre class="console-output">ERROR: Procedural database execution failed:
+    (gimp_display_new 3)</pre>
+
+<!-- 
+    <p>So, thats just another pitfall. Not all functions in Script-Fu,
+      acts the same as there counterparts in the menu's. Sometimes
+      there are much more low-level, so you have to do some more work,
+      to get the results you expect. The problem here is that our
+      newly created image, doesn't contain any layers. To display an
+      image, we actually need at least one layer. So the next step is
+      to create an layer:</p>
+ -->
+<P>そう、これがまさに落とし穴です。Script-Fu の全ての関数ではありませんが、メニューと対応するような同じ行動を行います。ときどきそこにはさらに低レベルなものがあるため、期待する結果を得るために、さらに若干の作業をする必要があります。ここでの問題は、新しく作成した画像にレイヤーが全く無いということです。画像を表示するには、実際には少なくとも一枚のレイヤーが必要になります。それで次のステップはレイヤーを作成することです:</P>
+
+<pre class="console-output">=&gt; (gimp-layer-new 3 256 256 RGB-IMAGE "foobar" 100 NORMAL-MODE)
+
+(21)</pre>
+
+
+<!-- 
+    <p>You might notice, that the constants RGB-IMAGE and NORMAL-MODE
+      is listed as RGB_IMAGE and NORMAL_MODE in the DB Browser (notice
+      the underscore '_'). You have to replace all the underscrores
+      with minus's '-' in the Script-Fu world. If your are unsure if
+      your replacements are right, just enter the constant into the
+      console.</p>
+ -->
+<P>定数 RGB-IMAGE と NORMAL-MODE は DB ブラウザで RGB_IMAGE と NORMAL_MODE として記載されていることに注意しましょう (アンダースコア '_' に注意)。Script-Fu の世界では全てのアンダースコアをマイナス '-' で置き換える必要があります。置換が正しいのか分からないのなら、コンソールの中に定数を入力してみましょう。</P>
+
+<!-- 
+    <p>The next step is to add the layer newly created layer to the
+      image, as described in the DB browser:</p>
+ -->
+<P>次のステップは DB ブラウザで説明したように、画像へ新しく作成したレイヤーにレイヤーを追加することです:</P>
+
+<pre class="console-output">=&gt; (gimp-display-new 3)
+
+(4)</pre>
+<!-- 
+And now we can finally display our image:
+ -->
+そしてついに画像を表示することができました:
+
+<pre class="console-output">=&gt; (gimp-display-new 3)
+
+(4)</pre>
+
+<!-- 
+    <p>The displayed image looks a bit wired, cause it is filled with
+      random colors, to erase them, we will fill the layer with the
+      current background color.</p>
+ -->
+<P>表示した画像はランダムな色で塗りつぶされているため、ちょっとぎこちなく見えるので、これらを消すために、現在の背景色でレイヤーを塗りつぶすことにします:</P>
+
+    <pre class="console-output">=&gt; (gimp-drawable-fill 21 BG-IMAGE-FILL)
+
+()</pre>
+
+<!-- 
+    <p>The function to fill a layer is called <tt
+      class="code">gimp-drawable-fill</tt> and not <tt
+      class="code">gimp-layer-fill</tt> as you might expect, thats
+      because a layer is a drawable. So if you are searching for
+      functions to manipulate layers, you should also look out for
+      stuff that manipulates drawables.</p>
+ -->
+<P>レイヤーを塗りつぶすための関数は <tt class="code">gimp-drawable-fill</tt> を呼び出すのであり、あなたが予想していたであろう <tt class="code">gimp-layer-fill</tt> ではありません。なぜならレイヤーは drawable だからです。そのためレイヤー操作の関数を検索するなら、drawable を操作するものも探さなければなりません。</P>
+    
+<!-- 
+    <p>Now we have our image set up. To quick for you? Then lets
+      summarize and write our first scheme function. First we
+      encapsule all into a let* clause and than add the let* clause
+      into a function body:</p>
+ -->
+<P>画像セットアップをしました。速いですか? ならば最初の scheme を要約して書きましょう。はじめに全てを let* クラスにカプセル化して、そして let* クラスを関数本体に追加しました:</P>
+
+<pre class="code">(define (my-make-new-image)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+        (layer (car (gimp-layer-new image 256 256 
+                     RGB-IMAGE "foobar" 100 NORMAL-MODE))))
+       (gimp-drawable-fill layer BG-IMAGE-FILL)
+       (gimp-image-add-layer image layer 0)
+       (gimp-display-new image)
+       image))</pre>
+
+<!-- 
+    <p>The last line in a scheme function is the return value, so <tt
+      class="code">image</tt> is the return value in this
+      function.</p>
+ -->
+<P>scheme 関数の最後の行は返り値で、<tt class="code">image</tt> がこの関数での返り値になります。</P>
+
+<!-- 
+    <p>So back to our metal-text thing, we need now to add a text
+      string and play with it. A little browsing in the DB brings up
+      <tt class="code">gimp-text-fontname</tt>.  To call it we type:</p>
+ -->
+<P>それから metal-text に戻り、文字列を追加してこれを試す必要があります。DB が呼び出す <tt class="code">gimp-text-fontname</tt> をちょっと確認して下さい。呼び出すためにこう入力します:</P>
+
+<pre class="console-output">=&gt; (gimp-text-fontname 3 21 -1 0 "Foobar" 0 TRUE 25 PIXELS
+		    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
+
+(33)</pre>
+
+<!-- 
+    <p>And voila, we have our text on a newly created layer. The
+      string <tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt>
+      might look as black-magic to you, but we will see later and easy
+      way to create it.</p>
+ -->
+<P>するとどうでしょう、新しく作成したレイヤーに文字がありますね。文字列 <tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt> はあなたにとって黒魔術のように見えるかもしれませんが、後で簡単な作成方法が分かるでしょう。</P>
+
+<P>(訳注: 黒魔術; black-magic とはこの場合、<tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt> という文字列をいちいち手で入力するという難解なことを行っていることを指す。フォント選択ダイアログで手軽にフォントを選ぶ方法を後述してあります。)</P>
+
+<!-- 
+    <p>Now we need to duplicate that layer, you might notice that there is
+      no duplicate layer function in the DB, so we need to do it
+      manually and write another scheme function:</p>
+ -->
+<P>そのレイヤーを複製する必要があるのですが、DB にはレイヤー複製の関数が無いことに気付くでしょう、そのため手作業でそれを行い、別の scheme 関数を記述する必要があります:</P>
+
+<pre class="code">(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))</pre>
+
+<!-- 
+and than:
+ -->
+するとレイヤー複製の関数は:
+
+<pre class="console-output">=&gt; (my-duplicate-layer 3 34)
+
+41</pre>
+    
+<!-- 
+    <p>The next step is to add some space for the enlarged text
+      border, gimp-layer-resize is our friend:</p>
+ -->
+<P>次なるステップは拡大した文字境界のために若干の空間を追加することで、gimp-layer-resize が味方です:</P>
+
+    <pre class="console-output">(gimp-layer-resize 41 200 100 5 5)</pre>
+
+<!-- 
+    <p>This works, but the width and height are hard coded, so we try
+      again in a more flexible manner:</p>
+ -->
+<P>これで動きますが、幅と高さはハードコード化されているので、よりいっそう柔軟な方法でもう一度挑戦します:</P>
+    
+    <pre class="code">(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))</pre>
+  
+<!-- 
+    <p>Now we need to transfer the layers alpha cannel to the
+      selection and grow it some pixels:</p>
+ -->
+<P>レイヤーのアルファチャンネルを選択領域に移し変えて数ピクセル大きくする必要があります:</P>
+
+    
+    <pre class="code">(gimp-selection-layer-alpha 41)
+(gimp-selection-grow 3 5)</pre>
+
+<!-- 
+    <p>Before we fill the layer, we have to remove the "Keep trans"
+      flag, which causes that all transparent areas stay
+      transparent:</p>
+ -->
+<P>レイヤーを塗りつぶす前に、全ての透明な領域を透明に保つ、"透明保護" のフラグを取り除く必要があります:</P>
+
+
+    <pre class="code">(gimp-layer-set-preserve-trans 41 0)</pre>
+
+<!-- 
+    <p>Now we will fill the selection with a gradient:</p>
+ -->
+    <p>グラデーションで選択領域を塗りつぶします:</p>
+
+    <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
+    
+    <h2><a name="write">Script-Fu に書き下ろす</a></h2>
+
+<!-- 
+    <p>Huh, now we have everything for our script-fu ready, we just
+      need to attach the pieces. In the following steps we will also
+      remove some unnecessary action and probably add some stuff.</p>
+ -->
+<P>ヒュー、ようやくこれで script-fu のための全ての準備が整って、細かい部分を取り付けるだけになりました。下のステップでいくつか必要無いものを取り去り、いくつかを追加します。</P>
+
+<!-- 
+    <p>Ok, so how to write a Script-Fu? Well, you need basically three
+      things. A file where your script is written down, that file
+      should be placed in <tt
+      class="file">~/.gimp-1.1/scripts/</tt>. A function, which does
+      all the image manipulation and at last you need to have a call
+      to <tt class="code">script-fu-register</tt> to make your script
+      visible from inside the Gimp.</p> 
+ -->
+<P>よおし、それではどのように Script-Fu を書きましょうか? そうね、基本的に三つのコトが必要ですね。スクリプトを書き下ろすファイル、それは <tt class="file">~/.gimp-1.1/scripts/</tt> になくちゃいけない。全ての画像処理を行う関数もです。最後はスクリプトを Gimp 内部から見えるようにするために <tt class="code">script-fu-register</tt> のコールを持つ必要がありますね。</P>
+
+<!-- 
+    <p>So lets write an empty function and register it. You should
+    copy&amp;paste the following code into a file <tt
+    class="file">dummy.scm</tt> and save it to <tt
+    class="file">~/.gimp-1.1/scripts/</tt> as described above.</p>
+ -->
+<P>中身が無い関数を書いて登録します。この下のコードを <tt class="file">dummy.scm</tt> の中にコピー&amp;ペーストして、上で説明したように <tt class="file">~/.gimp-1.1/scripts/</tt> へ保存します。</P>
+
+    <pre class="code">(define (my-dummy-function a b)
+  (print "Do nothing"))
+
+(script-fu-register "my-dummy-function"
+		    _"&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Dummy..."
+		    "Do nothing"
+		    "Joey User"
+		    "Joey User"
+		    "August 2000"
+		    ""
+		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
+   
+
+<!-- 
+    <p>When you then press <tt
+      class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> your script will
+      be loaded into the Gimp and should be accessable from the
+      menu.</p>
+ -->
+<P><tt class="menu">拡張-&gt;Scritp-fu-&gt;再読み込み</tt> を押すとスクリプトが Gimp に読み込まれてメニューからアクセスできるようになります。</P>
+    
+<!-- 
+    <p>Notice, that there are two kinds of Script-Fu's. The first kind
+      will create a new image, thats used for logo's and accessible
+      through the menu <tt
+      class="menu">Xtns-&gt;Scritp-fu-&gt...</tt>, and the second kind
+      will manipulate an existing image, this kind is accessible
+      through the right-click pop-up menu on an image <tt
+      class="menu">Scritp-fu-&gt...</tt>. To register the second kind
+      of Script-Fu, you need to adjust the path to <tt
+      class="code">&lt;Image&gt;/Script-Fu/...</tt> and it needs to
+      take the first two arguments of type SF-IMAGE and
+      SF-DRAWABLE.</p>
+ -->
+<P>注意点として、Script-Fu には 2 種類のスクリプトがあります。第一種は新規画像を作成するもので、メニュー <tt class="menu">拡張-&gt;Scritp-fu-&gt...</tt> を通ってアクセスできるものです。第二種は画像の <tt class="menu">Scritp-fu-&gt...</tt> の右クリックポップアップメニューを通ってアクセスできるものです。第二種の Script-Fu を登録するために、<tt class="code">&lt;Image&gt;/Script-Fu/...</tt> へパスを変更する必要があり、これは最初に SF-IMAGE と SF-DRAWABLE の型の引数を持つ必要があります。</P>
+
+<!-- 
+    <p>This brings us to the next topic, the arguments that your
+      function can get, they can have the following types:</p>
+ -->
+<P>これは次のトピックで取り上げますが、関数が取得できる引数には、以下の型があります:</P>
+    
+    <table border="1">
+      	<tr>
+	  <th>引数型<!-- Argument Type --></th>
+	  <th>データ型<!-- Data Type --></th>
+	  <th>説明<!-- Description --></th>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-IMAGE</tt></td>
+	  <td>整数 (image id)<!-- Integer (image id) --></td>
+	  <td>image id の取得に使う<!-- Used to get an image id --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-DRAWABLE</tt></td>
+	  <td>整数 (drawable id)<!-- Integer (drawable id) --></td>
+	  <td>drawable id を取得<!-- Get a drawable id --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-VALUE</tt></td>
+	  <td>文字列<!-- String --></td>
+	  <td>数値の入力<!-- Input a numeric value --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-TOGGLE</tt></td>
+	  <td>ブール (TRUE or FALSE)<!-- Boolean (TRUE or FALSE) --></td>
+	  <td>ブール値の入力<!-- Input a booleon value --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-PATTERN</tt></td>
+	  <td>文字列 (パターン名)<!-- String (Pattern name) --></td>
+	  <td>パターンを選ばせる<!-- Lets you select a pattern --></td>
+	</tr>
+
+<!-- 
+	<tr>
+	  <td><tt class="code">SF-ADJUSTMENT</tt></td> <td>List
+	  (start-value min-value max-value small-step large-step
+	  [int=0 or float=1] [slider=0 or roll-box=1])</td>
+	  <td>Creates a slider bar or a input box with range
+	  values</td>
+	</tr>
+ -->
+	<tr>
+	  <td><tt class="code">SF-ADJUSTMENT</tt></td> <td>リスト
+	  (開始値 最小値 最大値 小さな増分 大きな増分
+	  [整数=0 or 浮動=1] [スライダー=0 or ロールボックス=1])</td>
+	  <td>ある範囲内の値のスライドバーか入力ボックスを作成する</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-FILENAME</tt></td>
+	  <td>文字列 (パス名)<!-- String (pathname) --></td>
+	  <td>ファイルをブラウズさせる<!-- Lets you browse for the file --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-STRING</tt></td>
+	  <td>文字列<!-- String --></td>
+	  <td>入力ボックスの作成<!-- Creates a input box --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-FONT</tt></td>
+	  <td>文字列 (フォント名)<!-- String (fontname) --></td>
+	  <td>フォントを選ばせる<!-- Lets you select a font --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-COLOR</tt></td>
+	  <td>リスト (赤 緑 青) [0-255]<!-- List (red green blue) [0-255] --></td>
+	  <td>色を選ばせる<!-- Lets you select a color --></td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-OPTION</tt></td>
+	  <td>文字列のリスト<!-- List of strings --></td>
+	  <td>リストから項目を選ばせる<!-- Lets you select an item out of a list --></td>
+	</tr>  
+
+	<tr>
+	  <td><tt class="code">SF-GRADIENT</tt></td>
+	  <td>文字列 (グラデーション名)<!-- String (gradient name) --></td>
+	  <td>グラデーションを選ばせる<!-- Lets you select a gradient --></td>
+	</tr>
+    </table>
+    
+
+<!-- 
+    <p>The following code creates a box with all possible input
+    types:</p>
+ -->
+<P>下のコードは全ての利用可能な入力型のボックスを作成します:</P>
+
+<pre class="code">(define (my-demo-box value adj1 adj2 image drawable toggle pattern string font color option gradient)
+  (print "Do nothing"))
+
+(script-fu-register "my-demo-box"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Demo Box..."
+		    "Do nothing"
+		    "Joe User"
+		    "Joe User"
+		    "August 2000"
+		    ""
+		    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 1 0)
+		    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 1 1)
+		    SF-COLOR      "SF-COLOR" '(255 0 255)
+		    SF-DRAWABLE   "SF-DRAWABLE" 0
+		    SF-FONT       "SF-FONT" ""
+		    SF-GRADIENT   "SF-GRADIENT"  "Golden"
+		    SF-IMAGE      "SF-IMAGE" 0
+		    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
+		    SF-PATTERN    "SF-PATTERN" "Wood"
+		    SF-STRING     "SF-STRING" "Test String"
+		    SF-TOGGLE     "SF-TOGGLE" TRUE
+		    SF-VALUE      "SF-VALUE" "0"
+                    SF-FILENAME   "SF-FILENAME" "/")</pre>
+
+<!-- 
+    <p>The resulting box will look like this:</p>
+ -->
+    <p>その結果、ボックスはこんな風になります:</p>
+
+    <img src="images/demo-box.png">
+
+<!-- 
+    <p>So back to business, lets finish our Script-Fu example. We
+      should start wish the frame work, so we need to decide which
+      argument types we need. As we want to create a font, we first
+      need the text, so we use SF-STRING, than we should use SF-FONT
+      for the font selection and in addition SF-VALUE to enter the
+      font size.</p>
+ -->
+<P>それでは作業に戻って、Script-Fu のお手本を終わらせてしまいます。我々はフレームワークを始めたいので、必要な変数型を決める必要があります。フォントを作成したいときは、最初に文字が必要なので、SF-STRING を使用します。それからフォント選択のために SF-FONT に加えてフォントサイズを入力するため SF-VALUE を使用する必要があります。</P>
+
+<!-- 
+    <p>The creation of the <tt class="code">script-fu-register</tt> is
+      left as an exercise for the user. I you don't want to try it
+      yourself you can look some lines below for the finished
+      script. The resulting box might then lock like this:</p>
+ -->
+<P><tt class="code">script-fu-register</tt> の作成はユーザーのための練習問題として残しておきます。もし自分自身で挑戦したくないのなら完成したスクリプトを下の行で見ることができます。結果ボックスはこの様になって閉じるかもしれません。</P>
+
+    <!-- Insert image -->
+
+<!-- 
+    <p>Now that we have our register call set up, we can fill the
+      function with some code. First of we insert our two helper
+      functions <tt class="code">my-duplicate-layer</tt> and <tt
+      class="code">my-layer-add-border</tt> at the top of the
+      file. Next, we more or less copy&amp;paste our Script-Fu Console
+      experiments together. We move the <tt
+      class="code">gimp-display-new</tt> call to the end of our
+      function, so we don't have to see how the image rendering
+      works. We also add another helper function, which will cut the
+      final image to the right size. The resulting script might look
+      then something like this:</p>
+ -->
+<P>現在レジスタコールのセットアップが整っており、関数をいくつかのコードで満たすことができます。はじめにファイルの上の方へ 2 つの補助関数 <tt class="code">my-duplicate-layer</tt> と <tt class="code">my-layer-add-border</tt> を挿入します。次は、多少の Script-Fu コンソールと一緒にコピー&amp;ペーストします。関数の最後へ <tt class="code">gimp-display-new</tt> コールを移動すると、画像描画作業がどうなったのかを見る必要がなくなります。最終的な画像を正しい大きさに切り取る、それ以外の補助関数を追加します。その結果、スクリプトはこのようなものだと思います:</P>
+
+    <pre class="code">(define (my-image-to-layer-size image layer)
+  (gimp-layer-set-offsets layer 0 0)
+  (gimp-image-resize image 
+		     (car (gimp-drawable-width layer))
+		     (car (gimp-drawable-height layer))
+		     0 0))
+
+(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))
+
+(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))
+
+(define (my-make-metal-font text font font-size)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+	(bottom-font-layer (car (gimp-text-fontname image -1 0 0 text 0 TRUE font-size PIXELS
+					     font))))
+
+   (let* ((top-font-layer (my-duplicate-layer image bottom-font-layer)))
+     
+     (my-layer-add-border bottom-font-layer 20)
+
+     (gimp-layer-set-preserve-trans bottom-font-layer 0)
+     (gimp-gradients-set-active "Four_bars")
+
+     (gimp-selection-layer-alpha bottom-font-layer)
+     (gimp-selection-grow image 3)
+     (gimp-blend bottom-font-layer CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 200 50)
+
+
+     (gimp-selection-layer-alpha top-font-layer)
+     (gimp-blend top-font-layer    CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 50 200 0)
+     (gimp-selection-clear image)
+     
+     (let* ((new-layer (car (gimp-image-merge-visible-layers 
+			     image EXPAND-AS-NECESSARY))))
+       (my-image-to-layer-size image new-layer))
+
+     (gimp-display-new image))
+   ))
+
+(script-fu-register "my-make-metal-font"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/Logos/Metal Font..."
+		    "Create an example image of a custom gradient"
+		    "Federico Mena Quintero"
+		    "Federico Mena Quintero"
+		    "June 1997"
+		    ""
+		    SF-STRING     "Text" "The GIMP"
+		    SF-FONT       "Font" "-*-blippo-*-r-*-*-24-*-*-*-p-*-*-*"
+		    SF-VALUE      "Font Size" "50" )</pre>
+
+
+<!-- 
+    <h2><a name="pitfalls">Common Pitfalls</a></h2>
+    <p>The following is a list of common pitfalls in Script-Fu.</p>
+ -->
+    <h2><a name="pitfalls">よくある落とし穴</a></h2>
+    <p>この下は Script-Fu でよくある落とし穴のリストです。</p>
+
+    <h3><a name="return">返り値</a></h3> 
+    
+
+<!-- 
+    <p>When a function returns a value, it will always be encapsulet
+      in a list, it doesn't matter if its only one value or multiple
+      values. Even if the return value is itself a list, like for
+      example the color returned by <tt
+      class="code">gimp-color-picker</tt>, the return value will
+      always be encapsult in an extra list.</p>
+ -->
+<P>関数が値を返す時、それはリストというカプセルになっており、これがたった一つの値であるとか複数の値であるかということは重要ではありません。例えば <tt class="code">gimp-color-picker</tt> が返す色のように、たとえ返り値がそれ自身リストであるのなら、返り値は常に追加リストのカプセルになっているでしょう。</P>
+
+<!-- 
+    <p>If multiple values are returned they are also in a list, the
+      first return value is the first element in the list, the second
+      is the second list element, etc. So you need to always apply a
+      <tt class="code">car</tt> call to get the correct value.</p>
+ -->
+<P>もし複数の値が返されたなら、それもリストにあり、最初の値はリストの最初の要素で、その次は二番目のリスト要素です。だから正しい値を得るために常に <tt class="code">car</tt> の呼び出しを行う必要があります。</P>
+    
+    <h3><a name="r5sr">R5SR 遵守</a></h3>
+    
+<!-- 
+    <p><a
+	  href="/web/20030203041219/http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a>
+      is the document, which describes the scheme language, but
+      sadly the language used in the Gimp is not R5SR compliance,
+      not even close. Thats because Gimp uses SIOD as its scheme
+      interpreter. SIOD is a small scheme implementation, the
+      price is that it only provides a small subset of R5SR
+      functions, some have even another name. For example you
+      don't have <tt class="code">display</tt>, only a function
+      called <tt class="code">print</tt>. For a summary of scheme
+      functions supported by the Gimp, you can have a look at the
+      webpage of <a
+		    href="/web/20030203041219/http://people.delphi.com/gjc/siod.html">SIOD</a>. To
+      make it even worse The Gimp doesn't even provide all the
+      functions listed on the SIOD page, but its a good starting point.
+      You can also use the function <tt class="code">apropos</tt> in
+	  the console to search for a specific function:</p>
+ -->
+<P><a href="/web/20030203041219/http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a> は scheme 言語を説明した文書なのですが、嘆かわしいことに Gimp で使われている言語は R5SR 遵守ではなく、それほど近いわけでもありません。それは Gimp がその scheme インタープリタとして SIOD を使用するからなのです。SIOD は小規模な scheme 実装で、その位置付けは R5SR 関数の小規模なサブセットを規定しているだけで、いくつかはその他の名前を持っています。例えば <tt class="code">display</tt> を持っておらず、<tt class="code">print</tt> と呼ばれる関数があるだけです。Gimp でサポートしている scheme 関数の要約として、<a href="/web/20030203041219/http://people.delphi.com/gjc/siod.html">SIOD</a> のウェブページを参照することができます。さらに悪いことに Gimp は SIOD のページでリストアップされている全ての関数すら規定していないのですが、これでも十分な出発点です。特定の関数を検索するためにコンソールで <tt class="code">apropos</tt> 関数を使うこともできます:</P>
+
+   <pre class="console-output">=> (apropos "write")
+
+(fwrite writes swrite write-mask stroke-overwrite)</pre>
+
+    <h2><a name="debug">デバッギング</a></h2>
+    
+<!-- 
+    <p>When you start to play with Script-Fu and even if you are
+      common with it, you will very often ran into a situation, where
+      your script doesn't work. To make it even worse sometimes you will not
+      even get a error message. Most of the time the cause will be
+      simple, but the search hard. The following steps might make the
+      search easier.</p>
+ -->
+<P>Script-Fu を扱い始めた時に、たとえそれに慣れたとしても、スクリプトが動かないという状態にとても頻繁に出くわすでしょう。深刻な場合ではエラーメッセージすら受け取らないでしょう。原因のほとんどの場合は単純なものですが、調査が困難です。下のステップは調査を簡単にするかもしれません。</P>
+    
+<!-- 
+    <p>First of check that your script is syntactical correct, that
+      means you have closed all opened parentheses and quotes. An
+      editor with syntax highlighting, automatic indention and
+      parentheses highlighting will help to accomplish that.</p>
+ -->
+<P>最初のチェックはスクリプトが文法構成的に正しいかで、それは全ての開いた括弧とクォートを閉じているかということです。構文を強調、自動インデントと括弧を強調するエディタはそれの完成を手助けするでしょう。</P>
+
+<!-- 
+    <p>Second, you might have forgotten to add a <tt
+      class="code">car</tt> to some return value. To check for that
+      errors, copy&amp;paste your code into the Script-Fu Console and
+      call it manually.</p>
+ -->
+<P>次は、いくつかの返り値に <tt class="code">car</tt> を追加するのを忘れてしまっているのかもしれません。そのエラーをチェックするために、コードを Script-Fu コンソールの中にコピー&amp;ペーストしてそれを手動で呼び出してください。</P>
+
+    <pre class="console-output">ERROR: Invalid types specified for arguments</pre>
+
+<!-- 
+    <p>The above is most likely the error message you will get, if you
+      get another error message, your bug might be elsewhere.</p>
+ -->
+<P>上は最も受け取る可能性が高いエラーメッセージです。もし他のエラーを受け取ったなら、あなたのバグは別のところにあるのもしれません。</P>
+    
+<!-- 
+    <p>When you call a function with too few or to much arguments, you
+      will get the following error message:</p>
+ -->
+<P>少なすぎるか多すぎる引数で関数を呼び出したとき、下のエラーメッセージを受け取るでしょう:</P>
+    
+    <pre class="console-output">=&gt; (gimp-image-get-layers)
+ERROR: too few arguments (see errobj)</pre>
+
+<!-- 
+    Than simply have a look at the errobj, it will tell you which
+    arguments where expected and which you supplied.
+ -->
+<P>そうしたら素直に errobj を見てやれば、それは必要な引数と与えたものを教えてくれるでしょう。</P>
+
+    <pre class="console-output">=&gt; (print errobj)
+
+((image))
+()</pre>
+
+<!-- 
+    <p>At last if your function will still not work, add some <tt
+    class="code">print</tt> calls at the right places to check that
+    everything is working correctly. To see the output of the prints
+    you have to run your Script-Fu in the console.</p>
+ -->
+<P>最後に、関数がまだ動かなかったら、どこまでが正しく動いているのかをチェックするために適切な場所にいくつかの <tt class="code">print</tt> コールを追加します。print の出力を見るためにコンソールで Script-Fu を実行しなければなりません。</P>
+
+    <h2><a name="cannotdo">Script-Fu でできないこと</a></h2>
+
+<!-- 
+    <p>For now I have described what you can do with Script-Fu, but
+      there are also a lot of things, which you can't do in
+      Script-Fu.</p>
+ -->
+<P>今までは Script-Fu でできることを説明してきましたが、あなたが Script-Fu でできないものも、たくさんあるのです。</P>
+
+<!-- 
+    <p>The first thing, that you might want to do is to provide some
+      better default values for the argument that you function will
+      recieve. The bad news is that you can't do that, you can only
+      pass constant values to the Script-Fu register call. So if your
+      default value should for example be half the width of the image,
+      you simply can't do that, you have to life with an constant
+      value.</p>
+ -->
+<P>最初の、あなたが行いたいかもしれないことは関数が受け取る引数のためにより良いデフォルトの値を用意することです。悪い知らせはあなたがそれを行えないことで、Script-Fu レジスタコールに一定の値を渡すことができるだけなのです。だからデフォルトの値を、例えば画像の幅の半分になるようにするということは、そう簡単にそれをする事はできなくて、一定の値にしておかなければいけません。</P>
+
+<!-- 
+    <p>Another thing you might want to have is some sort of GUI, which
+      goes behind the stuff that is provided by the SF-* values and
+      again, you can't do this. The SF-* values are all of a gui, that
+      you can expect from Script-Fu, if you want more complicated
+      stuff, like a preview window, you have to write a real Gimp
+      Plug-in.</p>
+ -->
+<P>あなたがやりたいかもしれないもう一つのことは SF-* によって用意されている GUI を後ろに持って行ったり、もう一度出したりと、GUI の並び順を変えることで、これもまた行うことができません。SF-* の値が Script-Fu から見込まれている、gui 全体なので、もしプレビューウィンドウのような、もっと複雑なものが必要なら、本当の Gimp プラグインを書かなければなりません。</P>
+
+<!-- 
+    <p>At some point you might want to write your own filter or
+      effect, which needs image manipulation at pixel level. Thats a
+      thing that you actually can do in Script-Fu, but it will be
+      extremly slow, due to the interpreted nature of Script-Fu. So
+      again, its better to write that as a real Gimp Plug-in.</p>
+ -->
+<P>ある時点でピクセルレベルでの画像処理に必要な、自分自身のフィルタやエフェクトを書きたくなるかもしれません。そのことを実際には Script-Fu で行えるのですが、Script-Fu の本質がインタープリタであるために、極端に遅くなるでしょう。そのため繰り返して言います、本当の Gimp プラグインとしてそれを書いたほうが良いです。</P>
+
+<!-- 
+    <p>You might also want to open a directory and open all the images
+      in it. Not even that is possible. The SIOD webpage describes the
+      <tt class="code">opendir</tt> function, but when you try it in
+      Script-Fu it will not work as many other SIOD function.</p>
+ -->
+<P>ディレクトリを開いてこの中の全ての画像を開きたいかもしれません。それさえ可能ではありません。SIOD ウェブページは <tt class="code">opendir</tt> 関数を説明していますが、Script-Fu でそれをやろうとした時これは他の多くの SIOD 関数のようには動作しないでしょう。</P>
+
+    <pre class="console-output">=&gt; (opendir "/")
+
+ERROR: unbound variable (errobj opendir)</pre>
+
+<!-- 
+    <p>To solve this you have to work-around this by dumping the
+      directory contents to a file and read that file instead or you
+      can write a Perl-Fu, Python-Fu or a Gimp Plug-in.</p>
+ -->
+<P>これを解決するためにディレクトリの中身をファイルに落としてファイルの代わりに読み込んでこれの対策を行う必要があるか、Perl-Fu、Python-Fu や Gimp プラグインを書くことができます。</P>
+
+<!-- 
+    <p>There exist a project called <a
+      href="/web/20030203041219/http://anoncvs.jp.gnome.org/index.cgi/gimp-plugins-unstable/gimple/">gimple</a>
+      in the Gnome CVS repositiory which might fix some of this
+      issues. Gimple is a Guile interface for Gimp. It will have much
+      better R5SR compliance than SIOD and will probably be able to
+      call guile-gtk, to enable the creation ouf much more flexible
+      gui-interfaces, but I don't know the status of this project and
+      have never seen it in action.</p>
+ -->
+<P>Gnome CVS レポジトリに <a href="/web/20030203041219/http://anoncvs.jp.gnome.org/index.cgi/gimp-plugins-unstable/gimple/">gimple</a> と呼ばれる、この問題のいくつかを修正するかもしれないプロジェクトが存在します。Gimple は Gimp のための Guile インターフェイスです。これは SIOD よりもさらに良い R5SR 遵守を持ち、多分より柔軟な gui-インターフェイスを創り出すことが可能な、guile-gtk を呼び出すことができるのですが、私はこのプロジェクトの状態を知らなくて、活動中なのか全く分かりません。</P>
+
+    <h2><a name="examples">お手本</a></h2>
+
+<!-- 
+    <p>It is always a good idea to have a look at foreign Script-Fu's
+    to learn. Script-Fu's can for example be found in the Gimp
+    directory <tt
+    class="file">/usr/share/gimp/1.1/scripts/</tt>. There are also
+    some links to other Script-Fu sites at the <a
+    href="/web/20030203041219/http://www.gimp.org">Gimp</a> webpage. I have also uploaded
+    my Script-Fu's, you can find them <a href="scripts/">here</a>, but
+    be warned, most of them are not documented and some might not work
+    at all.</p>
+ -->
+<P>勉強のために海外の Script-Fu を見ておくことは常にグッドアイデアです。例題となる Script-Fu は Gimp ディレクトリの <tt class="file">/usr/share/gimp/1.1/scripts/</tt> で見付かります。<a href="/web/20030203041219/http://www.gimp.org/">Gimp</a> ウェブページには他の Script-Fu サイトへのいくつかのリンクがあります。私は自分の Script-Fu もアップロードしており、それらは<a href="/web/20030203041219/http://pingus.seul.org/~grumbel/gimp/script-fu/scripts/">こちら</a>で見付かりますが、注意して欲しいのは、そのほとんどはドキュメント化されておらず、いくつかは全く動作しないかもしれません。</P>
+
+    <h2><a name="references">参考文献</a></h2>
+    <ul>
+      <li><a href="/web/20030203041219/http://people.delphi.com/gjc/siod.html">SIOD</a></li>
+      <li><a href="/web/20030203041219/http://www.scheme.com/tspl2d/index.html">The Scheme
+      Language, Second Edition</a></li>
+      <li><a
+      href="/web/20030203041219/http://www.cs.rice.edu/CS/PLT/Teaching/Lectures/Released/Book/">How
+      to Design Programs</a></li>
+      <li><a href="/web/20030203041219/http://www.gimp.org/">The Gimp</a>
+    </ul>
+
+    <ul>
+      <li><a href="/web/20030203041219/http://lithwww.epfl.ch/teaching/rdf/support99/SchemeTut.html">Script-Fu &amp; Scheme</a></li>
+      <li><a href="/web/20030203041219/http://gum.gnome.gr.jp/write-scriptfu.html">Script-Fu (japanese)</a></li>
+      <li><a href="/web/20030203041219/http://www.xcf.berkeley.edu/~gimp/script-fu/script-fu.html">Script-Fu (GIMP)</a></li>
+      <li><a href="/web/20030203041219/http://www.script-fu.org/">Script-Fu.org</a></li>
+      <li><a href="/web/20030203041219/http://www.ee.byu.edu/support/gimp/write_scriptfu.html">GUM - Writing Script-Fu</a></li>
+      <li><a href="/web/20030203041219/http://w3.man.torun.pl/~makler/help/script-fu-tutorial/">Mike Terry's Black Belt School of ScriptFu</a></li>
+    </ul>
+
+    <h2><a name="changelog">変更履歴</a></h2>
+    <pre>
+    $Log: script-fu-tut.html,v $
+    Revision 1.8  2001/01/24 21:13:26  ingo
+    Added link to japanese translation
+
+    $Log: script-fu-tut.html,v $
+    Revision 1.7  2000/08/15 23:57:21  ingo
+    Added some examples
+
+    Revision 1.6  2000/08/15 16:13:22  ingo
+    Added a describtion of SF-FILENAME
+
+    Revision 1.5  2000/08/15 16:06:41  ingo
+    * Some sentences about debugging with (print ...)
+    * Moved the changelog to the bottom of the page
+    
+    Revision 1.4  2000/08/15 10:24:39  ingo
+    Added some infos about things you can't do in Script-Fu</pre>
+
+    <hr>
+
+    <p class="copyright">Copyright (c) 2000 Ingo Ruhnke &lt;<a
+      href="mailto:grumbel@gmx.de">grumbel@gmx.de</a>&gt;</p>
+
+    <p class="copyright">Permission is granted to copy, distribute and/or modify this
+      document under the terms of the <a
+      href="/web/20030203041219/http://www.gnu.org/copyleft/fdl.html">GNU Free
+      Documentation License</a>, Version 1.1 or any later version
+      published by the Free Software Foundation.</p>
+
+    <small>Last updated: $Date: 2001/01/24 21:13:26 $</small>
+
+<HR>	<!-- About Japanese Translation -->
+
+<h2><a name="Translation">日本語翻訳について</a></h2>
+
+<P>この文書は Ingo Ruhnke 氏の <A href="/web/20030203041219/http://pingus.seul.org/~grumbel/gimp/script-fu/script-fu-tut.html">Script-fu Tutorial</A> を私が邦訳したものです。この文書のライセンスについては <A href="/web/20030203041219/http://www.gnu.org/copyleft/fdl.ja.html">GNU FDL</A> をご覧下さい。もし翻訳の間違いがあることに気が付きましたら、指摘してもらえると幸いです。</P>
+
+<H3>日本語版の変更履歴</H3>
+<pre>
+    $Log: script-fu-tut.html,v $
+    Revision 1.8a 2001/03/10 いっちー
+      * 1.8 に追従して変更
+      * 翻訳が変だったところを修正
+
+    $Log: script-fu-tut.html,v $
+    Revision 1.7a 2001/01/23 いっちー
+      * 最初の日本語版
+      * 1.7 を日本語に翻訳</pre>
+
+<P class="copyright">Copyright (c) 2001 Iccii &lt;<A href="mailto:iccii@hotmail.com">iccii@hotmail.com</A>&gt; (Japanese Transrator)</P>
+
+  </body>
+</html>
+
+
+
+
+<!--
+     FILE ARCHIVED ON 4:12:19 Feb 3, 2003 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 10:44:19 May 26, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->

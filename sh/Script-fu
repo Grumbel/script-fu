@@ -1,0 +1,720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Science | WebHostingGeeks.com: Script-fu</title>
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+<meta name="copyright" content="Web Hosting Geeks">
+	<link rel="stylesheet" type="text/css" media="screen" href="http://science.webhostinggeeks.com/css.php?n=css_perfect" />
+	<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-228292-1']);
+		  _gaq.push(['_trackPageview']);
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+	</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>	
+</head>
+<body>
+<div class="back"><a href="http://webhostinggeeks.com/">Back to site</a></div>
+<div class="container">
+<div class="header_container">
+<div class="header">
+<div class="header_logo"><img alt="Web Hosting Geeks | Web Hosting Experts" src="http://cdn.webhostinggeeks.com/images/new_design/logo.png" class="logoImage" height="95" width="220"></a></div>
+<div class="header_slogan">Since 2004, our University project has become the Internet's most widespread web hosting directory. Here we like to talk a lot about web servers, web development, networking and security services. It is, after all, our expertise. To make things better we've launched this science section with the free access to educational resources and important scientific material translated to different languages.</div>
+</div>
+</div>
+
+
+	
+
+<div class="vice_title"></div>
+<div class="links">
+
+	
+		Source: <a rel="nofollow" href="http://seul.org/~grumbel/gimp/script-fu/script-fu-tut.html" >
+			http://seul.org/~grumbel/gimp/script-fu/script-fu-tut.html</a>
+	
+
+
+
+	
+
+
+	
+
+
+	
+
+
+	
+</div>
+
+
+<h1><span>Script-fu</span>
+</h1>
+
+<div class="pre">
+<style>
+
+
+.tabela {border:1px solid;}
+.tabela td {border:1px solid;}
+.tabela th {border:1px solid;
+text-transform: capitalize;}
+.sadrzaj p + p {
+text-indent: 0em;
+}
+
+.sadrzaj img {
+margin: 0;
+border: 0;
+}
+.sadrzaj h2 {font-weight: bold;}
+.sadrzaj a {text-decoration: none;}
+.sadrzaj a:hover {text-decoration: none;}
+.sadrzaj h1 {font-size: 30px;}
+.sadrzaj ul {
+display: block;
+list-style-type: disc;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+}
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+.sadrzaj
+</style>
+
+<div class="sadrzaj">
+<div bgcolor="white" text="black"><h1>Script-fu Predgovor</h1>
+
+    
+    
+
+    <h2><a name="preface">Predgovor</a></h2>
+
+    <p>Ovaj predgovor je napisan za <strong>The Gimp
+	1.1.24</strong>. Neke stvari opisane u njemu neće raditi ili će raditi drugačije nego na Gimp 1.0.x.</p>
+
+    <h2>Uvod</h2>
+
+    <p>Ovo je kratak uvod o Script-Fu programiranju.Pokušaću da vam pružim kratak uvod u svet Script-Fu-a, i da vam objasnim kako funkcionišu osnovne stvari.Proći ćemo kroz ceo Script-Fu, korak po korak.Cilj je da imamo Script-Fu koji pravi tekst u metal stilu.Predpostavljam da imate osnovno znanje o “Scheme”, jer je to programski jezik koji se koristi u Script-Fu-u.</p>
+
+    <h2><a name="#first">Prvi korak u Script-Fu</a></h2>
+
+    <p>O.K. sada prelazimo na prvi korak: šta želimo da radimo u Script-Fu, prvo ćemo da pokušamo da radimo u Gimp-u.To je veoma važno, jer želimo da znamo tačno koje operacije su nam potrebne, i po kom redu treba da ih pozivamo.</p>
+
+    <p>Hajde da napravimo našu test sliku, pre svega ćemo napraviti novu “rgb image” sliku (<tt class="menu">File-&gt;New Image</tt>) i ubaciti neki tekst u nju, recimo reč “Test”.</p>
+
+      <img src="http://seul.org/~grumbel/gimp/script-fu/images/step1.jpg">
+
+    <p>Onda ćemo duplirati tekst i primeniti gradient metala na gornjem sloju..</p>
+
+      <img src="http://seul.org/~grumbel/gimp/script-fu/images/step2.jpg">
+
+    <p>Zatim ćemo uzeti drugi sloj teksta i malo ga uvećati, a za to ćemo koristiti “alpha-to-selection function” i izabrano povećati za nekoliko piksela.Zatim ćemo to što smo izabrali popuniti sa istim gradientom ali drugačije orijentacije.</p>
+
+      <img src="http://seul.org/~grumbel/gimp/script-fu/images/step3.jpg">
+
+    <p>Na kraju, spajamo slojeve i nanosimo standardnu “drop shadow”.Kada se sa time završi, uradi ćemo “auto-crop” slike (image) a da bi uklonili sve neželjene delove slike.</p>
+
+    <img src="http://seul.org/~grumbel/gimp/script-fu/images/step4.jpg">
+
+    <h2><a name="repro">Reprodukcija koraka u Script-Fu konzoli</a></h2>
+
+    <p>U redu, slika sada izgleda kao što smo i želeli pa hajde da sumiramo korake koje smo načinili.</p>
+
+    <ol>
+	<li>Napravi novu sliku (image)</li>
+	<li>Kreiraj sloj teksta (text layer)</li>
+	<li>Dupliraj sloj teksta</li>
+	<li>Uvećaj donji sloj teksta</li>
+	<li>Popunite oba sloja teksta sa gradientom</li>
+	<li>Spojite slojeve teksta</li>
+	<li>Nanesite “drop shadow”</li>
+	<li>Spojite sve slojeve</li>
+	<li>Auto-crop slike</li>
+    </ol>
+
+    <p>Sada je zadatak da ponovite ove korake u <strong>Script-Fu
+      Console</strong>: gde možete da unesete Script-Fu Commands i da ih testirate.Koristite Console za testiranje svih novih funkcija sa kojima niste do kraja upoznati, u Console možete i delimično debagovati vaše skripte.Najlakše je da svaki red teksta pisan za Script-Fu prvo testirate u Console i kada budete sigurni da su ispravni unesete ih u Script-Fu.</p>
+
+    <img src="http://seul.org/~grumbel/gimp/script-fu/images/script-fu-console.png">
+
+    <p>Da bi ste to uradili, otvorićemo Script-Fu Console (<tt class="menu">Xtns-&gt;Script-fu-&gt;Consol</tt>). Kada je otvorimo kliknućemo na <tt class="menu">Browse...</tt> 
+	dugme u donjem levom uglu a to će nas dovesti na <strong>DB
+      Browser</strong>, gde možete tražiti funkcije za pristup Script-Fu-u.Uz ime funkcije dobićete i opis očekivanih argumenata i generalan opis onoga što ta funkcija radi.</p>
+
+    <img src="http://seul.org/~grumbel/gimp/script-fu/images/db-browser.png">
+
+    <p>Sada je vreme da reprodukujemo naš prvi korak u proces stvaranja slike, pa nam zato treba funkcija za pravljenje nove slike.Većina funkcija koje ćete naći u DB Browser-u ima imena slična onima sadržanim u Gimp menijima.Posle kraćeg traženja “new” našli smo funkciju
+	<tt class="code">gimp-image-new</tt>, koja zvuči kao ona koju smo i tražili.U konzolu ćemo uneti sledeće:</p>
+
+    <pre class="code">(gimp-image-new 256 256 RGB)</pre>
+
+    <p>i dobiti sledeći output:</p>
+
+    <pre class="console-output">=&gt; (gimp-image-new 256 256 RGB)
+
+(3)</pre>
+
+    <p>Prva linija je samo naredba koja je izvršena dok je druga linija povratna vrednost funkcije.Kao što možete da pročitate u DB Browser-u to je ID novo kreirane slike.Možete taj ID jednostavno da koristite kao argument za funkciju u konzoli.Povratna vrednost je prva prepreka na vašem putu po Script-Fu-u.Dolazi kao duga lista od jednog elementa a ne kao “integer” vrednost.Da bi ste iskoristili ovu vrednost moramo uzeti prvi element sa liste a što će nas vratiti na sliku sa ID 3.</p>
+
+    <p>Sada se možda pitate gde je slika koju smo napravili zbog toga što ne možete da je vidite.Odgovor je da još ne postoje mogućnosti za njeno prikazivanje, slika se još uvek nalazi u memoriji i ne prikazuje se tako da moramo da napravimo “display” za nju.Zato ćemo probati 
+	
+      <tt class="code">(gimp-display-new 3)</tt>, ali nam se prijavljuje greška.
+    </p>
+
+    <pre class="console-output">ERROR: Procedural database execution failed:
+    (gimp_display_new 3)</pre>
+
+    <p>Znači to je samo još jedna zamka.Funkcije u okviru Script-Fu-a ne ponašaju se na isti način kao njihove “kolege” u meniju.Ponekad su one na nižem nivou pa je potrebno još dodatnog rada za dobijanje očekivanog rezultata.Ovde je problem da naša novo napravljena  slika ne sadrži slojeve uopšte.Da bi se slika prikazala treba nam bar jedan sloj.Tako da je sledeći korak pravljenje slojeva (layer).</p>
+
+<pre class="console-output">=&gt; (gimp-layer-new 3 256 256 RGB-IMAGE "foobar" 100 NORMAL-MODE)
+
+(21)</pre>
+
+    <p>Primetiće te da su RGB-IMAGE i NORMAL-MODE navedeni kao RGB_IMAGE i NORMAL_MODE u DB Browser (primetite podvučeno '_').Moraćete da zamenite sve podvučeno sa minus  '-' u Script-Fu-u svetu.Ako niste sigurni da vam je zamena ispravna, samo unesite “constant” u konzolu.</p>
+
+    <p>Sledeći korak je dodavanje novoformiranog sloja slici na način opisan u DB Browser-u:</p>
+
+<pre class="console-output">=&gt; (gimp-image-add-layer 3 21 -1)
+
+()</pre>
+I sad konačno možemo prikazati našu sliku:
+
+<pre class="console-output">=&gt; (gimp-display-new 3)
+
+(4)</pre>
+
+    <p>Slika izgleda malo čudno a zato što je popunjena nasumičnim bojama, da bi ih izbrisali popunićemo slojeve trenutnim pozadinskim bojama.</p>
+
+    <pre class="console-output">=&gt; (gimp-drawable-fill 21 BG-IMAGE-FILL)
+
+()</pre>
+
+    <p>Funkcija za popunjavanje slojeva se zove <tt class="code">gimp-drawable-fill</tt> a ne <tt class="code">gimp-layer-fill</tt> 
+	kao što biste mislili a to je zato što je sloj “drawable”.Tako da ako tražite funkcije za upravljanje slojevima, treba da pogledate i stvari koje upravljaju “drawable”.</p>
+
+    <p>Sada imamo našu sliku.Prebrzo za tebe?.Hajde onda da sumiramo i napišemo našu prvu “scheme function”.Prvo sve ubacimo u “let* clause” a zatim dodamo “let* clause” u “function body”:</p>
+
+<pre class="code">(define (my-make-new-image)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+        (layer (car (gimp-layer-new image 256 256
+                     RGB-IMAGE "foobar" 100 NORMAL-MODE))))
+       (gimp-drawable-fill layer BG-IMAGE-FILL)
+       (gimp-image-add-layer image layer 0)
+       (gimp-display-new image)
+       image))</pre>
+
+    <p>Poslednja linija u šemi funkcije je povratna vrednost, tako da je <tt class="code">slika</tt> povratna vrednost ove funkcije.</p>
+
+    <p>Vratimo se sad našoj “metal-text” stvari, sada treba dodati tekst “string” i zabaviti se sa njime.Malo browsinga po DB-u nas dovodi do
+      <tt class="code">gimp-text-fontname</tt>.  Da bi ga pozvali kucamo:</p>
+
+<pre class="console-output">=&gt; (gimp-text-fontname 3 21 -1 0 "Foobar" 0 TRUE 25 PIXELS
+		    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
+
+(33)</pre>
+
+    <p>I evo ga, imamo tekst na novo formiranom sloju.String <tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt>
+      vam može izgledati kao neka crna magija, ali ćemo kasnije videti lakši način  da ga napravimo.</p>
+
+    <p>Sada moramo duplirati sloj a primetićete da za to nema opcije u DB-u tako da ćemo ručno napisati drugu “scheme function”:</p>
+
+<pre class="code">(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))</pre>
+i onda:
+
+<pre class="console-output">=&gt; (my-duplicate-layer 3 34)
+
+41</pre>
+
+    <p>Sledeći korak je dodavanje malo prostora za povećanje granica teksta, gimp-layer-resize će vam pomoći.</p>
+
+    <pre class="console-output">(gimp-layer-resize 41 200 100 5 5)</pre>
+
+    <p>Ovo radi, ali su visina i širina fiksirane tako da ćemo pokušati ovo na malo fleksibilniji način:</p>
+
+    <pre class="code">(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))</pre>
+
+    <p>Sada moramo da prebacimo slojeve “alpha cannel” na izabrane i dodamo malo piksela:</p>
+
+    <pre class="code">(gimp-selection-layer-alpha 41)
+(gimp-selection-grow 3 5)</pre>
+
+    <p>Pre nego što popunite sloj, moramo da uklonimo "Keep trans" zastavicu zbog koje sva providna polja ostaju to i dalje:</p>
+
+    <pre class="code">(gimp-layer-set-preserve-trans 41 0)</pre>
+
+    <p>Sada ćemo popuniti izabrano sa gradientom:</p>
+
+    <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
+
+    <h2><a name="write">Pisanje niz Script-Fu</a></h2>
+
+    <p>Uh, sada imamo sve spremno za Script-Fu samo još treba da sastavimo delove.U sledećim koracima ćemo ukloniti nepotrebne akcije i verovatno dodati nešto novih stvari.</p>
+
+    <p>U redu, kako napisati Script-Fu?.Pa u suštini vam trebaju tri stvari.Prva, fajl u kome se nalazi vaša skripta, taj fajl bi trebalo da se nalazi u
+	<tt class="file">~/.gimp-1.1/scripts/</tt>. Drugo, funkcija koja obavlja sve akcije vezane za sliku i na kraju vam je potreban poziv upućen
+	<tt class="code">script-fu-register</tt> da bi vaše skripte bile vidljive unutar Gimp-a.</p>
+
+    <p>Zato hajde da napišemo praznu funkciju i da je registrujemo.Trebalo bi da copy-paste sledeći kod u fajl <tt class="file">dummy.scm</tt> i da ga snimite u <tt class="file">~/.gimp-1.1/scripts/</tt> kao što je gore i opisano.</p>
+
+    <pre class="code">(define (my-dummy-function a b)
+  (print "Do nothing"))
+
+(script-fu-register "my-dummy-function"
+		    _"&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Dummy..."
+		    "Do nothing"
+		    "Joey User"
+		    "Joey User"
+		    "August 2000"
+		    ""
+		    SF-ADJUSTMENT _"Width" '(400 1 2000 1 10 0 1)
+		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
+
+
+    <p>Kada pritisnete <tt class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> vaša skripta će biti uneta u Gimp i biće dostupna iz menija.</p>
+
+    <p>Ali obratite pažnju, postoje dve vrste Script-Fu-a.Prva vrsta će napraviti novu sliku koja se koristi za logo i dostupna je kroz meni
+	<tt class="menu">Xtns-&gt;Scritp-fu-&gt;...</tt>, a druga vrsta će raditi sa postojećom slikom i ova vrsta je dostupna putem desnog klika na pop-up meni na slici
+	<tt class="menu">Scritp-fu-&gt;...</tt>. Za registraciju druge vrste Script-Fu-a, morate prilagoditi “path” do
+	<tt class="code">&lt;Image&gt;/Script-Fu/...</tt> i potrebno je da uzmete dva argumenta SF-IMAGE i SF-DRAWABLE tipa.</p>
+
+    <p>Ovo nas dovodi do druge teme, argumenti koje vaša funkcija može da ima a oni sadrže sledeće tipove:</p>
+
+    <table border="1" class="tabela">
+      	<tbody><tr>
+	  <th>Argument Tip</th>
+	  <th>Data Tip</th>
+	  <th>Opis</th>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-IMAGE</tt></td>
+	  <td>Integer (image id)</td>
+	  <td>Koristi se za dobijanje ID-a slike</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-DRAWABLE</tt></td>
+	  <td>Integer (drawable id)</td>
+	  <td>Nabavite drawable id</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-VALUE</tt></td>
+	  <td>String</td>
+	  <td>Input numeričke vrednosti</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-TOGGLE</tt></td>
+	  <td>Boolean (TRUE or FALSE)</td>
+	  <td>Input booleon vrednosti</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-PATTERN</tt></td>
+	  <td>String (Pattern name)</td>
+	  <td>Omogućava vam da izaberete obrazac</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-ADJUSTMENT</tt></td> <td>List
+	  (start-value min-value max-value small-step large-step
+	  [int=0 or float=1] [slider=0 or roll-box=1])</td>
+	  <td>Pravi slider bar ili input box za vrednosti</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-FILENAME</tt></td>
+	  <td>String (pathname)</td>
+	  <td>Omogućava vam da potražite datoteku</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-STRING</tt></td>
+	  <td>String</td>
+	  <td>Kreira polje za unos</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-FONT</tt></td>
+	  <td>String (fontname)</td>
+	  <td>omogićava da izaberete font </td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-COLOR</tt></td>
+	  <td>List (red green blue) [0-255]</td>
+	  <td>Omogućava vam da izaberete boju</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-OPTION</tt></td>
+	  <td>List of strings</td>
+	  <td>Omogućava vam da izaberete stavku van liste</td>
+	</tr>
+
+	<tr>
+	  <td><tt class="code">SF-GRADIENT</tt></td>
+	  <td>String (gradient name)</td>
+	  <td>Omogućava vam da izaberete gradijent</td>
+	</tr>
+    </tbody></table>
+
+    <p>Sledeći kod stvara kutiju sa svim mogućim vrednostima input-a :</p>
+
+<pre class="code">(define (my-demo-box value adj1 adj2 image drawable toggle pattern string font color option gradient)
+  (print "Do nothing"))
+
+(script-fu-register "my-demo-box"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/My Stuff/Demo Box..."
+		    "Do nothing"
+		    "Joe User"
+		    "Joe User"
+		    "August 2000"
+		    ""
+		    SF-ADJUSTMENT "SF-ADJUSTMENT (slider)" '( 30 1 2000 1 10 1 0)
+		    SF-ADJUSTMENT "SF-ADJUSTMENT"         '(400 1 2000 1 10 1 1)
+		    SF-COLOR      "SF-COLOR" '(255 0 255)
+		    SF-DRAWABLE   "SF-DRAWABLE" 0
+		    SF-FONT       "SF-FONT" ""
+		    SF-GRADIENT   "SF-GRADIENT"  "Golden"
+		    SF-IMAGE      "SF-IMAGE" 0
+		    SF-OPTION     "SF-OPTION" '("Option 1" "Option 2" "Option 3")
+		    SF-PATTERN    "SF-PATTERN" "Wood"
+		    SF-STRING     "SF-STRING" "Test String"
+		    SF-TOGGLE     "SF-TOGGLE" TRUE
+		    SF-VALUE      "SF-VALUE" "0"
+                    SF-FILENAME   "SF-FILENAME" "/")</pre>
+
+    <p>Dobijena kutija će izgledati ovako:</p>
+
+    <img src="http://seul.org/~grumbel/gimp/script-fu/images/demo-box.png">
+
+    <p>Dakle, nazad na posao i hajde da završimo naš primer sa Script-Fu-om.Trebalo bi početi sa radom od okvira, tako da moramo da odlučimo koja nam je vrsta argumenata potrebna.Kako želimo da napravimo font prvo nam je potreban tekst, tako da koristimo SF-STRING, a zatim ćemo koristiti SF-FONT za izbor fonta i dodatnu SF-VALUE za unos veličine fonta.</p>
+
+    <p>Pravljenje <tt class="code">script-fu-register</tt> je ostavljeno kao vežba za korisnike.Ako ne želite sami da ga napravite pogledajte ispod kako izgleda napravljen.Box (kutija) će tada izgledati ovako:</p>
+
+    <!-- Insert image -->
+
+    <p>Sada kada smo napravili “register call set up” vreme je da ubacimo neki kod u funkciju.Prvo ubacujemo dve pomoćne funkcije :
+	<tt class="code">my-duplicate-layer</tt> i <tt class="code">my-layer-add-border</tt>, na vrh fajla.Sledeće, manje više copy&paste naše Script-Fu Console eksperimente zajedno.Pomeramo
+	<tt class="code">gimp-display-new</tt> call na kraj funkcije, jer ne moramo da vidimo kako rendering slike funkcioniše.Takođe ćemo dodati još jednu pomoćnu funkciju a koja će konačnu sliku “iseći” na pravu veličinu.Rezultat će biti slika koja bi mogla ovako da izgleda:</p>
+
+    <pre class="code">(define (my-image-to-layer-size image layer)
+  (gimp-layer-set-offsets layer 0 0)
+  (gimp-image-resize image
+		     (car (gimp-drawable-width layer))
+		     (car (gimp-drawable-height layer))
+		     0 0))
+
+(define (my-layer-add-border layer border)
+	(let* ((width  (car (gimp-drawable-width  layer)))
+	       (height (car (gimp-drawable-height layer))))
+	       (gimp-layer-resize layer
+				  (+ width border) (+ height border)
+				  (/ border 2) (/ border 2))))
+
+(define (my-duplicate-layer image layer)
+	(let* ((dup-layer (car (gimp-layer-copy layer 1))))
+              (gimp-image-add-layer image dup-layer 0)
+	      dup-layer))
+
+(define (my-make-metal-font text font font-size)
+ (let* ((image (car (gimp-image-new 256 256 RGB)))
+	(bottom-font-layer (car (gimp-text-fontname image -1 0 0 text 0 TRUE font-size PIXELS
+					     font))))
+
+   (let* ((top-font-layer (my-duplicate-layer image bottom-font-layer)))
+
+     (my-layer-add-border bottom-font-layer 20)
+
+     (gimp-layer-set-preserve-trans bottom-font-layer 0)
+     (gimp-gradients-set-active "Four_bars")
+
+     (gimp-selection-layer-alpha bottom-font-layer)
+     (gimp-selection-grow image 3)
+     (gimp-blend bottom-font-layer CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 200 50)
+
+
+     (gimp-selection-layer-alpha top-font-layer)
+     (gimp-blend top-font-layer    CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 50 200 0)
+     (gimp-selection-clear image)
+
+     (let* ((new-layer (car (gimp-image-merge-visible-layers
+			     image EXPAND-AS-NECESSARY))))
+       (my-image-to-layer-size image new-layer))
+
+     (gimp-display-new image))
+   ))
+
+(script-fu-register "my-make-metal-font"
+		    "&lt;Toolbox&gt;/Xtns/Script-Fu/Logos/Metal Font..."
+		    "Create an example image of a custom gradient"
+		    "Federico Mena Quintero"
+		    "Federico Mena Quintero"
+		    "June 1997"
+		    ""
+		    SF-STRING     "Text" "The GIMP"
+		    SF-FONT       "Font" "-*-blippo-*-r-*-*-24-*-*-*-p-*-*-*"
+		    SF-VALUE      "Font Size" "50" )</pre>
+
+
+    <h2><a name="pitfalls">Uobičajene Zamke</a></h2>
+    <p>Sledi lista uobičajenih zamki u Script-Fu-u.</p>
+
+    <h3><a name="return">Povratne vrednosti</a></h3>
+
+    <p>Kada funkcija vraća vrednost, ona će uvek biti zatvorena u listi bez obzira da li se radi samo o jednoj ili više.Čak i ako je povratna vrednost i sama lista kao kad na primer
+	<tt class="code">gimp-color-picker</tt>, vrati boju, povratna vrednost će uvek biti zatvorena u dodatnoj listi.</p>
+
+    <p>Ako se višestruke vrednosti vraćaju i one će biti u obliku listi gde je prva vraćena vrednost prvi element u listi, druga je drugi i tako dalje.Zato morate da uvek dodajete “car call” da bi dobili ispravne vrednosti.</p>
+
+    <h3><a name="r5sr">R5SR Compliance</a></h3>
+
+    <p><a rel="nofollow" href="http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a>
+      je dokument koji opisuje jezičke šeme, ali na žalost jezik koji koristi Gimp nije  R5SR kompatibilan, nije čak ni blizu.To je zato što Gimp koristi SIOD kao jezički interpretator.SIOD je mala šema za implementaciju, i mana mu je što pruža samo mali skup  R5SR funkcija, čak su i neka od imena funkcija promenjena.Na primer nemate “display” samo funkciju pod nazivom “print”.Za kraj priče u šemama funkcija koje podržava Gimp pogledajte na
+	  <a rel="nofollow" href="http://people.delphi.com/gjc/siod.html">SIOD</a>. web stranu.Da bi stvar bila još gora, Gimp ne omogućava sve funkcije koje se nalaze na SIOD strani, ali može da posluži kao dobra polazna tačka.Takođe možete koristiti “apropos” funkcije u Consoli za traženje specifičnih funkcija.</p>
+
+      <pre class="console-output">=&gt; (apropos "write")
+
+(fwrite writes swrite write-mask stroke-overwrite)</pre>
+
+    <h2><a name="debug">Debugging</a></h2>
+
+    <p>Kada počnete da se igrate sa Script-Fu-om pa čak i kada se upoznate sa njim, veoma često ćete nailaziti na situacije kada vam scripta neće raditi.Da stvar bude gora, ponekad nećete ni dobiti izveštaj o grešci.U većini slučajeva će razlog biti prost, ali potraga za njim teška.
+Sledeći koraci bi mogli da vam tu potragu olakšaju.</p>
+
+    <p>Prvo proverite da vam je tekst interpunkcijski tačan, a to znači da ste zatvorili sve otvorene zagrade i znake navoda.Tekst editor vam u tome može pomoći.</p>
+
+    <p>Drugo, možda ste zaboravili da dodate “car” u neke povratne vrednosti.Da bi izvršili proveru na ove greške copy&paste vaš code u Console i izvršite radnju manuelno.</p>
+
+    <pre class="console-output">ERROR: Invalid types specified for arguments</pre>
+
+    <p>Ovo će biti najčešća poruka koju ćete dobijati a ako dobijete neku drugu vaš “bug” je negde drugde.</p>
+
+    <p>Kada pozivate funkciju sa premalo ili previše argumenata, dobićete sledeću poruku o grešci: </p>
+
+    <pre class="console-output">=&gt; (gimp-image-get-layers)
+ERROR: too few arguments (see errobj)</pre>
+
+    Onda samo pogledajte u errobj:to će vam reći koji su argumenti bili očekivani a koje ste vi pružili.
+
+    <pre class="console-output">=&gt; (print errobj)
+
+((image))
+()</pre>
+
+    <p>Na kraju ako vam funkcija i dalje ne radi, dodajte neke “print calls” na prava mesta da  bi ste proverili da li sve radi ispravno.Da bi ste videli svoje snimke morate “provući” Script-Fu kroz Console-u. </p>
+
+    <h2><a name="cannotdo">Stvari koje ne možete raditi u Script-Fu-u</a></h2>
+
+    <p>Do sada sam vam opisivao stvari koje možete raditi u Script-Fu-u a sada ću vam navesti neke koje ne možete.</p>
+
+    <p>Prva stvar koju bi ste možda želeli da radite je da dobijete bolje default vrednosti za argumente koje će vaša funkcija dobiti.Loša vest je što to ne možete, možete samo da “pass constant values” u Script-Fu register call.Tako da ako su vaše default vrednosti na primer pola širine slike to ne možete da dobijete možete samo cele vrednosti.</p>
+
+    <p>Druga stvar koju bi ste možda želeli je neka vrsta GUI-a koji obuhvata više od onoga što omogućavaju “SF-* values” i ponovo toga nema.”SF-* values” su sav GUI koji možete očekivati od Script-Fu-a.Ako želite komplikovanije stvari, moraćete da napišete pravi Gimp Plug-in.</p>
+
+    <p>U nekom trenutku ćete poželeti da napišete vaš filter ili effect, koji zahteva obradu na nivou piksela.To je stvar koju zapravo možete ovde uraditi ali će biti užasno sporo.Tako da će biti bolje da to napišete kao pravi Gimp Plug-in.</p>
+
+    <p>Možda ćete želiti da otvorite direktorijum i sve slike u njemu.Ni to nije moguće.SIOD webpage opisuje opendir funkciju, ali kada je probate u Script-Fu-u ona neće raditi kao druge SIOD funkcije.</p>
+
+    <pre class="console-output">=&gt; (opendir "/")
+
+ERROR: unbound variable (errobj opendir)</pre>
+
+    <p>Za rešavanje ovog problema morate da poradite na prebacivanju sadržaja direktorijuma na fajl i čitanje fajla ili da napišete Perl-Fu, Python-Fu ili Gimp Plug-in.</p>
+
+    <p>Postoji program pod nazivom <a rel="nofollow" href="http://anoncvs.jp.gnome.org/index.cgi/gimp-plugins-unstable/gimple/">gimple</a>
+      u Gnome CVS repositiory koji može da pomogne u rešavanju nekih od ovih pitanja.Gimple je Guile interface za Gimp.Ima bolje podržanu R5SR funkciju od SIOD-a i verovatno će biti u mogućnosti da “ call guile-gtk”, da bi omogućio pravljenje fleksibilnijeg “gui-interfaces” ali je ne znam status ovog programa niti sam ga ikad video na delu.</p>
+
+    <h2><a name="examples">Examples (primeri)</a></h2>
+
+    <p>Uvek je dobra ideja da se pogleda strani Script-Fu.Script-Fu se na primer može naći u Gimp directory
+	<tt class="file">/usr/share/gimp/1.1/scripts/</tt>. Tu takođe postoje linkovi za druge Script-Fu sajtove na <a rel="nofollow" href="http://www.gimp.org">Gimp</a> 
+	webpage-u.Ja sam isto tako “upload” svoj Script-fu i to možete pronaći <a rel="nofollow" href="http://seul.org/~grumbel/gimp/script-fu/scripts/">ovde</a>, ali budite pažljivi jer većina nije dokumentovana a neki možda i ne rade.</p>
+
+    <h2><a name="references">Reference</a></h2>
+    <ul>
+      <li><a rel="nofollow" href="http://people.delphi.com/gjc/siod.html">SIOD</a></li>
+      <li><a rel="nofollow" href="http://www.scheme.com/tspl2d/index.html">The Scheme
+      Language, Second Edition</a></li>
+      <li><a rel="nofollow" href="http://www.cs.rice.edu/CS/PLT/Teaching/Lectures/Released/Book/">How
+      to Design Programs</a></li>
+      <li><a rel="nofollow" href="http://www.gimp.org">The Gimp</a>
+    </li></ul>
+
+    <ul>
+      <li><a rel="nofollow" href="http://lithwww.epfl.ch/teaching/rdf/support99/SchemeTut.html">Script-Fu &amp; Scheme</a></li>
+      <li><a rel="nofollow" href="http://gum.gnome.gr.jp/write-scriptfu.html">Script-Fu (japanese)</a></li>
+      <li><a rel="nofollow" href="http://www.xcf.berkeley.edu/~gimp/script-fu/script-fu.html">Script-Fu (GIMP)</a></li>
+      <li><a rel="nofollow" href="http://www.script-fu.org">Script-Fu.org</a></li>
+      <li><a rel="nofollow" href="http://www.ee.byu.edu/support/gimp/write_scriptfu.html">GUM - Writing Script-Fu</a></li>
+      <li><a rel="nofollow" href="http://w3.man.torun.pl/~makler/help/script-fu-tutorial/">Mike Terry's Black Belt School of ScriptFu</a></li>
+    </ul>
+
+    <h2><a name="changelog">ChangeLog</a></h2>
+    <pre>    $Log: script-fu-tut.html,v $
+    Revision 1.12  2002/02/21 10:46:10  ingo
+    some spelling fixes
+
+    Revision 1.11  2002/01/23 18:18:39  ingo
+    applied OSHIRO Naoki's typo patch
+
+    Revision 1.10  2001/11/19 21:33:20  ingo
+    *** empty log message ***
+
+    Revision 1.9  2001/11/19 21:30:09  ingo
+    added french version link
+
+    Revision 1.8  2001/01/24 21:13:26  ingo
+    Added link to japanese translation
+
+    Revision 1.7  2000/08/15 23:57:21  ingo
+    Added some examples
+
+    Revision 1.6  2000/08/15 16:13:22  ingo
+    Added a describtion of SF-FILENAME
+
+    Revision 1.5  2000/08/15 16:06:41  ingo
+    * Some sentences about debugging with (print ...)
+    * Moved the changelog to the bottom of the page
+
+    Revision 1.4  2000/08/15 10:24:39  ingo
+    Added some infos about things you can't do in Script-Fu</pre>
+<br>
+<p>Ovaj tekst je star 10 godina i više up to date informacija možete naći na <a rel="nofollow" href="http://www.gimp.org/docs/script-fu-update.html">http://www.gimp.org/docs/script-fu-update.html</a></p>
+    <hr>
+
+    
+
+    
+
+    
+  
+
+</div>
+</div>
+</div>
+
+<div class="published for_li">Published (Last edited): 26-03-2013
+
+	
+		, source: <a rel="nofollow" href="http://seul.org/~grumbel/gimp/script-fu/script-fu-tut.html" >
+			http://seul.org/~grumbel/gimp/script-fu/script-fu-tut.html
+		</a>
+	
+
+
+
+
+	
+
+
+	
+
+
+	
+</div>
+
+</div>
+
+
+<div class="container">
+<div id="Footer">
+
+<div class="left-footer">
+<div class="left-footer-block">
+<h4><a href="http://webhostinggeeks.com">Web Hosting Geeks</a></h4>
+<a href="http://webhostinggeeks.com/hosting-providers/">Hosting Providers</a><br>
+<a href="http://webhostinggeeks.com/blog/">Geeks' Blog</a><br>
+<a href="http://answers.webhostinggeeks.com/">Talk to the experts</a><br>
+<a href="http://webhostinggeeks.com/guides/">Free Hosting Guides</a><br>
+<a href="http://webhostinggeeks.com/hostcp/register.php">Register Hosting Company</a><br>
+<a href="http://webhostinggeeks.com/company/contacts.html">Contacts Us</a><br>
+<a href="http://webhostinggeeks.com/company/legal/">Terms of Use</a><br>
+<a href="http://webhostinggeeks.com/company/privacy/">Privacy Policy</a><br>
+</div>
+<div class="left-footer-block">
+<h4><a href="http://webhostinggeeks.com/besthosting.html">Best Web Hosting</a></h4>
+<a href="http://webhostinggeeks.com/bestsharedhosting.html">Shared</a><br>
+<a href="http://webhostinggeeks.com/bestvpshosting.html">VPS</a><br>
+<a href="http://webhostinggeeks.com/bestdedicatedhosting.html">Dedicated</a><br>
+<a href="http://webhostinggeeks.com/bestresellerhosting.html">Reseller</a><br>
+<a href="http://webhostinggeeks.com/bestecommercehosting.html">E-commerce</a><br>
+<a href="http://webhostinggeeks.com/bestbloghosting.html">Blog Hosting</a><br>
+<a href="http://webhostinggeeks.com/bestunixhosting.html">Unix</a><br>
+<a href="http://webhostinggeeks.com/bestwindowshosting.html">Windows</a><br>
+</div>
+<div class="left-footer-block">
+<h4><a href="http://webhostinggeeks.com/user-reviews/">Web Hosting Reviews</a><br></h4>
+<a href="http://webhostinggeeks.com/user-reviews/inmotion-hosting/">Inmotion Hosting</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/web-hosting-hub/">WebHostingHub</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/ipage/">iPage</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/fatcow/">FatCow</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/hostgator/">HostGator</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/arvixe/">Arvixe</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/greengeeks/">GreenGeeks</a><br>
+<a href="http://webhostinggeeks.com/user-reviews/godaddy/">GoDaddy</a><br>
+</div>
+</div>
+
+<div class="right-footer" id="footer_social">
+Copyright &copy; 2004 &ndash; 2015 WebHostingGeeks.com.<br />
+Independent reviews and ratings of web hosting services by real customers.
+<br /><br />
+<g:plusone size="medium" annotation="inline" width="265" href="http://webhostinggeeks.com/"></g:plusone>
+</div>
+    
+</div><br /><br /></div>
+
+</body>
+</html>
