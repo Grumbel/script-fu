@@ -1,73 +1,78 @@
-BODY { 
-	color: black;
-	background: white;
-/*	text-align: justify; */
+html {
+    color: black;
+    background: rgb(100, 50, 25);
+    margin: 0;
+    padding: 0;
 }
 
-DIV.menu {
-	font-size: 0.8em;
-	font-family: sans-serif;
-	text-align: center;
-	background:	rgb(220,220,220); 
-	border:	        solid thin;
-	padding:	0.2em;
-	text:           width;
-	margin: 0px 0px 0px 0px;
+body {
+    max-width: 960px;
+    margin: 0 auto;
+    background: white;
+    padding: 1em 5em;
+    box-shadow: 0 0 64px rgba(0, 0, 0, 0.5);
 }
 
-H1,H2,H3,H4,H5,H6 {
-	font-family: "helvetica", sans-serif;
+.warning {
+    background-color: rgb(255, 200, 200);
+    border-color: red;
+    border-width: 6px;
+    border-style: solid;
+    padding: 0em 1em;
+    margin: 1em;
 }
 
-DIV.answer { color: darkblue }
-
-DIV.question {
-	color: darkgreen;
+.menu {
+    font-size: 0.8em;
+    font-family: sans-serif;
+    text-align: center;
+    background:	rgb(220,220,220);
+    text: width;
+    margin: 0;
 }
 
-TH.news {
-	font-family:	sans-serif;
-	text-align:	center;
-	color:		white;
-	background:	black;
+ol {
+    list-style-type: none;
+    padding: 0 0 0 1em;
 }
 
-P.code {
-	font-size:	0.9em;
+h1,h2,h3,h4,h5,h6 {
+    font-family: "helvetica", sans-serif;
 }
 
-PRE.code {
-	border:		solid thin;
-	font-size:	0.9em;
-	font-family:	monospace; 
-	padding:	0.3em;
-	background:	rgb(220,220,220); 
+p.code {
 }
 
-PRE.console-output {
-	border:		solid thin;
-	font-size:	0.9em;
-	font-family:	monospace;
-	padding:	0.3em;
-	background:	rgb(255,255,0); 
+pre.code {
+    font-family: monospace;
+    padding: 0.3em;
+    background:	lightblue;
 }
 
-TT.code {
-	color: green;
+pre.console-output {
+    font-family: monospace;
+    padding: 0.3em;
+    background:	lightgrey;
 }
 
-TT.menu {
-	color: blue;
+tt.code {
+    color: green;
 }
 
-TT.key {
-	color: blue;
+tt.menu {
+    color: blue;
 }
 
-TT.file {
-	color: red;
+tt.key {
+    color: blue;
 }
 
-SMALL.grey {
-	color:          rgb(150,150,150);
+tt.file {
+    color: red;
 }
+
+small.grey {
+    color:          rgb(150,150,150);
+}
+
+/* EOF */
