@@ -40,10 +40,10 @@
       <li><a href="#repro">Reproducing the steps in the Script-Fu Console</a></li>
       <li><a href="#write">Writing down the Script-Fu</a></li>
       <li><a href="#pitfalls">Common Pitfalls</a></li>
-      <ol>
+      <li><ol>
         <li><a href="#return">Return Values</a></li>
         <li><a href="#r5sr">R5SR Compliance</a></li>
-      </ol>
+      </ol></li>
       <li><a href="#debug">Debugging</a></li>
       <li><a href="#cannotdo">Things you can't do in Script-Fu</a></li>
       <li><a href="#examples">Examples</a></li>
@@ -51,7 +51,7 @@
       <li><a href="#changelog">ChangeLog</a></li>
     </ol>
 
-    <h2><a name="preface">Preface</a></h2>
+    <h2 id="preface">Preface</h2>
 
     <p>The following tutorial is written for <strong>The Gimp
 	1.1.24</strong>. Some things described here will not work or will work
@@ -67,7 +67,7 @@
       of Scheme, which is the programming language that is used in
       Script-Fu</p>
 
-    <h2><a name="#first">First step on the road to a Script-Fu</a></h2>
+    <h2 id="first">First step on the road to a Script-Fu</h2>
 
     <p>Ok, now we take the first step:what we want to do
       in Script-Fu,  we try to do first in The Gimp as normal.
@@ -75,30 +75,30 @@
       operation we need, and in which order we need to call them.</p>
 
     <p>So let's create our test image, first of we create a new rgb
-      image (<tt class="menu">File-&gt;New Image</tt>) and insert some
+      image (<span class="menu">File-&gt;New Image</span>) and insert some
       text into it, say the word "Test".</p>
 
-      <img src="images/step1.jpg">
+      <img src="images/step1.jpg" alt="Image of step1">
 
     <p>Then we duplicate the text and apply a metal gradient to the
       top layer.</p>
 
-      <img src="images/step2.jpg">
+      <img src="images/step2.jpg" alt="Image of step2">
 
     <p>Then we take the second text layer and enlarge it a bit, to do
       so, we use the alpha-to-selection function and grow the
       selection by a few pixels. Then we fill the selection with the
       same gradient, but in a another orientation.</p>
 
-      <img src="images/step3.jpg">
+      <img src="images/step3.jpg" alt="Image of step3">
 
     <p>At last, we merge the layers and apply a standard drop
       shadow. When that is done, we auto-crop the image, to remove all
       unnecessary parts of the image.</p>
 
-    <img src="images/step4.jpg">
+    <img src="images/step4.jpg" alt="Image of step4">
 
-    <h2><a name="repro">Reproducing the steps in the Script-Fu Console</a></h2>
+    <h2 id="repro">Reproducing the steps in the Script-Fu Console</h2>
 
     <p>Ok: the image looks now as we expected it to, so lets summarize
        what we have done:</p>
@@ -124,11 +124,11 @@
       parallel-write the Script-Fu, once the commands act as you
       expect them to.</p>
 
-    <img src="images/script-fu-console.png">
+    <img src="images/script-fu-console.png" alt="Image of Script-Fu Console">
 
-    <p>To do so, we open the Script-Fu Console (<tt
-      class="menu">Xtns-&gt;Script-fu-&gt;Consol</tt>). When the
-      console is open, we click on the <tt class="menu">Browse...</tt> button in the bottom
+    <p>To do so, we open the Script-Fu Console (<span
+      class="menu">Xtns-&gt;Script-fu-&gt;Consol</span>). When the
+      console is open, we click on the <span class="menu">Browse...</span> button in the bottom
       left corner; this brings us to the <strong>DB
       Browser</strong>, where you can search for
       functions which you can access from within Script-Fu. Along
@@ -136,13 +136,13 @@
       arguments it expects and a general description what the function
       does.</p>
 
-    <img src="images/db-browser.png">
+    <img src="images/db-browser.png" alt="Image of DB Browser">
 
     <p>Now it's time to reproduce our first step in the image
       creation, so we need a function to create an new image. Most of
       the functions you find in the DB Browser have names similar to those
       in the menus of the Gimp. After a little search for "new" we
-      find the function <tt class="code">gimp-image-new</tt>, which
+      find the function <span class="code">gimp-image-new</span>, which
       sounds like what we are searching for. We enter the following
       into the console:</p>
 
@@ -161,14 +161,14 @@
       console. The return value is also the first pitfall on our
       journey to Script-Fu. It comes as a one element long list and
       <em>not</em> as a integer value! So to use the value, we have to
-      get the first element of the list with <tt
-      class="code">car</tt>, it will then return the image with ID 3.</p>
+      get the first element of the list with <span
+      class="code">car</span>, it will then return the image with ID 3.</p>
 
     <P>You might now wonder, where the image is that we have created,
       'cause you cannot see it. The answer is: we don't have a
       display for it, so the image is only inside the memory, but is
       not displayed, so we need create an display for it.  So we try
-      <tt class="code">(gimp-display-new 3)</tt>, but we get an error:
+      <span class="code">(gimp-display-new 3)</span>, but we get an error:
     </p>
 
     <pre class="console-output">ERROR: Procedural database execution failed:
@@ -213,9 +213,9 @@ And now we can finally display our image:
 
 ()</pre>
 
-    <p>The function to fill a layer is called <tt
-      class="code">gimp-drawable-fill</tt> and not <tt
-      class="code">gimp-layer-fill</tt> as you might expect, that's
+    <p>The function to fill a layer is called <span
+      class="code">gimp-drawable-fill</span> and not <span
+      class="code">gimp-layer-fill</span> as you might expect, that's
       because a layer is a drawable. So if you are searching for
       functions to manipulate layers, you should also look out for
       stuff that manipulates drawables.</p>
@@ -234,13 +234,13 @@ And now we can finally display our image:
        (gimp-display-new image)
        image))</pre>
 
-    <p>The last line in a scheme function is the return value, so <tt
-      class="code">image</tt> is the return value in this
+    <p>The last line in a scheme function is the return value, so <span
+      class="code">image</span> is the return value in this
       function.</p>
 
     <p>So back to our metal-text thing, we need now to add a text
       string and play with it. A little browsing in the DB brings up
-      <tt class="code">gimp-text-fontname</tt>.  To call it we type:</p>
+      <span class="code">gimp-text-fontname</span>.  To call it we type:</p>
 
 <pre class="console-output">=&gt; (gimp-text-fontname 3 21 -1 0 "Foobar" 0 TRUE 25 PIXELS
 		    "-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1")
@@ -248,7 +248,7 @@ And now we can finally display our image:
 (33)</pre>
 
     <p>And voila, we have our text on a newly created layer. The
-      string <tt class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</tt>
+      string <span class="code">"-freefont-blippo-heavy-r-normal-*-24-*-*-*-p-*-iso8859-1"</span>
       might look like black-magic to you, but we will see later an easy
       way to create it.</p>
 
@@ -297,7 +297,7 @@ and then:
 
     <pre class="code">(gimp-blend 41 CUSTOM NORMAL LINEAR 100 0 REPEAT-NONE FALSE 0 0 0 0 30 50)</pre>
 
-    <h2><a name="write">Writing down the Script-Fu</a></h2>
+    <h2 id="write">Writing down the Script-Fu</h2>
 
     <p>Huh, now we have everything for our script-fu ready, we just
       need to attach the pieces. In the following steps we will also
@@ -305,16 +305,16 @@ and then:
 
     <p>Ok, so how to write a Script-Fu? Well, you need basically three
       things. First, a file where your script is written down, that file
-      should be placed in <tt
-      class="file">~/.gimp-1.1/scripts/</tt>. Second, a function, which does
+      should be placed in <span
+      class="file">~/.gimp-1.1/scripts/</span>. Second, a function, which does
       all the image manipulation, and finally you need to have a call
-      to <tt class="code">script-fu-register</tt> to make your script
+      to <span class="code">script-fu-register</span> to make your script
       visible from inside the Gimp.</p>
 
     <p>So lets write an empty function and register it. You should
-    copy&amp;paste the following code into a file <tt
-    class="file">dummy.scm</tt> and save it to <tt
-    class="file">~/.gimp-1.1/scripts/</tt> as described above.</p>
+    copy&amp;paste the following code into a file <span
+    class="file">dummy.scm</span> and save it to <span
+    class="file">~/.gimp-1.1/scripts/</span> as described above.</p>
 
     <pre class="code">(define (my-dummy-function a b)
   (print "Do nothing"))
@@ -330,106 +330,106 @@ and then:
 		    SF-ADJUSTMENT _"Height" '(30 1 2000 1 10 0 1))</pre>
 
 
-    <p>When you then press <tt
-      class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</tt> your script will
+    <p>When you then press <span
+      class="menu">Xtns-&gt;Scritp-fu-&gt;Reload</span> your script will
       be loaded into the Gimp and should be accessable from the
       menu.</p>
 
     <p>Notice, that there are two kinds of Script-Fu's. The first kind
       will create a new image, thats used for logo's and accessible
-      through the menu <tt
-      class="menu">Xtns-&gt;Scritp-fu-&gt...</tt>, and the second kind
+      through the menu <span
+      class="menu">Xtns-&gt;Scritp-fu-&gt;...</span>, and the second kind
       will manipulate an existing image, this kind is accessible
-      through the right-click pop-up menu on an image <tt
-      class="menu">Scritp-fu-&gt...</tt>. To register the second kind
-      of Script-Fu, you need to adjust the path to <tt
-      class="code">&lt;Image&gt;/Script-Fu/...</tt> and it needs to
+      through the right-click pop-up menu on an image <span
+      class="menu">Scritp-fu-&gt;...</span>. To register the second kind
+      of Script-Fu, you need to adjust the path to <span
+      class="code">&lt;Image&gt;/Script-Fu/...</span> and it needs to
       take the first two arguments of type SF-IMAGE and
       SF-DRAWABLE.</p>
 
     <p>This brings us to the next topic, the arguments that your
       function can get, they can have the following types:</p>
 
-    <table border="1">
-      	<tr>
-	  <th>Argument Type</th>
-	  <th>Data Type</th>
-	  <th>Description</th>
-	</tr>
+    <table>
+      <tr>
+	<th>Argument Type</th>
+	<th>Data Type</th>
+	<th>Description</th>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-IMAGE</tt></td>
-	  <td>Integer (image id)</td>
-	  <td>Used to get an image id</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-IMAGE</span></td>
+	<td>Integer (image id)</td>
+	<td>Used to get an image id</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-DRAWABLE</tt></td>
-	  <td>Integer (drawable id)</td>
-	  <td>Get a drawable id</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-DRAWABLE</span></td>
+	<td>Integer (drawable id)</td>
+	<td>Get a drawable id</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-VALUE</tt></td>
-	  <td>String</td>
-	  <td>Input a numeric value</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-VALUE</span></td>
+	<td>String</td>
+	<td>Input a numeric value</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-TOGGLE</tt></td>
-	  <td>Boolean (TRUE or FALSE)</td>
-	  <td>Input a booleon value</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-TOGGLE</span></td>
+	<td>Boolean (TRUE or FALSE)</td>
+	<td>Input a booleon value</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-PATTERN</tt></td>
-	  <td>String (Pattern name)</td>
-	  <td>Lets you select a pattern</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-PATTERN</span></td>
+	<td>String (Pattern name)</td>
+	<td>Lets you select a pattern</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-ADJUSTMENT</tt></td> <td>List
+      <tr>
+	<td><span class="code">SF-ADJUSTMENT</span></td> <td>List
 	  (start-value min-value max-value small-step large-step
 	  [int=0 or float=1] [slider=0 or roll-box=1])</td>
-	  <td>Creates a slider bar or a input box with range
+	<td>Creates a slider bar or a input box with range
 	  values</td>
-	</tr>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-FILENAME</tt></td>
-	  <td>String (pathname)</td>
-	  <td>Lets you browse for the file</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-FILENAME</span></td>
+	<td>String (pathname)</td>
+	<td>Lets you browse for the file</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-STRING</tt></td>
-	  <td>String</td>
-	  <td>Creates a input box</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-STRING</span></td>
+	<td>String</td>
+	<td>Creates a input box</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-FONT</tt></td>
-	  <td>String (fontname)</td>
-	  <td>Lets you select a font</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-FONT</span></td>
+	<td>String (fontname)</td>
+	<td>Lets you select a font</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-COLOR</tt></td>
-	  <td>List (red green blue) [0-255]</td>
-	  <td>Lets you select a color</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-COLOR</span></td>
+	<td>List (red green blue) [0-255]</td>
+	<td>Lets you select a color</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-OPTION</tt></td>
-	  <td>List of strings</td>
-	  <td>Lets you select an item out of a list</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-OPTION</span></td>
+	<td>List of strings</td>
+	<td>Lets you select an item out of a list</td>
+      </tr>
 
-	<tr>
-	  <td><tt class="code">SF-GRADIENT</tt></td>
-	  <td>String (gradient name)</td>
-	  <td>Lets you select a gradient</td>
-	</tr>
+      <tr>
+	<td><span class="code">SF-GRADIENT</span></td>
+	<td>String (gradient name)</td>
+	<td>Lets you select a gradient</td>
+      </tr>
     </table>
 
     <p>The following code creates a box with all possible input
@@ -461,7 +461,7 @@ and then:
 
     <p>The resulting box will look like this:</p>
 
-    <img src="images/demo-box.png">
+    <img src="images/demo-box.png" alt="Image of demo box">
 
     <p>So back to business, lets finish our Script-Fu example. We
       should start with the frame work, so we need to decide which
@@ -470,7 +470,7 @@ and then:
       for the font selection and in addition SF-VALUE to enter the
       font size.</p>
 
-    <p>The creation of the <tt class="code">script-fu-register</tt> is
+    <p>The creation of the <span class="code">script-fu-register</span> is
       left as an exercise for the user. If you don't want to try it
       yourself you can look some lines below for the finished
       script. The resulting box might then look like this:</p>
@@ -479,11 +479,11 @@ and then:
 
     <p>Now that we have our register call set up, we can fill the
       function with some code. First of we insert our two helper
-      functions: <tt class="code">my-duplicate-layer</tt> and <tt
-      class="code">my-layer-add-border</tt>, at the top of the
+      functions: <span class="code">my-duplicate-layer</span> and <span
+      class="code">my-layer-add-border</span>, at the top of the
       file. Next, we more or less copy&amp;paste our Script-Fu Console
-      experiments together. We move the <tt
-      class="code">gimp-display-new</tt> call to the end of our
+      experiments together. We move the <span
+      class="code">gimp-display-new</span> call to the end of our
       function, so we don't have to see how the image rendering
       works. We also add another helper function, which will cut the
       final image to the right size. The resulting script might look
@@ -548,24 +548,24 @@ and then:
 		    SF-VALUE      "Font Size" "50" )</pre>
 
 
-    <h2><a name="pitfalls">Common Pitfalls</a></h2>
+    <h2 id="pitfalls">Common Pitfalls</h2>
     <p>The following is a list of common pitfalls in Script-Fu.</p>
 
-    <h3><a name="return">Return Values</a></h3>
+    <h3 id="return">Return Values</h3>
 
     <p>When a function returns a value, it will always be encapsulated
       in a list; it doesn't matter whether only one value or multiple
       values. Even if the return value is itself a list, like for
-      example the color returned by <tt
-      class="code">gimp-color-picker</tt>, the return value will
+      example the color returned by <span
+      class="code">gimp-color-picker</span>, the return value will
       always be encapsulated in an extra list.</p>
 
     <p>If multiple values are returned they are also in a list, the
       first return value is the first element in the list, the second
       is the second list element, etc. So you need to always apply a
-      <tt class="code">car</tt> call to get the correct value.</p>
+      <span class="code">car</span> call to get the correct value.</p>
 
-    <h3><a name="r5sr">R5SR Compliance</a></h3>
+    <h3 id="r5sr">R5SR Compliance</h3>
 
     <p><a
 	  href="http://www.schemers.org/Documents/Standards/R5RS/">R5SR</a>
@@ -575,21 +575,21 @@ and then:
       interpreter. SIOD is a small scheme implementation, the
       price is that it only provides a small subset of R5SR
       functions; even some of the functions' names have been changed. For example you
-      don't have <tt class="code">display</tt>, only a function
-      called <tt class="code">print</tt>. For a summary of scheme
+      don't have <span class="code">display</span>, only a function
+      called <span class="code">print</span>. For a summary of scheme
       functions supported by the Gimp, you can have a look at the
       webpage of <a
 		    href="http://people.delphi.com/gjc/siod.html">SIOD</a>. To
       make it even worse The Gimp doesn't even provide all the
       functions listed on the SIOD page, but its a good starting point.
-      You can also use the function <tt class="code">apropos</tt> in
+      You can also use the function <span class="code">apropos</span> in
 	  the console to search for a specific function:</p>
 
       <pre class="console-output">=> (apropos "write")
 
 (fwrite writes swrite write-mask stroke-overwrite)</pre>
 
-    <h2><a name="debug">Debugging</a></h2>
+    <h2 id="debug">Debugging</h2>
 
     <p>When you start to play with Script-Fu, and even when you are
       familiar with it, you will very often run into a situation where
@@ -603,8 +603,8 @@ and then:
       editor with syntax highlighting, automatic indention and
       parentheses highlighting will help to accomplish that.</p>
 
-    <p>Second, you might have forgotten to add a <tt
-      class="code">car</tt> to some return value. To check for these
+    <p>Second, you might have forgotten to add a <span
+      class="code">car</span> to some return value. To check for these
       errors, copy&amp;paste your code into the Script-Fu Console and
       call it manually.</p>
 
@@ -627,12 +627,12 @@ ERROR: too few arguments (see errobj)</pre>
 ((image))
 ()</pre>
 
-    <p>At last if your function will still not work, add some <tt
-    class="code">print</tt> calls at the right places to check that
+    <p>At last if your function will still not work, add some <span
+    class="code">print</span> calls at the right places to check that
     everything is working correctly. To see the output of the prints
     you have to run your Script-Fu in the console.</p>
 
-    <h2><a name="cannotdo">Thing you can't do in Script-Fu</a></h2>
+    <h2 id="cannotdo">Thing you can't do in Script-Fu</h2>
 
     <p>For now I have described what you can do with Script-Fu, but
       there are also a lot of things which you can't do in
@@ -661,7 +661,7 @@ ERROR: too few arguments (see errobj)</pre>
 
     <p>You might also want to open a directory and open all the images
       in it. Not even that is possible. The SIOD webpage describes the
-      <tt class="code">opendir</tt> function, but when you try it in
+      <span class="code">opendir</span> function, but when you try it in
       Script-Fu it will not work as many other SIOD function.</p>
 
     <pre class="console-output">=&gt; (opendir "/")
@@ -681,19 +681,19 @@ ERROR: unbound variable (errobj opendir)</pre>
       gui-interfaces, but I don't know the status of this project and
       have never seen it in action.</p>
 
-    <h2><a name="examples">Examples</a></h2>
+    <h2 id="examples">Examples</h2>
 
     <p>It is always a good idea to have a look at foreign Script-Fu's
     to learn. Script-Fu's can for example be found in the Gimp
-    directory <tt
-    class="file">/usr/share/gimp/1.1/scripts/</tt>. There are also
+    directory <span
+    class="file">/usr/share/gimp/1.1/scripts/</span>. There are also
     some links to other Script-Fu sites at the <a
     href="http://www.gimp.org">Gimp</a> webpage. I have also uploaded
     my Script-Fu's, you can find them <a href="scripts/">here</a>, but
     be warned, most of them are not documented, and some might not work
     at all.</p>
 
-    <h2><a name="references">References</a></h2>
+    <h2 id="references">References</h2>
     <ul>
       <li><a href="http://people.delphi.com/gjc/siod.html">SIOD</a></li>
       <li><a href="http://www.scheme.com/tspl2d/index.html">The Scheme

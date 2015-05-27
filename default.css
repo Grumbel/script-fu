@@ -55,19 +55,19 @@ pre.console-output {
     background:	lightgrey;
 }
 
-tt.code {
+span.code {
     color: green;
 }
 
-tt.menu {
+span.menu {
     color: blue;
 }
 
-tt.key {
+span.key {
     color: blue;
 }
 
-tt.file {
+span.file {
     color: red;
 }
 
